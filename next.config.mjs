@@ -8,6 +8,10 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true,
+    domains: [
+      'pagead2.googlesyndication.com',
+      'googleads.g.doubleclick.net',
+    ],
   },
 }
 
