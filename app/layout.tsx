@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+import { Metadata } from 'next'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -7,11 +8,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="ko">
+      <head>
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+          data-ad-client="ca-pub-4845852016760480"
+        />
+      </head>
       <body>{children}</body>
     </html>
   )

@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import { Navigation } from '@/components/Navigation/Navigation'
 import { getPostDatabase } from '@/notionApi/getPostDatabase'
 import { Client } from '@notionhq/client'
@@ -16,6 +17,14 @@ interface PageCoverType {
     external: {
       url: string
     }
+  }
+}
+
+export const metadata: Metadata = {
+  title: 'Post Page',
+  description: 'Blog post page',
+  other: {
+    'google-adsense-account': 'ca-pub-4845852016760480'
   }
 }
 
