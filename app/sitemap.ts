@@ -7,19 +7,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   
   const posts = await getPostDatabase()
   
-  const postsUrls = posts.results.map((post) => ({
-    url: `${baseUrl}/post/${post.id}`,
-    lastModified: new Date(((post as PageObjectResponse).properties.post_date as DatePropertyItemObjectResponse).date?.start ?? ''),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
+  const postsUrls = posts.results.map((post) => {
+    const postDate = ((post as PageObjectResponse).properties.post_date as DatePropertyItemObjectResponse).date?.start
+    return {
+      url: `${baseUrl}/post/${post.id}`,
+      lastModified: postDate ? new Date(postDate) : new Date(),
+      priority: 0.8
+    }
+  })
 
   return [
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
+      priority: 1.0
     },
     ...postsUrls,
   ]
