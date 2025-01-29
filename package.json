@@ -16,6 +16,7 @@
     "@types/mdx": "^2.0.13",
     "@vanilla-extract/css": "^1.15.1",
     "clsx": "^2.1.1",
+    "feed": "^4.2.2",
     "highlight.js": "^11.9.0",
     "next": "14.2.3",
     "next-mdx-remote": "^4.4.1",

@@ -24,6 +24,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           data-ad-client="ca-pub-4845852016760480"
         />
+        <link 
+          rel="alternate" 
+          type="application/rss+xml" 
+          title="ppippi's Dev Blog RSS Feed" 
+          href="/feed.xml" 
+        />
       </head>
       <body>{children}</body>
     </html>
