@@ -10,13 +10,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticPages = [
       {
         url: baseUrl,
-        lastModified: new Date(),
-        priority: 1.0
+        lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
       },
       {
-        url: `${baseUrl}/about`,  // about 페이지가 있다면
-        lastModified: new Date(),
-        priority: 0.9
+        url: `${baseUrl}/about`,
+        lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
       }
     ]
 
@@ -26,9 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const postDate = ((post as PageObjectResponse).properties.post_date as DatePropertyItemObjectResponse).date?.start
       return {
         url: `${baseUrl}/post/${post.id}`,
-        lastModified: postDate ? new Date(postDate) : new Date(),
-        priority: 0.8,
-        changefreq: 'monthly'  // 블로그 포스트는 자주 수정되지 않으므로
+        lastModified: postDate 
+          ? new Date(new Date(postDate).getTime() - (9 * 60 * 60 * 1000)).toISOString() 
+          : new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString(),
+        changefreq: 'monthly'
       }
     })
 
@@ -41,8 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 기본 sitemap 반환
     return [{
       url: 'https://ppippi-dev.github.io',
-      lastModified: new Date(),
-      priority: 1.0
+      lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
     }]
   }
 } 
