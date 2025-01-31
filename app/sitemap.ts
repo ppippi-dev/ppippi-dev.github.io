@@ -11,10 +11,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       {
         url: baseUrl,
         lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
-      },
-      {
-        url: `${baseUrl}/about`,
-        lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
       }
     ]
 
