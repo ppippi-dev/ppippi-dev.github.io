@@ -16,7 +16,7 @@ export async function GET() {
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
       '<url>',
       `  <loc>${baseUrl}</loc>`,
-      `  <lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>`,
+      `  <lastmod>${formatDate(new Date())}</lastmod>`,
       '</url>'
     ];
 
@@ -26,8 +26,8 @@ export async function GET() {
     for (const post of posts.results) {
       const postDate = ((post as PageObjectResponse).properties.post_date as DatePropertyItemObjectResponse).date?.start
       const lastmod = postDate 
-        ? formatDate(new Date(new Date(postDate).getTime() - (9 * 60 * 60 * 1000)))
-        : formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))
+        ? formatDate(new Date(postDate))
+        : formatDate(new Date())
 
       xmlStrings.push(
         '<url>',
@@ -59,7 +59,7 @@ export async function GET() {
       '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
       '<url>',
       `  <loc>https://ppippi-dev.github.io</loc>`,
-      `  <lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>`,
+      `  <lastmod>${formatDate(new Date())}</lastmod>`,
       '</url>',
       '</urlset>'
     ].join('\n');
