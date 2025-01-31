@@ -2,6 +2,11 @@ import { getPostDatabase } from '@/notionApi/getPostDatabase'
 import { MetadataRoute } from 'next'
 import { PageObjectResponse, DatePropertyItemObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
+// 날짜를 YYYY-MM-DD 형식으로 포맷팅하는 헬퍼 함수
+function formatDate(date: Date): string {
+  return date.toISOString().split('T')[0]
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const baseUrl = 'https://ppippi-dev.github.io'
@@ -10,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticPages = [
       {
         url: baseUrl,
-        lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
+        lastModified: formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))
       }
     ]
 
@@ -21,8 +26,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return {
         url: `${baseUrl}/post/${post.id}`,
         lastModified: postDate 
-          ? new Date(new Date(postDate).getTime() - (9 * 60 * 60 * 1000)).toISOString() 
-          : new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString(),
+          ? formatDate(new Date(new Date(postDate).getTime() - (9 * 60 * 60 * 1000)))
+          : formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000))),
         changefreq: 'monthly'
       }
     })
@@ -36,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // 기본 sitemap 반환
     return [{
       url: 'https://ppippi-dev.github.io',
-      lastModified: new Date(new Date().getTime() - (9 * 60 * 60 * 1000)).toISOString()
+      lastModified: formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))
     }]
   }
 } 
