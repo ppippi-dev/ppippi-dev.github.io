@@ -6,7 +6,7 @@ function formatDate(date: Date): string {
   return date.toISOString().split('T')[0]
 }
 
-export default async function sitemap() {
+export async function GET() {
   try {
     const baseUrl = 'https://ppippi-dev.github.io'
     
@@ -16,8 +16,8 @@ export default async function sitemap() {
     
     // 메인 페이지 추가
     xml += '<url>\n'
-    xml += `<loc>${baseUrl}</loc>\n`
-    xml += `<lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>\n`
+    xml += `  <loc>${baseUrl}</loc>\n`
+    xml += `  <lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>\n`
     xml += '</url>\n'
 
     // 블로그 포스트 추가
@@ -30,8 +30,8 @@ export default async function sitemap() {
         : formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))
 
       xml += '<url>\n'
-      xml += `<loc>${baseUrl}/post/${post.id}</loc>\n`
-      xml += `<lastmod>${lastmod}</lastmod>\n`
+      xml += `  <loc>${baseUrl}/post/${post.id}</loc>\n`
+      xml += `  <lastmod>${lastmod}</lastmod>\n`
       xml += '</url>\n'
     }
 
@@ -53,8 +53,8 @@ export default async function sitemap() {
     const fallbackXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://ppippi-dev.github.io</loc>
-<lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>
+  <loc>https://ppippi-dev.github.io</loc>
+  <lastmod>${formatDate(new Date(new Date().getTime() - (9 * 60 * 60 * 1000)))}</lastmod>
 </url>
 </urlset>`
 
