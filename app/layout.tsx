@@ -7,6 +7,11 @@ export const metadata: Metadata = {
   verification: {
     google: 'QtdRN4sJqiyHD62UJrE_IDbeFhcdbVpBCg0a0h0Smkw',
   },
+  icons: {
+    icon: '/favicon.ico',
+    // 또는 PNG/SVG 사용시:
+    // icon: '/icon.png',
+  },
 }
 
 export default function RootLayout({

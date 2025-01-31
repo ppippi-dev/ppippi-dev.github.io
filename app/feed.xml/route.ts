@@ -12,7 +12,6 @@ export async function GET() {
     id: baseUrl,
     link: baseUrl,
     language: "ko",
-    favicon: `${baseUrl}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}, ppippi`,
     author: {
       name: "ppippi",
