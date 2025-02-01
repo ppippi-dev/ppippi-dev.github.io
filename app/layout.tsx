@@ -29,6 +29,19 @@ export default function RootLayout({
           crossOrigin="anonymous"
           data-ad-client="ca-pub-4845852016760480"
         />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-KQYDN19HGC"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-KQYDN19HGC');
+          `}
+        </Script>
         <link 
           rel="alternate" 
           type="application/rss+xml" 
