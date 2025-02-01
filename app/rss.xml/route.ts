@@ -1,22 +1,19 @@
-import { Feed } from 'feed'
+import RSS from 'rss'
 import { getPostDatabase } from '@/notionApi/getPostDatabase'
-import { PageObjectResponse, RichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 export async function GET() {
   const baseUrl = 'https://ppippi-dev.github.io'
   
-  // Feed 기본 정보 설정
-  const feed = new Feed({
+  // RSS 피드 기본 설정
+  const feed = new RSS({
     title: "ppippi's Dev Blog",
     description: "개발 관련 이야기를 공유하는 블로그입니다",
-    id: baseUrl,
-    link: baseUrl,
+    feed_url: `${baseUrl}/rss.xml`,
+    site_url: baseUrl,
     language: "ko",
+    pubDate: new Date(),
     copyright: `All rights reserved ${new Date().getFullYear()}, ppippi`,
-    author: {
-      name: "ppippi",
-      link: baseUrl
-    }
   })
 
   try {
@@ -29,17 +26,20 @@ export async function GET() {
       const postDate = (postObj.properties.post_date as any).date?.start
       const description = (postObj.properties.description as any).rich_text[0]?.plain_text || ''
       
-      feed.addItem({
+      feed.item({
         title: title,
-        id: post.id,
-        link: `${baseUrl}/post/${post.id}`,
         description: description,
+        url: `${baseUrl}/post/${post.id}`,
+        guid: post.id,
         date: postDate ? new Date(postDate) : new Date(),
+        author: 'ppippi'
       })
     })
 
-    // RSS 피드 생성
-    return new Response(feed.rss2(), {
+    // RSS 피드 XML 생성
+    const rssXml = feed.xml({ indent: true })
+
+    return new Response(rssXml, {
       headers: {
         'Content-Type': 'application/xml',
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -49,7 +49,7 @@ export async function GET() {
     })
     
   } catch (error) {
-    console.error('RSS feed generation failed:', error)
-    return new Response('Error generating RSS feed', { status: 500 })
+    console.error('RSS 피드 생성 실패:', error)
+    return new Response('RSS 피드 생성 중 오류 발생', { status: 500 })
   }
 } 
