@@ -3,9 +3,8 @@ import { Navigation } from '@/components/Navigation/Navigation'
 import { getPostDatabase } from '@/notionApi/getPostDatabase'
 import { Client } from '@notionhq/client'
 import { GetPageResponse } from '@notionhq/client/build/src/api-endpoints'
-import Image from 'next/image'
 import { NotionToMarkdown } from 'notion-to-md'
-import { container, content, coverImage } from './styles.css'
+import { container, content } from './styles.css'
 import { CustomMdxRemote } from '@/components/CustomMdxRemote/CustomMdxRemote'
 
 interface PageCoverType {
@@ -53,7 +52,7 @@ export default async function PostPage({
       <div className={container}>
         <div className={content}>
           <article style={{ position: 'relative' }}>
-            <Image
+            {/* <Image
               src={
                 notionPage.cover.type === 'file'
                   ? notionPage.cover.file.url
@@ -62,7 +61,7 @@ export default async function PostPage({
               alt="포스트 커버 이미지"
               className={coverImage}
               fill
-            />
+            /> */}
 
             <CustomMdxRemote source={markdown.parent} />
           </article>

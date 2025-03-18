@@ -14,13 +14,6 @@ export default async function Home() {
       <Navigation />
 
       <div className={content}>
-        <div className={header}>
-          <button className={tagDropdownTrigger}>
-            전체
-            <Image src={dropDownArrow} alt="화살표" />
-          </button>
-        </div>
-
         <ul className={postList}>
           {response.results.map((database: any) => (
             <PostListItem
