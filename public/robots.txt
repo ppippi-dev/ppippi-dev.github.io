@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://ppippi-dev.github.io/sitemap.xml
-
 #DaumWebMasterTool:55790ee2c3db0cd9fc72e17b392e3c8ac6345273d67fbc48f263389374b2c135:+yoi+THGIltfnRj+F8y4Lg==
