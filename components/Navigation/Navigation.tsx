@@ -22,7 +22,7 @@ export function Navigation() {
         <Link href="/" className={navTitleContainer}>
           <span className={logoEmoji}>✅</span>
           <h1 className={title}>
-            <span className={bold}>Ppippi</span> Blog
+            <span className={bold}>ppippi-dev</span> Blog
           </h1>
         </Link>
 
