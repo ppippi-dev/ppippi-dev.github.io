@@ -20,7 +20,7 @@ export function Navigation() {
     <nav className={container}>
       <div className={content}>
         <Link href="/" className={navTitleContainer}>
-          <span className={logoEmoji}>👾</span>
+          <span className={logoEmoji}>✅</span>
           <h1 className={title}>
             <span className={bold}>Ppippi</span> Blog
           </h1>
