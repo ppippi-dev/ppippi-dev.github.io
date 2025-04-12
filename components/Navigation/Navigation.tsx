@@ -14,6 +14,7 @@ import {
 } from './styles.css'
 
 import githubLogo from '@/public/icons/github_logo.svg'
+import linkedinLogo from '@/public/icons/linkedin_logo.svg'
 
 export function Navigation() {
   return (
@@ -35,6 +36,16 @@ export function Navigation() {
               className={iconButton}
             >
               <Image src={githubLogo} alt="깃허브" />
+            </a>
+          </li>
+          <li className={navControlListItem}>
+            <a 
+              href="https://www.linkedin.com/in/parkjeongbin" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={iconButton}
+            >
+              <Image src={linkedinLogo} alt="링크드인" />
             </a>
           </li>
         </ul>
