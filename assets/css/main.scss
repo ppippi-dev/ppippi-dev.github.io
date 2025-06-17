@@ -1,0 +1,626 @@
+---
+---
+
+@import "type-theme";
+
+/* 전체 백그라운드 색상 설정 */
+html, body {
+  background-color: #ffffff !important;
+}
+
+.home {
+  background-color: #ffffff !important;
+}
+
+/* 헤더와 메인 콘텐츠 사이의 구분선 제거 */
+.home {
+  border-top: none !important;
+}
+
+header, .header, #header {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.posts-container {
+  border-top: none !important;
+}
+
+/* 모든 불필요한 구분선 제거 */
+article, main, .main {
+  border-top: none !important;
+}
+
+.ohouse-post-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+  background-color: #fff;
+}
+
+.ohouse-post {
+  padding: 60px 0;
+}
+
+.ohouse-post-header {
+  margin-bottom: 60px;
+}
+
+.ohouse-post-categories {
+  margin-bottom: 20px;
+}
+
+.ohouse-category-tag {
+  display: inline-block;
+  background-color: #f5f5f5;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ohouse-category-tag:hover {
+  background-color: #e9e9e9;
+  color: #333;
+}
+
+.ohouse-post-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 20px 0;
+  color: #000;
+  letter-spacing: -0.02em;
+}
+
+.ohouse-post-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0 0 30px 0;
+  line-height: 1.5;
+}
+
+.ohouse-post-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.875rem;
+  color: #999;
+}
+
+.ohouse-post-date {
+  font-weight: 500;
+}
+
+.ohouse-post-author {
+  font-weight: 500;
+  color: #666;
+}
+
+/* 카테고리 태그 */
+.post-category {
+  margin-bottom: 1rem;
+}
+
+.category-tag {
+  display: inline-block;
+  background-color: #35C5F0;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0.8rem;
+}
+
+/* 포스트 제목 */
+.post-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1rem 0;
+  color: #333;
+  letter-spacing: -0.02em;
+}
+
+/* 포스트 서브타이틀 */
+.post-subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: #666;
+  margin: 0.5rem 0 1.5rem 0;
+  line-height: 1.4;
+}
+
+/* 포스트 메타 정보 */
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1.5rem;
+}
+
+.post-date {
+  font-weight: 500;
+}
+
+.post-author {
+  font-weight: 500;
+}
+
+.post-author::before {
+  content: "•";
+  margin-right: 0.5rem;
+  color: #ddd;
+}
+
+.ohouse-post-content {
+  line-height: 1.8;
+  font-size: 1.125rem;
+  color: #333;
+  margin-bottom: 80px;
+}
+
+.ohouse-post-content h1,
+.ohouse-post-content h2,
+.ohouse-post-content h3,
+.ohouse-post-content h4,
+.ohouse-post-content h5,
+.ohouse-post-content h6 {
+  font-weight: 700;
+  margin: 60px 0 24px 0;
+  color: #000;
+  line-height: 1.3;
+}
+
+.ohouse-post-content h1 {
+  font-size: 2rem;
+  margin-top: 80px;
+}
+
+.ohouse-post-content h2 {
+  font-size: 1.75rem;
+  margin-top: 60px;
+}
+
+.ohouse-post-content h3 {
+  font-size: 1.5rem;
+  margin-top: 48px;
+}
+
+.ohouse-post-content p {
+  margin: 24px 0;
+  line-height: 1.8;
+}
+
+.ohouse-post-content ul,
+.ohouse-post-content ol {
+  margin: 24px 0;
+  padding-left: 24px;
+}
+
+.ohouse-post-content li {
+  margin: 8px 0;
+  line-height: 1.7;
+}
+
+.ohouse-post-content blockquote {
+  border-left: 4px solid #ddd;
+  margin: 40px 0;
+  padding: 20px 24px;
+  background-color: #f9f9f9;
+  color: #666;
+  font-style: normal;
+  font-size: 1rem;
+}
+
+.ohouse-post-content code {
+  background-color: #f1f3f4;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #e91e63;
+  font-family: 'Monaco', 'Consolas', monospace;
+}
+
+.ohouse-post-content pre {
+  background-color: #f8f9fa;
+  padding: 24px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 40px 0;
+  border: 1px solid #e9ecef;
+  font-family: 'Monaco', 'Consolas', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.ohouse-post-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 40px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.ohouse-post-footer {
+  padding: 40px 0;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 60px;
+}
+
+.ohouse-post-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ohouse-tags-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666;
+  margin-right: 8px;
+}
+
+.ohouse-tag {
+  background-color: #f5f5f5;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ohouse-tag:hover {
+  background-color: #e9e9e9;
+  color: #333;
+}
+
+/*  피처 이미지 */
+.ohouse-post-feature-image {
+  margin: 60px 0;
+}
+
+.ohouse-post-feature-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .ohouse-post-container {
+    padding: 0 20px;
+  }
+  
+  .ohouse-post {
+    padding: 40px 0;
+  }
+  
+  .ohouse-post-header {
+    margin-bottom: 40px;
+  }
+  
+  .ohouse-post-title {
+    font-size: 1.75rem;
+    margin-bottom: 16px;
+  }
+  
+  .ohouse-post-subtitle {
+    font-size: 1.125rem;
+    margin-bottom: 24px;
+  }
+  
+  .ohouse-post-content {
+    font-size: 1rem;
+    margin-bottom: 60px;
+  }
+  
+  .ohouse-post-content h1 {
+    font-size: 1.5rem;
+    margin-top: 60px;
+  }
+  
+  .ohouse-post-content h2 {
+    font-size: 1.375rem;
+    margin-top: 48px;
+  }
+  
+  .ohouse-post-content h3 {
+    font-size: 1.25rem;
+    margin-top: 40px;
+  }
+  
+  .ohouse-post-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .ohouse-post-tags {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+.posts-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  padding-top: 60px;
+}
+
+.posts-header {
+  margin-bottom: 60px;
+}
+
+.posts-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.posts-subtitle {
+  font-size: 1.125rem;
+  color: #666;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 40px 0;
+}
+
+.posts-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.posts-categories .category-tag {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.posts-categories .category-tag:before {
+  content: "#";
+  color: #666;
+  margin-right: 2px;
+}
+
+.posts-categories .category-tag:hover {
+  color: #000;
+}
+
+.posts-grid {
+  margin-top: 60px;
+}
+
+.post-card {
+  padding: 40px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.post-card:first-child {
+  padding-top: 0;
+}
+
+.post-card:last-child {
+  border-bottom: none;
+}
+
+.post-card-content {
+  flex: 1;
+}
+
+.post-card-image {
+  flex-shrink: 0;
+  width: 200px;
+  height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.post-card-image:hover img {
+  transform: scale(1.05);
+}
+
+/* 이미지가 없는 포스트 카드 */
+.post-card.no-image {
+  display: block;
+}
+
+.post-card.no-image .post-card-content {
+  flex: none;
+}
+
+.post-card-category {
+  margin-bottom: 16px;
+}
+
+.category-badge {
+  color: #35C5F0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.category-badge:hover {
+  color: #0099CC;
+}
+
+.post-card-header {
+  
+}
+
+.post-card-title {
+  margin: 0 0 12px 0;
+  line-height: 1.3;
+}
+
+.post-card-title a {
+  color: #000;
+  text-decoration: none;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.post-card-title a:hover {
+  color: #35C5F0;
+}
+
+.post-card-subtitle {
+  color: #666;
+  font-size: 1.125rem;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.post-card-footer {
+  
+}
+
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.post-card-date {
+  font-weight: 400;
+}
+
+.post-card-author {
+  font-weight: 500;
+  color: #666;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .posts-container {
+    padding: 0 1.25rem;
+  }
+  
+  .posts-header {
+    margin-bottom: 40px;
+  }
+  
+  .posts-title {
+    font-size: 1.75rem;
+    margin-bottom: 12px;
+  }
+  
+  .posts-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+  
+  .posts-categories {
+    margin-bottom: 32px;
+    gap: 6px;
+  }
+  
+  .posts-categories .category-tag {
+    font-size: 0.8rem;
+  }
+  
+  .post-card {
+    padding: 32px 0;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .post-card-image {
+    width: 100%;
+    height: 200px;
+    order: -1;
+  }
+  
+  .post-card-title a {
+    font-size: 1.25rem;
+  }
+  
+  .post-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+.home .posts-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 카테고리 태그 오버라이드 - 파란색 버튼 제거 */
+.posts-categories .category-tag {
+  background: none !important;
+  color: #666 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  margin-right: 16px !important;
+}
+
+.posts-categories .category-tag:before {
+  content: "#" !important;
+  color: #666 !important;
+  margin-right: 4px !important;
+}
+
+.posts-categories .category-tag:hover {
+  color: #000 !important;
+  background: none !important;
+}
+
+/* 제목 중앙정렬 제거 */
+.posts-header {
+  text-align: left !important;
+}
+
+/* 포스트 카드 제목 중앙정렬 제거 */
+.post-card-header {
+  text-align: left !important;
+}
+
+.post-card-title {
+  text-align: left !important;
+}
+
+.post-card-meta {
+  text-align: left !important;
+}

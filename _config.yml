@@ -1,0 +1,120 @@
+# SITE CONFIGURATION
+baseurl: ""
+url: "https://ppippi-dev.github.io"
+
+# THEME-SPECIFIC CONFIGURATION
+theme_settings:
+  # Meta
+  title: ppippi-dev Blog
+  avatar: assets/img/avatar.png
+  favicon: assets/favicon.ico
+  gravatar: # Email MD5 hash
+  description: "Cloud, Kubernetes, Data Engineering, Machine Learning, and more"
+
+  # Header and footer text
+  header_text:
+  header_text_feature_image:
+  footer_text: >
+   Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/rohanchandra/type-theme">Type Theme</a>
+
+  # Icons
+  rss: true
+  email_address: # Full email address, e.g. "sam@example.com"
+  behance:
+  bitbucket:
+  dribbble:
+  facebook:
+  flickr:
+  gitlab:
+  github: "ppippi-dev"
+  gitter:
+  google_plus:
+  instagram:
+  linkedin: "https://www.linkedin.com/in/parkjeongbin/"
+  pinterest:
+  reddit:
+  soundcloud:
+  stack_exchange:  # Full URL
+  steam:
+  tumblr:
+  twitter:
+  wordpress:
+  youtube:
+
+  # Scripts
+  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  disqus_shortname:
+  katex: true # Enable if using math markup
+  search: true # Enable the search feature
+
+  # Localization strings
+  str_follow_on: "Follow on"
+  str_rss_follow: "Follow RSS feed"
+  str_email: "Email"
+  str_next_post: "Next post"
+  str_previous_post: "Previous post"
+  str_next_page: "Next"
+  str_previous_page: "Prev"
+  str_continue_reading: "Continue reading"
+  str_javascript_required_disqus: "Please enable JavaScript to view comments."
+  str_search_no_results: "No results found."
+
+  # English strings
+  en:
+    str_follow_on: "Follow on"
+    str_rss_follow: "Follow RSS feed"
+    str_email: "Email"
+    str_next_post: "Next post"
+    str_previous_post: "Previous post"
+    str_next_page: "Next"
+    str_previous_page: "Prev"
+    str_continue_reading: "Continue reading"
+    str_javascript_required_disqus: "Please enable JavaScript to view comments."
+    str_search_no_results: "No results found."
+
+  # Korean strings
+  ko:
+    str_follow_on: "팔로우"
+    str_rss_follow: "RSS 피드 구독"
+    str_email: "이메일"
+    str_next_post: "다음 글"
+    str_previous_post: "이전 글"
+    str_next_page: "다음"
+    str_previous_page: "이전"
+    str_continue_reading: "계속 읽기"
+    str_javascript_required_disqus: "댓글을 보려면 JavaScript를 활성화하세요."
+    str_search_no_results: "검색 결과가 없습니다."
+
+  # Colours, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
+  google_fonts: "Source+Sans+Pro:400,700,700italic,400italic"
+
+  # Post navigation
+  post_navigation: true
+
+# Languages
+default_lang: "ko"
+languages: ["ko", "en"]
+
+# Permalink settings for multilingual posts
+permalink: /:year/:month/:day/:title/
+
+# Collections for multilingual posts
+collections:
+  posts_en:
+    output: true
+    permalink: /en/:year/:month/:day/:title/
+
+# BUILD SETTINGS
+markdown: kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: "compressed"
+# Jekyll 기본 페이지네이션을 비활성화 (커스텀 페이지네이션 사용)
+plugins: []
+# paginate: 6
+# paginate_path: "/page:num/"
+exclude:
+  - Gemfile
+  - Gemfile.lock

@@ -1,0 +1,60 @@
+<div id="post-nav">
+  {% comment %} --- Logic to find next and previous post in the same language --- {% endcomment %}
+  {% assign current_lang = page.path | split: '/' | slice: 1 | first %}
+
+  {% assign lang_posts = "" | split: "" %}
+  {% for post in site.posts %}
+    {% assign post_lang = post.path | split: '/' | slice: 1 | first %}
+    {% if post_lang == current_lang %}
+      {% assign lang_posts = lang_posts | push: post %}
+    {% endif %}
+  {% endfor %}
+
+  {% for post in lang_posts %}
+    {% if post.url == page.url %}
+      {% assign post_index = forloop.index0 %}
+    {% endif %}
+  {% endfor %}
+
+  {% assign prev_post_index = post_index | minus: 1 %}
+  {% assign next_post_index = post_index | plus: 1 %}
+
+  {% if prev_post_index >= 0 %}
+    {% assign previous_post_in_lang = lang_posts[prev_post_index] %}
+  {% else %}
+    {% assign previous_post_in_lang = nil %}
+  {% endif %}
+
+  {% if next_post_index < lang_posts.size %}
+    {% assign next_post_in_lang = lang_posts[next_post_index] %}
+  {% else %}
+    {% assign next_post_in_lang = nil %}
+  {% endif %}
+
+  {% comment %} --- Use the found posts for navigation --- {% endcomment %}
+  {% assign t = site.theme_settings[current_lang] | default: site.theme_settings.ko %}
+
+  <div id="previous-post" class="post-nav-post">
+    {% if previous_post_in_lang %}
+      <p>{{ t.str_previous_post }}</p>
+      <a href="{{ site.baseurl }}{{ previous_post_in_lang.url }}">
+        {{ previous_post_in_lang.title }}
+      </a>
+    {% else %}
+      <p>&nbsp;</p>
+      <span></span>
+    {% endif %}
+  </div>
+
+  <div id="next-post" class="post-nav-post">
+    {% if next_post_in_lang %}
+      <p>{{ t.str_next_post }}</p>
+      <a href="{{ site.baseurl }}{{ next_post_in_lang.url }}">
+        {{ next_post_in_lang.title }}
+      </a>
+    {% else %}
+      <p>&nbsp;</p>
+      <span></span>
+    {% endif %}
+  </div>
+</div>

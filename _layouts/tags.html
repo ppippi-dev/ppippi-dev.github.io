@@ -1,0 +1,112 @@
+---
+layout: page
+---
+
+{% assign current_lang = page.lang | default: site.default_lang %}
+{% if current_lang == "en" %}
+  {% assign tag_nav_title = "Tag List" %}
+  {% assign posts_count_suffix = " posts" %}
+  {% assign date_format = "%B %-d, %Y" %}
+{% else %}
+  {% assign tag_nav_title = "태그 목록" %}
+  {% assign posts_count_suffix = "개 포스트" %}
+  {% assign date_format = "%Y년 %m월 %d일" %}
+{% endif %}
+
+<div class="tags-container">
+  {% comment %} 모든 포스트에서 태그 수집 {% endcomment %}
+  {% assign all_tags = "" | split: "" %}
+  {% assign filtered_posts_by_tag = "" | split: "" %}
+  
+  {% comment %} 현재 언어에 맞는 포스트들 수집 {% endcomment %}
+  {% assign current_posts = "" | split: "" %}
+  
+  {% if current_lang == "en" %}
+    {% for post in site.posts_en %}
+      {% assign current_posts = current_posts | push: post %}
+    {% endfor %}
+  {% else %}
+    {% for post in site.posts %}
+      {% assign current_posts = current_posts | push: post %}
+    {% endfor %}
+  {% endif %}
+  
+  {% comment %} 태그 수집 및 중복 제거 {% endcomment %}
+  {% for post in current_posts %}
+    {% if post.tags %}
+      {% for tag in post.tags %}
+        {% unless all_tags contains tag %}
+          {% assign all_tags = all_tags | push: tag %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  
+  {% assign sorted_tags = all_tags | sort %}
+
+  <!-- 태그 네비게이션 -->
+  <div class="tags-navigation">
+    <h2 class="tags-nav-title">{{ tag_nav_title }}</h2>
+    <div class="tag-list">
+      {% for tag in sorted_tags %}
+        {% assign tag_posts = "" | split: "" %}
+        {% for post in current_posts %}
+          {% if post.tags contains tag %}
+            {% assign tag_posts = tag_posts | push: post %}
+          {% endif %}
+        {% endfor %}
+        
+        {% if tag_posts.size > 0 %}
+          <a href="#{{ tag | cgi_escape }}" class="tag-nav-item">
+            #{{ tag }}
+            <span class="tag-count">({{ tag_posts.size }})</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 태그별 포스트 목록 -->
+  <div class="tags-content">
+    {% for tag in sorted_tags %}
+      {% assign tag_posts = "" | split: "" %}
+      {% for post in current_posts %}
+        {% if post.tags contains tag %}
+          {% assign tag_posts = tag_posts | push: post %}
+        {% endif %}
+      {% endfor %}
+      
+      {% if tag_posts.size > 0 %}
+        <section class="tag-section">
+          <h2 id="{{ tag | cgi_escape }}" class="tag-title">
+            <span class="tag-hash">#</span>{{ tag }}
+            <span class="tag-count-inline">({{ tag_posts.size }}{{ posts_count_suffix }})</span>
+          </h2>
+          
+          <div class="posts-grid">
+            {% assign sorted_tag_posts = tag_posts | sort: "date" | reverse %}
+            {% for post in sorted_tag_posts %}
+              {% if post.title != null %}
+                <article class="tag-post-card">
+                  <h3 class="post-title">
+                    <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                  </h3>
+                  <div class="post-meta">
+                    <time datetime="{{ post.date | date_to_xmlschema }}">
+                      {{ post.date | date: date_format }}
+                    </time>
+                  </div>
+                  {% if post.excerpt %}
+                    <div class="post-excerpt">
+                      {{ post.excerpt | strip_html | truncatewords: 20 }}
+                    </div>
+                  {% endif %}
+                </article>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

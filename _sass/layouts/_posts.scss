@@ -1,0 +1,127 @@
+.post-content > :last-child {
+  margin-bottom: 0;
+}
+article,
+.comments {
+  @extend %padding-regular;
+  border-bottom: 1px solid $border-color;
+  float: left;
+  width: 100%;
+}
+article {
+  .subtitle {
+    font-size: 1.45em;
+    font-weight: normal;
+    margin: 0;
+  }
+  header {
+    margin-bottom: 6%;
+    text-align: center;
+  }
+  a {
+    @extend .body-link;
+  }
+  .footnotes {
+    font-size: 0.9em;
+  }
+  .post-content {
+    @extend %padding-regular;
+  }
+}
+header {
+  h1 {
+    margin: 0;
+  }
+}
+.meta {
+  color: rgba($text-color, .5);
+  font-size: 0.9em;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.feature-image {
+  padding: 0%;
+  .post-link {
+    color: $feature-image-text-color;
+  }
+  header {
+    color: $feature-image-text-color;
+    background-size: $feature-image-size;
+    margin-bottom: 0;
+    padding: $padding-large/2.5 $padding-large;
+    .meta {
+      color: rgba($feature-image-text-color, .7);
+    }
+  }
+  .post-content {
+    @extend %padding-regular;
+  }
+}
+
+#post-nav {
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+
+  .post-nav-post {
+    display: table-cell;
+    width: 50%;
+    height: 120px;
+    padding: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+
+    p {
+      color: rgba($text-color, 0.5);
+      font-size: 0.8em;
+      letter-spacing: 0.1em;
+      margin: 0 0 0.5em 0;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    a {
+      font-weight: bold;
+      color: $text-color;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      line-height: 1.2;
+      display: block;
+
+      &:hover {
+        color: $link-color;
+      }
+    }
+
+    span {
+      display: block;
+      height: 1.2em;
+    }
+  }
+
+  #previous-post {
+    border-right: 1px solid $border-color;
+  }
+
+  #next-post {
+    /* 오른쪽 박스 */
+  }
+}
+
+.post-feature-image {
+  text-align: center;
+  margin: 2rem 0;
+  
+  img {
+    max-width: 100%;
+    max-height: 550px;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
