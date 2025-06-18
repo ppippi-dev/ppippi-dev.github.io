@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building an Nvidia Triton Inference Server"
-subtitle: ""
+subtitle: "A Practical Guide to Triton Inference Server, from Installation to Operation"
 feature-img: "assets/img/2025-05-16/0.webp"
 tags: [MLOps]
 ---

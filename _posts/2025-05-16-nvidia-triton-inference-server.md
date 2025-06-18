@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nvidia Triton Inference Server 구축하기"
-subtitle: ""
+subtitle: "설치부터 운영까지, Triton 추론 서버 실전 가이드"
 feature-img: "assets/img/2025-05-16/0.webp"
 tags: [MLOps]
 ---
