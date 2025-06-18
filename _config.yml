@@ -9,7 +9,7 @@ theme_settings:
   avatar: assets/img/avatar.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
-  description: "Cloud, Kubernetes, Data Engineering, Machine Learning, and more"
+  description: "My personal blog for organizing learnings and experiences in MLOps, AI, and Cloud."
 
   # Header and footer text
   header_text:
