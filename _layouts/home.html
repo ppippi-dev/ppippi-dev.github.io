@@ -22,7 +22,7 @@ layout: default
     [
       {% assign t = site.theme_settings[page.lang] | default: site.theme_settings.ko %}
       {% if page.lang == "en" %}
-        {% assign filtered_posts = site.posts_en %}
+        {% assign filtered_posts = site.posts_en | sort: 'date' | reverse %}
       {% else %}
         {% assign filtered_posts = site.posts %}
       {% endif %}
