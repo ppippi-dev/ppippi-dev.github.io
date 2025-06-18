@@ -3,7 +3,7 @@ layout: post
 title: "GKE에서 AWS IAM Role 연동: Access Key 없이 안전하게 AWS 리소스 접근하기"
 subtitle: "GKE Workload Identity와 AWS IAM Role을 활용한 안전한 멀티클라우드 접근 방식"
 feature-img: "assets/img/2025-05-03/0.webp"
-tags: [머신러닝]
+tags: [Infra]
 ---
 
 ## 들어가며: 멀티클라우드 환경에서의 보안

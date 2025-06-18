@@ -2,7 +2,6 @@
 ---
 
 @import "type-theme";
-
 /* 전체 백그라운드 색상 설정 */
 html, body {
   background-color: #ffffff !important;
@@ -32,7 +31,7 @@ article, main, .main {
 }
 
 .ohouse-post-container {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 0 40px;
   background-color: #fff;
@@ -624,3 +623,4 @@ article, main, .main {
 .post-card-meta {
   text-align: left !important;
 }
+

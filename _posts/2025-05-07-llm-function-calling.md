@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "[LLM] Function Calling 구현하기"
-subtitle: ""
-feature-img: "assets/img/2025-05-03/0.webp"
-tags: [머신러닝]
+title: "AI 에이전트의 핵심, LLM Function Calling 파헤치기"
+subtitle: "Python과 OpenAI API를 활용해 LLM이 외부 함수를 호출하고 실제 작업을 수행하는 방법을 알아봅니다."
+feature-img: "assets/img/2025-05-07/0.webp"
+tags: [LLMOps]
 ---
 
 최근 대규모 언어 모델(LLM) 분야에서 **Function Calling**이라는 흥미로운 개념이 등장했습니다.
@@ -43,7 +43,7 @@ ReAct 에이전트와 Function Calling 에이전트의 차이점에 대해 더 �
 
 먼저 yahoo finance 라이브러리를 통해 가격을 조회하는 코드는 다음과 같습니다. (실제 실행을 위해서는 yfinance 라이브러리가 설치되어 있어야 합니다: pip install yfinance)
 
-```
+```python
 def get_stock_price(stock_code: str) -> dict:
     """주식 가격 정보를 가져오기 위한 함수"""
     try:
@@ -85,7 +85,7 @@ def get_stock_price(stock_code: str) -> dict:
 
 이제 이런 함수가 있다는 것을 LLM에게 알려주기 위한 형태로 만들어야 합니다.
 
-```
+```python
     tools = [
         {
             "type": "function",
@@ -109,7 +109,7 @@ def get_stock_price(stock_code: str) -> dict:
 
 이제 이 tools 정보를 포함하여 GPT를 호출합니다. (실제 API 호출을 위해서는 openai 라이브러리가 필요하며, API 키 설정이 필요합니다.)
 
-```
+```python
     messages: list[ChatCompletionMessageParam] = [
         {
             "role": "user",
@@ -130,7 +130,7 @@ def get_stock_price(stock_code: str) -> dict:
 
 위 코드를 실행하면 (실제 API 호출 시), LLM은 사용자의 질문을 이해하고 get\_stock\_price 함수를 호출해야 한다고 판단할 경우 다음과 유사한 응답을 반환합니다.
 
-```
+```shell
 ChatCompletion(id='chatcmpl-BUYpFct1sxYpeNUb7IBeegqOb6XJS', 
 choices=[Choice(finish_reason='tool_calls', index=0, logprobs=None, 
 message=ChatCompletionMessage(content=None, refusal=None, role='assistant', 
@@ -149,7 +149,7 @@ prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=0)))
 
 이제 개발자는 이 응답을 바탕으로 실제로 위에서 정의한 get\_stock\_price 함수를 실행합니다.
 
-```
+```python
     if response.choices and response.choices[0].message.tool_calls:
         tool_call = response.choices[0].message.tool_calls[0]
         if tool_call.function.name == "get_stock_price":
@@ -170,7 +170,7 @@ prompt_tokens_details=PromptTokensDetails(audio_tokens=0, cached_tokens=0)))
 
 마지막으로, 이 answer\_data (함수 실행 결과)를 다시 LLM에게 전달하여 사용자에게 친절한 형태로 답변을 생성하도록 요청합니다.
 
-```
+```python
 messages = [
         {
             "role": "system",
