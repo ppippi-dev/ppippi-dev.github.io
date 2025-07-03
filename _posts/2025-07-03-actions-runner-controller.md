@@ -2,7 +2,7 @@
 layout: post
 title: "Actions Runner Controller 구축하기"
 subtitle: "MLOps CI 환경 구축하기"
-feature-img: "assets/img/2025-07-03/0.webp"
+feature-img: "assets/img/2025-07-03/0.png"
 tags: [MLOps, Infra]
 ---
 

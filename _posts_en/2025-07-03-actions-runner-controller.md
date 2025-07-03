@@ -2,7 +2,7 @@
 layout: post
 title: "Building Actions Runner Controller"
 subtitle: "Setting up MLOps CI Environment"
-feature-img: "assets/img/2025-07-03/0.webp"
+feature-img: "assets/img/2025-07-03/0.png"
 tags: [MLOps, Infra]
 ---
 
