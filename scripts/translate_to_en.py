@@ -10,7 +10,7 @@ import yaml
 
 try:
     from openai import OpenAI
-except Exception:
+except ImportError:
     print("[ERROR] openai package not available. Make sure it's installed.")
     sys.exit(1)
 
@@ -105,7 +105,7 @@ def split_front_matter(translated_markdown: str) -> tuple[dict, str]:
         fm = yaml.safe_load(fm_text) or {}
         if not isinstance(fm, dict):
             fm = {}
-    except Exception:
+    except yaml.YAMLError:
         fm = {}
     return fm, body
 
@@ -154,10 +154,22 @@ def main() -> int:
 
         # Construct English filename by preserving the original filename
         en_path = to_en_filename(src)
+
+        # If the English file already exists, remove it first to ensure a clean overwrite
+        if en_path.exists():
+            try:
+                en_path.unlink()
+                print(
+                    f"[translate] Overwriting existing: {en_path.relative_to(REPO_ROOT)}"
+                )
+            except OSError:
+                # Best-effort unlink; continue with write which will overwrite contents
+                pass
+
         en_post = frontmatter.Post(body, **fm)
         with open(en_path, "w", encoding="utf-8") as f:
             f.write(frontmatter.dumps(en_post))
-        print(f"[translate] Created: {en_path.relative_to(REPO_ROOT)}")
+        print(f"[translate] Created/Updated: {en_path.relative_to(REPO_ROOT)}")
         created += 1
 
     print(f"[translate] New English posts: {created}")
