@@ -159,7 +159,9 @@ def main() -> int:
         if en_path.exists():
             try:
                 en_path.unlink()
-                print(f"[translate] Overwriting existing: {en_path.relative_to(REPO_ROOT)}")
+                print(
+                    f"[translate] Overwriting existing: {en_path.relative_to(REPO_ROOT)}"
+                )
             except OSError:
                 # Best-effort unlink; continue with write which will overwrite contents
                 pass
