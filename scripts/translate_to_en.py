@@ -7,7 +7,6 @@ from pathlib import Path
 
 import frontmatter
 import yaml
-from slugify import slugify
 
 try:
     from openai import OpenAI
@@ -28,6 +27,7 @@ PROMPT_SYSTEM = (
     "- Do not hallucinate code or change code semantics.\n"
     "- Maintain YAML front matter formatting.\n"
     "- If there is mixed language, prefer English.\n"
+    "- Do NOT change the file name or slug. The output will be saved using the exact same filename as the source (e.g., 2025-07-03-actions-runner-controller.md).\n"
 )
 
 
@@ -53,23 +53,15 @@ def load_korean_posts(only_paths: list[Path] | None = None) -> list[Path]:
     return sorted(POSTS_DIR.glob("*.md"))
 
 
-def to_en_filename(source_path: Path, en_title: str) -> Path:
-    # source: YYYY-MM-DD-title.md -> keep date, replace slug with English slug
-    date_prefix = source_path.name.split("-", 3)[:3]
-    # Build english slug from translated title
-    en_slug = slugify(en_title)
-    filename = f"{date_prefix[0]}-{date_prefix[1]}-{date_prefix[2]}-{en_slug}.md"
-    return POSTS_EN_DIR / filename
+def to_en_filename(source_path: Path) -> Path:
+    # Keep the exact same filename as the source for the English post
+    # Example: 2025-07-03-actions-runner-controller.md -> same name under _posts_en
+    return POSTS_EN_DIR / source_path.name
 
 
 def needs_translation(src_file: Path) -> bool:
-    try:
-        post = frontmatter.load(src_file)
-    except Exception:
-        return True
-    title = str(post.get("title", ""))
     # If corresponding EN file already exists, skip
-    en_filename = to_en_filename(src_file, title or src_file.stem)
+    en_filename = to_en_filename(src_file)
     if en_filename.exists():
         return False
     # If any file on the same date exists in _posts_en, we might have different slug; check by date
@@ -160,8 +152,8 @@ def main() -> int:
         if "title" not in fm or not fm["title"]:
             fm["title"] = dict(post).get("title", "")
 
-        # Construct english filename from translated title
-        en_path = to_en_filename(src, str(fm.get("title", src.stem)))
+        # Construct English filename by preserving the original filename
+        en_path = to_en_filename(src)
         en_post = frontmatter.Post(body, **fm)
         with open(en_path, "w", encoding="utf-8") as f:
             f.write(frontmatter.dumps(en_post))
