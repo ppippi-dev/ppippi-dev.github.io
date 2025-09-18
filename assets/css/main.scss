@@ -38,6 +38,15 @@
   --vercel-code-operator: var(--v-blue-600);
   --vercel-code-added: var(--v-green-700);
   --vercel-code-removed: var(--v-red-700);
+  --vercel-inline-code-bg: rgba(15, 23, 42, 0.06);
+  --vercel-inline-code-hover-bg: rgba(15, 23, 42, 0.1);
+  --vercel-inline-code-border: rgba(15, 23, 42, 0.12);
+  --vercel-inline-code-shadow: 0 10px 24px -20px rgba(15, 23, 42, 0.35);
+  --vercel-inline-code-text: #121826;
+  --vercel-inline-code-font-size: 0.84em;
+  --vercel-inline-code-padding-y: 0.16em;
+  --vercel-inline-code-padding-x: 0.42em;
+  --vercel-inline-code-radius: 5px;
 }
 /* 전체 백그라운드 색상 설정 */
 html, body {
@@ -260,24 +269,28 @@ article, main, .main {
 }
 
 .ohouse-post-content :not(pre) > code {
-  background: var(--vercel-code-surface);
-  padding: 0.25em 0.6em;
-  border-radius: 6px;
-  font-size: 0.9em;
-  color: var(--vercel-code-text);
+  background: var(--vercel-inline-code-bg);
+  padding: var(--vercel-inline-code-padding-y) var(--vercel-inline-code-padding-x);
+  border-radius: var(--vercel-inline-code-radius);
+  font-size: var(--vercel-inline-code-font-size);
+  color: var(--vercel-inline-code-text);
   font-family: var(--monospace);
-  border: 1px solid var(--vercel-code-border);
-  box-shadow: 0 10px 24px -18px rgba(12, 14, 18, 0.9);
+  border: 1px solid var(--vercel-inline-code-border);
+  box-shadow: var(--vercel-inline-code-shadow);
   transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
 }
 
 .ohouse-post-content :not(pre) > code:hover {
   transform: translateY(-1px);
-  background-color: #141821;
-  box-shadow: 0 18px 40px -26px rgba(12, 14, 18, 0.98);
+  background-color: var(--vercel-inline-code-hover-bg);
+  box-shadow: 0 16px 32px -26px rgba(15, 23, 42, 0.42);
 }
 
-.ohouse-post-content :not(pre) > code::selection,
+.ohouse-post-content :not(pre) > code::selection {
+  background-color: rgba(82, 174, 255, 0.22);
+  color: var(--vercel-inline-code-text);
+}
+
 .ohouse-post-content pre code::selection,
 .ohouse-post-content pre span::selection,
 .ohouse-post-content pre::selection {
@@ -285,7 +298,11 @@ article, main, .main {
   color: var(--vercel-code-text);
 }
 
-.ohouse-post-content :not(pre) > code::-moz-selection,
+.ohouse-post-content :not(pre) > code::-moz-selection {
+  background-color: rgba(82, 174, 255, 0.22);
+  color: var(--vercel-inline-code-text);
+}
+
 .ohouse-post-content pre code::-moz-selection,
 .ohouse-post-content pre span::-moz-selection,
 .ohouse-post-content pre::-moz-selection {
