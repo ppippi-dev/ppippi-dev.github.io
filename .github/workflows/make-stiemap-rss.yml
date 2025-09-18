@@ -1,0 +1,40 @@
+name: Generate sitemap and RSS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_posts/**'
+      - '_posts_en/**'
+      - 'scripts/generate_sitemap_rss.py'
+      - '.github/workflows/make-stiemap-rss.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate sitemap and RSS
+        run: python scripts/generate_sitemap_rss.py
+
+      - name: Commit generated files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: update sitemap and rss'
+          file_pattern: |
+            sitemap.xml
+            feed.xml
