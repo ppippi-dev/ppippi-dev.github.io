@@ -268,6 +268,7 @@ def collect_static_pages() -> List[StaticEntry]:
         Path("search.html"),
         Path("en/index.html"),
         Path("en/tags.html"),
+        Path("robots.txt"),
     ]
     entries: List[StaticEntry] = []
     for rel_path in static_files:
