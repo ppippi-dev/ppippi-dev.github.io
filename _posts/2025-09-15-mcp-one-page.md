@@ -6,11 +6,13 @@ feature-img: "assets/img/2025-09-15-mcp-one-page/0.png"
 tags: [LLMOps]
 ---
 
-2024년 11월, Anthropic이 Claude에서 MCP(Model Context Protocol)를 오픈소스로 공개했다. 출시 직후부터 주변에서는 "MCP 써봤냐"는 질문이 잦았고, "써보면 정말 편하다"라는 이야기도 들려왔다.
+2024년 11월, Anthropic이 Claude에서 MCP(Model Context Protocol)를 오픈소스로 공개했다. 출시 직후부터 주변에서는 "MCP 써봤냐"는 질문이 잦았고,  "써보면 정말 편하다"라는 이야기도 들려왔다.
 
-솔직히 처음에는 큰 감흥이 없었다. OpenAI Function Calling과 크게 다르지 않아 보였고, 이미 LLM 확장 기능을 만들 수 있는 도구는 많았기 때문이다. 하지만 불과 몇 달 사이에 MCP는 OpenAI, Google 등 주요 플레이어들의 제품에도 빠르게 통합되며 사실상 표준 후보로 자리 잡았다. ChatGPT UI에서도 [베타 기능으로 MCP를 직접 등록](https://platform.openai.com/docs/guides/developer-mode)할 수 있게 된 것이 좋은 예다.
+솔직히 처음에는 큰 감흥이 없었다. OpenAI Function Calling 혹은 Gemini Function Calling과 크게 다르지 않아 보였고, 이미 LLM 확장 기능을 만들 수 있는 도구는 많았기 때문이다. 하지만 불과 몇 달 사이에 MCP는 OpenAI, Google 등 주요 플레이어들의 제품에도 빠르게 통합되며 사실상 표준 후보로 자리 잡았다. ChatGPT UI에서도 [베타 기능으로 MCP를 직접 등록](https://platform.openai.com/docs/guides/developer-mode)할 수 있게 된 것이 좋은 예이며, 그 외에 많은 Agent Docs에서도 MCP 관련 튜토리얼을 제공하고 있다.
 
-이 글에서는 MCP를 직접 구현해보고자 한다.
+이 글에서는 간단한 MCP를 직접 구현해보고자 한다.
+
+
 
 ## 왜 MCP를 다시 바라보게 되었나
 
@@ -29,7 +31,7 @@ tags: [LLMOps]
 
 Claude는 MCP를 ["AI 애플리케이션을 외부 시스템에 연결하기위한 오픈 소스 표준"](https://modelcontextprotocol.io/docs/getting-started/intro) 이라고 소개하고 있다.
 
-특히 (질리도록 들어본...?) 자주 사용하는 표현 중 하나인 "AI 애플리케이션 용 USB-C 포트처럼 MCP를 생각해보십시오." 라는 내용이 등장한다. 즉, MCP는 AI 애플리케이션을 외부 시스템과 연결해주는 프로토콜이다.
+특히 질리도록 들어본 표현 중 하나인 "AI 애플리케이션 용 USB-C 포트처럼 MCP를 생각해보십시오." 라는 내용이 등장한다. 즉, MCP는 AI 애플리케이션을 외부 시스템과 연결해주는 프로토콜이다.
 
 Function Calling과 비교하면, 단일 벤더가 정한 JSON 스키마를 따르는 대신, MCP는 연결·초기화·도구 목록·리소스 접근까지 전 과정을 표준화했다. 덕분에 서버 입장에서는 "어떤 클라이언트가 붙더라도 동일한 핸드셰이크"를 기대할 수 있고, 클라이언트는 새로운 기능을 발견(List)하고 설명(Description)만으로 호출할 수 있다.
 
@@ -41,11 +43,7 @@ Function Calling과 비교하면, 단일 벤더가 정한 JSON 스키마를 따�
 
 간단한 예시를 들면, GPT에게 오늘 나의 캘린더 일정을 조회 해달라고 요청하는 것이다.
 
-MCP가 없다면, GPT는 이를 수행할 수 없다. 하지만 MCP를 통해 캘린더를 조회하는 API를 호출하고, 이를 통해 데이터를 조회할 수 있다. 물론 GPT의 Function calling을 통해서도 가능하지만, MCP는 오픈소스 프로토콜로 설정해서, GPT에서도 호출 할 수 있고 Gemini에서도 호출할 수 있는 그야말로 표준을 만든 셈이다.
-
-
-
-나의 경우 [Cursor에서 MCP 서버를 등록](https://docs.cursor.com/en/context/mcp)해두고, 주로 사용하곤 한다. 
+MCP가 없다면, GPT는 이를 수행할 수 없다. 하지만 MCP를 통해 캘린더를 조회하는 API를 호출하고, 이를 통해 데이터를 조회할 수 있다. 물론 Function calling을 통해서도 가능하지만, MCP는 오픈소스 프로토콜로 설정해서, GPT에서도 호출 할 수 있고 Gemini에서도 호출할 수 있는 그야말로 표준을 만든 셈이다.
 
 
 
@@ -68,9 +66,9 @@ MCP는 크게 2가지로 나눌 수 있다. Client와 Server이다. MCP Host 라
 
 주목해야 할 부분은 MCP에서 클라이언트와 서버가 1:1 세션 연결을 권장한다는 점이다.
 
-MCP 서버는 로컬 또는 원격으로 실행할 수 있다. 로컬에서는 STDIO 전송을 사용하며 클라이언트와 동일한 시스템에서 돌리게 되는데, 이를 로컬 MCP라고 부른다.
+MCP 서버는 로컬 또는 원격으로 클라이언트와 연결 할 수 있다. 로컬에서는 STDIO를 사용하며 클라이언트와 동일한 시스템(운영체제)에서 돌리게 되는데, 이를 로컬 MCP라고 부른다.
 
-반대로 외부 플랫폼에서 실행하며 SSE 전송으로 연결하면 원격 MCP 서버가 된다.
+반대로 외부 플랫폼에서 실행하며 SSE 전송으로 연결하면 원격 MCP 서버가 되며 네트워크를 통한 통신이 된다.
 
 
 
@@ -111,7 +109,6 @@ from mcp.server.fastmcp import FastMCP
 mcp = FastMCP(
     name="stock-mcp",
 )
-
 ```
 
 
@@ -171,7 +168,6 @@ def get_stock_price(args: dict[str, Any]) -> dict[str, Any]:
         }
     except Exception as e:
         return {"success": False, "error": str(e)}
-    
 ```
 
 
@@ -197,14 +193,12 @@ async def main() -> None:
                 {"args": {"ticker": "005930.KS"}},
             )
             print(result.content)
-
 ```
 
 해당 코드를 실행시키면 아래와 같은 로그가 출력된다.
 
 ```shell
 [TextContent(type='text', text='{\n  "success": true,\n  "company_name": "Samsung Electronics Co., Ltd.",\n  "ticker": "005930.KS",\n  "current_price": 78200.0,\n  "previous_close": 79400.0,\n  "change": "-1200.00 (-1.51%)"\n}', annotations=None, meta=None)]
-
 ```
 
 흐름을 다시 정리하면 아래와 같다.
@@ -263,7 +257,6 @@ async def main() -> None:
                     {"args": {"ticker": "005930.KS"}},
                 )
                 print(result.content)
-
 ```
 
 
@@ -287,18 +280,13 @@ PROMPT_MESSAGE:
             If you don't know the answer, return 'None'
             
 GPT Response:  get_stock_price
-
 ```
 
 Prompt를 직접 만들어도 되지만, 프로덕션에서는 "도구 선택 → 인자 생성 → 호출 결과 해석" 과정을 프레임워크가 대신해 주는 경우가 많다. 다만 한 번은 로우레벨 흐름을 경험해 보는 것이 좋다. 어떤 메시지가 오가고 실패했을 때 어떤 예외가 터지는지 감을 잡을 수 있기 때문이다.
 
 물론 직접 이렇게 LLM을 구현할 필요는 없다. 마지막에 간단하게 소개하겠지만, OpenAI SDK나 Google ADK에서 MCP와의 연동을 함께 제공하고 있어 훨씬 간단하게 통합할 수 있다.
 
-
-
 이제 다음으로 Resource를 살펴보자.
-
-
 
 ### Resource
 
@@ -314,7 +302,6 @@ def help_resource() -> str:
         "  - stock-answer: Message template for composing a stock response\n"
         "\n(Invoke the LLM from the client.)\n"
     )
-    
 ```
 
 Resource는 에이전트가 참고할 수 있는 정적인 자료를 노출하는 용도로 활용한다. 
@@ -341,8 +328,7 @@ async def main() -> None:
 
             for r in resources.resources:
                 read_result = await session.read_resource(r.uri)
-                print(read_result.contents)
-                
+                print(read_result.contents)      
 ```
 
 Resource도 Tools와 동일하게 MCP에서 List 혹은 Read 관련 함수를 제공하며, 클라이언트가 필요 시 적절한 URI로 `read_resource`를 호출한다. 
@@ -356,7 +342,6 @@ Resource도 Tools와 동일하게 MCP에서 List 혹은 Read 관련 함수를 �
 - file://help.md/: Server usage guide and available tools
 
 [TextResourceContents(uri=AnyUrl('file://help.md/'), mimeType='text/plain', meta=None, text='# stock-mcp Help\n\n- get_stock_price(ticker): Look up a Yahoo Finance ticker (e.g., 005930.KS)\n- prompts:\n  - extract-stock-code: Message template for extracting a 6-digit stock code\n  - stock-answer: Message template for composing a stock response\n\n(Invoke the LLM from the client.)\n')]
-
 ```
 
 
@@ -383,7 +368,6 @@ def extract_stock_code_prompt(user_input: str) -> dict[str, Any]:
             f"Question: {user_input}"
         ),
     }
-
 ```
 
 LLM에서 자주 쓰는 프롬프트를 MCP 서버에서 관리한다고 생각하면 된다.
@@ -428,7 +412,6 @@ async def main() -> None:
             )
 
             print("GPT Response: ", response.choices[0].message.content)
-            
 ```
 
 위와 같이 Prompt를 MCP 서버에서 받아온 뒤 LLM에 그대로 전달하면, 서버에서 정의한 템플릿과 인자가 조합된 최종 메시지를 재사용할 수 있다. 복잡한 Few-shot 예제를 서버에 묶어 두고, 클라이언트는 필요한 변수만 넘기는 방식이 깔끔하게 정리된다.
@@ -465,7 +448,6 @@ async def main():
 
         result = await Runner.run(agent, "삼성전자 주가 얼마야?")
         print(result)
-
 ```
 
 
