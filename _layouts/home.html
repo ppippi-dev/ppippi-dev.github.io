@@ -151,15 +151,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         paginationContainer.style.display = 'flex';
         
-        // Update prev/next buttons
-        prevBtn.disabled = currentPage === 1;
-        nextBtn.disabled = currentPage === totalPages;
-        prevBtn.style.display = currentPage === 1 ? 'none' : 'block';
-        nextBtn.style.display = currentPage === totalPages ? 'none' : 'block';
+        // Calculate page range (10 pages per group)
+        const pagesPerGroup = 10;
+        const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+        const startPage = (currentGroup - 1) * pagesPerGroup + 1;
+        const endPage = Math.min(currentGroup * pagesPerGroup, totalPages);
         
-        // Update page numbers
+        // Update prev/next buttons
+        const hasPrevGroup = currentGroup > 1;
+        const hasNextGroup = currentGroup < Math.ceil(totalPages / pagesPerGroup);
+        
+        prevBtn.disabled = !hasPrevGroup;
+        nextBtn.disabled = !hasNextGroup;
+        prevBtn.style.display = hasPrevGroup ? 'block' : 'none';
+        nextBtn.style.display = hasNextGroup ? 'block' : 'none';
+        
+        // Update page numbers (only show current group)
         paginationNumbers.innerHTML = '';
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = startPage; i <= endPage; i++) {
             if (i === currentPage) {
                 paginationNumbers.innerHTML += `<span class="pagination-current">${i}</span>`;
             } else {
@@ -177,8 +186,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Event listeners
-    prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
-    nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+    prevBtn.addEventListener('click', () => {
+        const pagesPerGroup = 10;
+        const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+        const prevGroupStartPage = (currentGroup - 2) * pagesPerGroup + 1;
+        goToPage(prevGroupStartPage);
+    });
+    nextBtn.addEventListener('click', () => {
+        const pagesPerGroup = 10;
+        const currentGroup = Math.ceil(currentPage / pagesPerGroup);
+        const nextGroupStartPage = currentGroup * pagesPerGroup + 1;
+        goToPage(nextGroupStartPage);
+    });
     
     // Make goToPage globally available
     window.goToPage = goToPage;
