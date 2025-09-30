@@ -7,14 +7,14 @@ layout: default
     <div class="posts-header">
       <h1 class="posts-title">{{ site.theme_settings.title }}</h1>
       <p class="posts-subtitle">{{ site.theme_settings.description }}</p>
-      <div class="posts-categories">
+      <!-- <div class="posts-categories">
         {% assign all_tags = site.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort %}
         {% for tag in all_tags limit: 5 %}
           {% if tag != '' %}
             <a href="{{ site.baseurl }}/tags#{{ tag | slugify }}" class="category-tag">{{ tag }}</a>
           {% endif %}
         {% endfor %}
-      </div>
+      </div> -->
     </div>
     
     <!-- All posts data (hidden, used by JavaScript) -->
