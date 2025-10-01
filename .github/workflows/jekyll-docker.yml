@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 # GitHub Pages에 배포하기 위한 권한 설정
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -17,7 +18,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  generate_sitemap_rss:
+    uses: ./.github/workflows/make-stiemap-rss.yml
+
   build:
+    needs: generate_sitemap_rss
     runs-on: ubuntu-latest
     
     steps:

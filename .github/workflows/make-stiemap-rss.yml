@@ -1,21 +1,14 @@
 name: Generate sitemap and RSS
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - '_posts/**'
-      - '_posts_en/**'
-      - 'scripts/generate_sitemap_rss.py'
-      - '.github/workflows/make-stiemap-rss.yml'
+  workflow_call:
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
