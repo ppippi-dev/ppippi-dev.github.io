@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://ppippi-dev.github.io/sitemap.xml
+Sitemap: https://ppippi.dev/sitemap.xml

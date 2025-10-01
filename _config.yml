@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://ppippi-dev.github.io"
+url: "https://ppippi.dev"
 
 # THEME-SPECIFIC CONFIGURATION
 theme_settings:
