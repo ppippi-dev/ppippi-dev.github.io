@@ -1,6 +1,5 @@
 ---
 ---
-
 @import "type-theme";
 
 :root {
@@ -48,7 +47,7 @@
   --vercel-inline-code-padding-x: 0.42em;
   --vercel-inline-code-radius: 5px;
 }
-/* 전체 백그라운드 색상 설정 */
+/* Set site-wide background color */
 html, body {
   background-color: #ffffff !important;
 }
@@ -57,7 +56,7 @@ html, body {
   background-color: #ffffff !important;
 }
 
-/* 헤더와 메인 콘텐츠 사이의 구분선 제거 */
+/* Remove divider between header and main content */
 .home {
   border-top: none !important;
 }
@@ -71,7 +70,7 @@ header, .header, #header {
   border-top: none !important;
 }
 
-/* 모든 불필요한 구분선 제거 */
+/* Remove other unnecessary dividers */
 article, main, .main {
   border-top: none !important;
 }
@@ -147,7 +146,7 @@ article, main, .main {
   color: #666;
 }
 
-/* 카테고리 태그 */
+/* Category tags */
 .post-category {
   margin-bottom: 1rem;
 }
@@ -165,7 +164,7 @@ article, main, .main {
   margin-right: 0.8rem;
 }
 
-/* 포스트 제목 */
+/* Post title */
 .post-title {
   font-size: 2.5rem;
   font-weight: 700;
@@ -175,7 +174,7 @@ article, main, .main {
   letter-spacing: -0.02em;
 }
 
-/* 포스트 서브타이틀 */
+/* Post subtitle */
 .post-subtitle {
   font-size: 1.25rem;
   font-weight: 400;
@@ -184,7 +183,7 @@ article, main, .main {
   line-height: 1.4;
 }
 
-/* 포스트 메타 정보 */
+/* Post meta info */
 .post-meta {
   display: flex;
   align-items: center;
@@ -198,17 +197,244 @@ article, main, .main {
   font-weight: 500;
 }
 
+/* Guide/collection layout */
+.guide-wrapper {
+  display: grid;
+  grid-template-columns: clamp(200px, 14vw, 240px) minmax(0, 1fr);
+  column-gap: clamp(1.25rem, 2.5vw, 2rem);
+  align-items: start;
+  width: 100%;
+  max-width: min(100%, 1480px);
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(2.5rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3rem);
+  float: none !important;
+}
+
+.guide-sidebar {
+  grid-column: 1 / 2;
+  justify-self: stretch;
+  align-self: start;
+  width: 100%;
+  max-width: 240px;
+  padding: 2rem 2.25rem;
+  background-color: var(--v-white-200);
+  border: 1px solid var(--v-gray-400);
+  border-radius: 14px;
+  box-shadow: 0 14px 32px rgba(17, 24, 39, 0.08);
+}
+
+.guide-sidebar-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.guide-chapter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.guide-chapter-item a {
+  display: block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  color: var(--v-gray-900);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.guide-chapter-item a:hover {
+  background-color: var(--v-gray-400);
+  color: var(--v-gray-1000);
+}
+
+.guide-chapter-item.is-active a {
+  background-color: var(--v-blue-600);
+  color: #fff;
+}
+
+.guide-content {
+  grid-column: 2 / 3;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  background-color: #fff;
+  border-radius: 18px;
+  padding: clamp(2rem, 3vw, 3rem);
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+}
+
+.guide-content-header h1 {
+  font-size: clamp(2.2rem, calc(1.6vw + 1.9rem), 2.8rem);
+  margin-bottom: 1rem;
+}
+
+.guide-meta {
+  color: var(--v-gray-600);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-markdown {
+  line-height: 1.75;
+  font-size: 1.05rem;
+}
+
+.guide-prev-next {
+  margin-top: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.guide-nav-link {
+  display: inline-block;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  background-color: var(--v-gray-400);
+  color: var(--v-gray-1000);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.guide-nav-link:hover {
+  background-color: var(--v-blue-600);
+  color: #fff;
+}
+
+.guide-prev-next .next {
+  margin-left: auto;
+}
+
+@media (max-width: 960px) {
+  .guide-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    max-width: 100%;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .guide-sidebar {
+    width: 100%;
+    padding: 0 0 1rem 0;
+    border: none;
+    border-bottom: 1px solid var(--v-gray-400);
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .guide-content {
+    width: 100%;
+    padding: 1.75rem 1.5rem;
+    box-shadow: none;
+  }
+
+  .guide-prev-next {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .guide-prev-next .next {
+    margin-left: 0;
+  }
+}
+
+.guide-index {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.guide-index-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.guide-index-description {
+  color: var(--v-gray-700);
+  margin-bottom: 2rem;
+}
+
+.guide-index-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guide-index-item {
+  border: 1px solid var(--v-gray-400);
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  background-color: var(--v-white-200);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.guide-index-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.05);
+}
+
+.guide-index-item-body {
+  display: flex;
+  gap: 1rem;
+}
+
+.guide-index-order {
+  font-weight: 700;
+  color: var(--v-blue-700);
+  min-width: 2rem;
+}
+
+.guide-index-title {
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--v-gray-1000);
+  text-decoration: none;
+  margin-bottom: 0.3rem;
+}
+
+.guide-index-title:hover {
+  color: var(--v-blue-700);
+}
+
+.guide-index-subtitle {
+  color: var(--v-gray-700);
+  margin: 0 0 0.3rem 0;
+}
+
+.guide-index-summary {
+  color: var(--v-gray-800);
+  margin: 0;
+  line-height: 1.6;
+}
+
 .post-author {
   font-weight: 500;
 }
 
 .post-author::before {
-  content: "•";
+  content: "\\2022";
   margin-right: 0.5rem;
   color: #ddd;
 }
 
-.ohouse-post-content {
+.ohouse-post-content,
+.guide-markdown {
   line-height: 1.8;
   font-size: 1.125rem;
   color: #333;
@@ -220,45 +446,59 @@ article, main, .main {
 .ohouse-post-content h3,
 .ohouse-post-content h4,
 .ohouse-post-content h5,
-.ohouse-post-content h6 {
+.ohouse-post-content h6,
+.guide-markdown h1,
+.guide-markdown h2,
+.guide-markdown h3,
+.guide-markdown h4,
+.guide-markdown h5,
+.guide-markdown h6 {
   font-weight: 700;
   margin: 60px 0 24px 0;
   color: #000;
   line-height: 1.3;
 }
 
-.ohouse-post-content h1 {
+.ohouse-post-content h1,
+.guide-markdown h1 {
   font-size: 2rem;
   margin-top: 80px;
 }
 
-.ohouse-post-content h2 {
+.ohouse-post-content h2,
+.guide-markdown h2 {
   font-size: 1.75rem;
   margin-top: 60px;
 }
 
-.ohouse-post-content h3 {
+.ohouse-post-content h3,
+.guide-markdown h3 {
   font-size: 1.5rem;
   margin-top: 48px;
 }
 
-.ohouse-post-content p {
+.ohouse-post-content p,
+.guide-markdown p {
   margin: 24px 0;
   line-height: 1.8;
 }
 
 .ohouse-post-content ul,
-.ohouse-post-content ol {
+.ohouse-post-content ol,
+.guide-markdown ul,
+.guide-markdown ol {
   margin: 24px 0;
   padding-left: 24px;
 }
 
-.ohouse-post-content li {
+.ohouse-post-content li,
+.guide-markdown li {
   margin: 8px 0;
   line-height: 1.7;
 }
 
-.ohouse-post-content blockquote {
+.ohouse-post-content blockquote,
+.guide-markdown blockquote {
   border-left: 4px solid #ddd;
   margin: 40px 0;
   padding: 20px 24px;
@@ -268,7 +508,8 @@ article, main, .main {
   font-size: 1rem;
 }
 
-.ohouse-post-content :not(pre) > code {
+.ohouse-post-content :not(pre) > code,
+.guide-markdown :not(pre) > code {
   background: var(--vercel-inline-code-bg);
   padding: var(--vercel-inline-code-padding-y) var(--vercel-inline-code-padding-x);
   border-radius: var(--vercel-inline-code-radius);
@@ -280,37 +521,47 @@ article, main, .main {
   transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
 }
 
-.ohouse-post-content :not(pre) > code:hover {
+.ohouse-post-content :not(pre) > code:hover,
+.guide-markdown :not(pre) > code:hover {
   transform: translateY(-1px);
   background-color: var(--vercel-inline-code-hover-bg);
   box-shadow: 0 16px 32px -26px rgba(15, 23, 42, 0.42);
 }
 
-.ohouse-post-content :not(pre) > code::selection {
+.ohouse-post-content :not(pre) > code::selection,
+.guide-markdown :not(pre) > code::selection {
   background-color: rgba(82, 174, 255, 0.22);
   color: var(--vercel-inline-code-text);
 }
 
 .ohouse-post-content pre code::selection,
 .ohouse-post-content pre span::selection,
-.ohouse-post-content pre::selection {
+.ohouse-post-content pre::selection,
+.guide-markdown pre code::selection,
+.guide-markdown pre span::selection,
+.guide-markdown pre::selection {
   background-color: rgba(82, 174, 255, 0.28);
   color: var(--vercel-code-text);
 }
 
-.ohouse-post-content :not(pre) > code::-moz-selection {
+.ohouse-post-content :not(pre) > code::-moz-selection,
+.guide-markdown :not(pre) > code::-moz-selection {
   background-color: rgba(82, 174, 255, 0.22);
   color: var(--vercel-inline-code-text);
 }
 
 .ohouse-post-content pre code::-moz-selection,
 .ohouse-post-content pre span::-moz-selection,
-.ohouse-post-content pre::-moz-selection {
+.ohouse-post-content pre::-moz-selection,
+.guide-markdown pre code::-moz-selection,
+.guide-markdown pre span::-moz-selection,
+.guide-markdown pre::-moz-selection {
   background-color: rgba(82, 174, 255, 0.28);
   color: var(--vercel-code-text);
 }
 
-.ohouse-post-content pre {
+.ohouse-post-content pre,
+.guide-markdown pre {
   position: relative;
   background: linear-gradient(160deg, rgba(18, 20, 27, 0.96) 0%, rgba(14, 16, 22, 0.98) 55%, rgba(12, 14, 20, 0.99) 100%);
   padding: 28px 32px;
@@ -326,7 +577,8 @@ article, main, .main {
   font-variant-ligatures: none;
 }
 
-.ohouse-post-content pre::before {
+.ohouse-post-content pre::before,
+.guide-markdown pre::before {
   content: "";
   position: absolute;
   inset: 1px;
@@ -337,7 +589,9 @@ article, main, .main {
 }
 
 .ohouse-post-content pre code,
-.ohouse-post-content pre span {
+.ohouse-post-content pre span,
+.guide-markdown pre code,
+.guide-markdown pre span {
   background: transparent;
   padding: 0;
   border: 0;
@@ -352,7 +606,14 @@ article, main, .main {
 .ohouse-post-content pre .cm,
 .ohouse-post-content pre .cpf,
 .ohouse-post-content pre .c1,
-.ohouse-post-content pre .cs {
+.ohouse-post-content pre .cs,
+.guide-markdown pre .c,
+.guide-markdown pre .ch,
+.guide-markdown pre .cd,
+.guide-markdown pre .cm,
+.guide-markdown pre .cpf,
+.guide-markdown pre .c1,
+.guide-markdown pre .cs {
   color: var(--vercel-code-muted);
   font-style: italic;
 }
@@ -362,14 +623,24 @@ article, main, .main {
 .ohouse-post-content pre .kn,
 .ohouse-post-content pre .kp,
 .ohouse-post-content pre .kr,
-.ohouse-post-content pre .kt {
+.ohouse-post-content pre .kt,
+.guide-markdown pre .k,
+.guide-markdown pre .kd,
+.guide-markdown pre .kn,
+.guide-markdown pre .kp,
+.guide-markdown pre .kr,
+.guide-markdown pre .kt {
   color: var(--vercel-code-keyword);
 }
 
 .ohouse-post-content pre .nn,
 .ohouse-post-content pre .nc,
 .ohouse-post-content pre .nf,
-.ohouse-post-content pre .fm {
+.ohouse-post-content pre .fm,
+.guide-markdown pre .nn,
+.guide-markdown pre .nc,
+.guide-markdown pre .nf,
+.guide-markdown pre .fm {
   color: var(--vercel-code-func);
 }
 
@@ -378,7 +649,13 @@ article, main, .main {
 .ohouse-post-content pre .nv,
 .ohouse-post-content pre .vc,
 .ohouse-post-content pre .vg,
-.ohouse-post-content pre .vi {
+.ohouse-post-content pre .vi,
+.guide-markdown pre .nb,
+.guide-markdown pre .bp,
+.guide-markdown pre .nv,
+.guide-markdown pre .vc,
+.guide-markdown pre .vg,
+.guide-markdown pre .vi {
   color: var(--vercel-code-text);
 }
 
@@ -393,7 +670,19 @@ article, main, .main {
 .ohouse-post-content pre .sr,
 .ohouse-post-content pre .ss,
 .ohouse-post-content pre .si,
-.ohouse-post-content pre .se {
+.ohouse-post-content pre .se,
+.guide-markdown pre .s,
+.guide-markdown pre .sb,
+.guide-markdown pre .sc,
+.guide-markdown pre .s1,
+.guide-markdown pre .s2,
+.guide-markdown pre .sd,
+.guide-markdown pre .sh,
+.guide-markdown pre .sx,
+.guide-markdown pre .sr,
+.guide-markdown pre .ss,
+.guide-markdown pre .si,
+.guide-markdown pre .se {
   color: var(--vercel-code-string);
 }
 
@@ -403,25 +692,38 @@ article, main, .main {
 .ohouse-post-content pre .mh,
 .ohouse-post-content pre .mi,
 .ohouse-post-content pre .il,
-.ohouse-post-content pre .mo {
+.ohouse-post-content pre .mo,
+.guide-markdown pre .m,
+.guide-markdown pre .mb,
+.guide-markdown pre .mf,
+.guide-markdown pre .mh,
+.guide-markdown pre .mi,
+.guide-markdown pre .il,
+.guide-markdown pre .mo {
   color: var(--vercel-code-number);
 }
 
 .ohouse-post-content pre .o,
 .ohouse-post-content pre .ow,
-.ohouse-post-content pre .p {
+.ohouse-post-content pre .p,
+.guide-markdown pre .o,
+.guide-markdown pre .ow,
+.guide-markdown pre .p {
   color: var(--vercel-code-operator);
 }
 
-.ohouse-post-content pre .gd {
+.ohouse-post-content pre .gd,
+.guide-markdown pre .gd {
   color: var(--vercel-code-removed);
 }
 
-.ohouse-post-content pre .gi {
+.ohouse-post-content pre .gi,
+.guide-markdown pre .gi {
   color: var(--vercel-code-added);
 }
 
-.ohouse-post-content img {
+.ohouse-post-content img,
+.guide-markdown img {
   max-width: 100%;
   height: auto;
   margin: 40px 0;
@@ -465,7 +767,7 @@ article, main, .main {
   color: #333;
 }
 
-/*  피처 이미지 */
+/* Feature image */
 .ohouse-post-feature-image {
   margin: 60px 0;
 }
@@ -629,7 +931,7 @@ article, main, .main {
   transform: scale(1.05);
 }
 
-/* 이미지가 없는 포스트 카드 */
+/* Post card without featured image */
 .post-card.no-image {
   display: block;
 }
@@ -704,7 +1006,7 @@ article, main, .main {
   color: #666;
 }
 
-/* 반응형 디자인 */
+/* Responsive design tweaks */
 @media (max-width: 768px) {
   .posts-container {
     padding: 0 1.25rem;
@@ -760,7 +1062,7 @@ article, main, .main {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* 카테고리 태그 오버라이드 - 파란색 버튼 제거 */
+/* Override category tag color - remove blue button */
 .posts-categories .category-tag {
   background: none !important;
   color: #666 !important;
@@ -784,12 +1086,12 @@ article, main, .main {
   background: none !important;
 }
 
-/* 제목 중앙정렬 제거 */
+/* Remove centered title */
 .posts-header {
   text-align: left !important;
 }
 
-/* 포스트 카드 제목 중앙정렬 제거 */
+/* Remove centered card title */
 .post-card-header {
   text-align: left !important;
 }

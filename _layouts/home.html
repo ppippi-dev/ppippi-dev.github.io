@@ -58,6 +58,20 @@ layout: default
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const postsData = JSON.parse(document.getElementById('posts-data').textContent);
+    {% assign adk_chapters = site.adk | sort: 'order' %}
+    {% assign adk_first = adk_chapters | first %}
+    {% if adk_first and page.lang != "en" %}
+    postsData.unshift({
+        title: {{ "ADK 시리즈" | jsonify }},
+        subtitle: {{ adk_first.subtitle | default: "Google Agent Development Kit 단계별 가이드" | jsonify }},
+        url: {{ adk_first.url | relative_url | jsonify }},
+        excerpt: {{ adk_first.content | strip_html | truncatewords: 30 | jsonify }},
+        date: "",
+        author: {{ "ADK Series" | jsonify }},
+        "feature-img": {{ "assets/img/2025-10-10-adk/adk-social-card.png" | relative_url | jsonify }},
+        tags: {{ ["ADK"] | jsonify }}
+    });
+    {% endif %}
     const postsGrid = document.getElementById('posts-grid');
     const paginationContainer = document.getElementById('pagination-container');
     const prevBtn = document.getElementById('prev-btn');

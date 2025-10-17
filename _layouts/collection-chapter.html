@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+{% assign collection_name = page.collection %}
+{% assign sort_key = page.collection_sort_key | default: 'order' %}
+{% assign collection_items = site[collection_name] | sort: sort_key %}
+{% assign collection_label = page.collection_label | default: collection_name | replace: '_', ' ' | capitalize %}
+
+<article class="guide-wrapper">
+  <aside class="guide-sidebar">
+    <h2 class="guide-sidebar-title">{{ collection_label }}</h2>
+    <ol class="guide-chapter-list">
+      {% for entry in collection_items %}
+      <li class="guide-chapter-item{% if entry.url == page.url %} is-active{% endif %}">
+        <a href="{{ entry.url | relative_url }}">{{ entry.title }}</a>
+      </li>
+      {% endfor %}
+    </ol>
+  </aside>
+
+  <section class="guide-content">
+    <header class="guide-content-header">
+      <h1>{{ page.title }}</h1>
+      {% if page.date %}
+      <p class="guide-meta">{{ page.date | date: "%Y.%m.%d" }}</p>
+      {% endif %}
+    </header>
+    <div class="guide-markdown">
+      {{ content }}
+    </div>
+
+    {% if collection_items %}
+    <nav class="guide-prev-next">
+      {% assign prev_entry = nil %}
+      {% assign next_entry = nil %}
+      {% for entry in collection_items %}
+        {% if entry.url == page.url %}
+          {% assign next_index = forloop.index0 | plus: 1 %}
+          {% if next_index < collection_items.size %}
+            {% assign next_entry = collection_items[next_index] %}
+          {% endif %}
+          {% break %}
+        {% endif %}
+        {% assign prev_entry = entry %}
+      {% endfor %}
+
+      {% if prev_entry %}
+        <a class="guide-nav-link prev" href="{{ prev_entry.url | relative_url }}">
+          ← {{ prev_entry.title }}
+        </a>
+      {% endif %}
+
+      {% if next_entry %}
+        <a class="guide-nav-link next" href="{{ next_entry.url | relative_url }}">
+          {{ next_entry.title }} →
+        </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </section>
+</article>

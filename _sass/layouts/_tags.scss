@@ -1,13 +1,13 @@
-// 기존 스타일 제거됨 - 새로운 모던 스타일로 교체
+// Replace legacy styles with modern layout
 
-// 태그 페이지 컨테이너
+// Tag page container
 .tags-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-// 태그 네비게이션 섹션
+// Tag navigation section
 .tags-navigation {
   background: #f8f9fa;
   border-radius: 12px;
@@ -58,7 +58,7 @@
   }
 }
 
-// 태그 콘텐츠 섹션
+// Tag content section
 .tags-content {
   .tag-section {
     margin-bottom: 4rem;
@@ -104,7 +104,7 @@
     }
   }
 
-  // 포스트 그리드
+  // Post grid
   .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -112,7 +112,7 @@
     margin-top: 2rem;
   }
 
-  // 포스트 카드
+  // Post card
   .tag-post-card {
     background: white;
     border: 1px solid $border-color;
@@ -167,7 +167,7 @@
       }
 
       &::before {
-        content: '📅';
+        content: "\1F4C5";
         margin-right: 0.5rem;
       }
     }
@@ -183,7 +183,7 @@
   }
 }
 
-// 반응형 디자인
+// Responsive design
 @media (max-width: 768px) {
   .tags-container {
     padding: 0 15px;
