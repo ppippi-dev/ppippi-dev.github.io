@@ -27,6 +27,7 @@
 			{% else %}
 				{% assign site_pages = site.pages %}
 			{% endif %}
+
 			{% for page in site_pages %}
 			{% if page.title and page.hide != true %}
 			<li>

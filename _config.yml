@@ -104,6 +104,18 @@ collections:
   posts_en:
     output: true
     permalink: /en/:year/:month/:day/:title/
+  adk:
+    output: true
+    permalink: /adk/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: adk
+    values:
+      layout: collection-chapter
+      collection_label: ADK
+      lang: ko
 
 # BUILD SETTINGS
 markdown: kramdown
