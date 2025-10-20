@@ -26,7 +26,10 @@ layout: default
       {% else %}
         {% assign filtered_posts = site.posts %}
       {% endif %}
+      {% assign first_item = true %}
       {% for post in filtered_posts %}
+      {% unless post.path contains '_posts/adk/' %}
+      {% if first_item == false %},{% endif %}
       {
         "title": {{ post.title | jsonify }},
         "subtitle": {{ post.subtitle | jsonify }},
@@ -36,7 +39,9 @@ layout: default
         "author": {{ post.author | jsonify }},
         "feature-img": {{ post.feature-img | relative_url | jsonify }},
         "tags": {{ post.tags | jsonify }}
-      }{% unless forloop.last %},{% endunless %}
+      }
+      {% assign first_item = false %}
+      {% endunless %}
       {% endfor %}
     ]
     </script>
@@ -58,7 +63,7 @@ layout: default
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const postsData = JSON.parse(document.getElementById('posts-data').textContent);
-    {% assign adk_chapters = site.adk | sort: 'order' %}
+    {% assign adk_chapters = site.posts | where_exp: 'p', 'p.path contains "_posts/adk/"' | sort: 'order' %}
     {% assign adk_first = adk_chapters | first %}
     {% if adk_first and page.lang != "en" %}
     postsData.unshift({
@@ -69,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         date: "",
         author: {{ "ADK Series" | jsonify }},
         "feature-img": {{ "assets/img/2025-10-10-adk/adk-social-card.png" | relative_url | jsonify }},
-        tags: {{ ["ADK"] | jsonify }}
+        tags: ["ADK"]
     });
     {% endif %}
     const postsGrid = document.getElementById('posts-grid');

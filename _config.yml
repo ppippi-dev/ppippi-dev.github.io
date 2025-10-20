@@ -104,18 +104,29 @@ collections:
   posts_en:
     output: true
     permalink: /en/:year/:month/:day/:title/
-  adk:
-    output: true
-    permalink: /adk/:path/
 
 defaults:
+  # ADK chapter pages stored under `_posts/_adk` but rendered like a collection
   - scope:
-      path: ""
-      type: adk
+      path: _posts/adk
     values:
       layout: collection-chapter
       collection_label: ADK
       lang: ko
+      section: adk
+      categories: [adk]
+      permalink: /adk/:title/
+      collection_path: _posts/adk
+  - scope:
+      path: _posts_en/adk
+    values:
+      layout: collection-chapter
+      collection_label: ADK
+      lang: en
+      section: adk
+      categories: [adk]
+      permalink: /en/adk/:title/
+      collection_path: _posts_en/adk
 
 # BUILD SETTINGS
 markdown: kramdown
@@ -123,6 +134,7 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: "compressed"
+# Keep collections at default root (so `_posts_en` stays separate)
 # Jekyll 기본 페이지네이션을 비활성화 (커스텀 페이지네이션 사용)
 plugins: []
 # paginate: 6
@@ -130,3 +142,4 @@ plugins: []
 exclude:
   - Gemfile
   - Gemfile.lock
+  - vendor

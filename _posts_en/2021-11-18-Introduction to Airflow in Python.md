@@ -437,8 +437,10 @@ You can loop to create many tasks programmatically instead of duplicating code.
 Templates can access Airflow-provided variables and macros, such as:
 
 ```jinja
+{% raw %}
 {{ ds }}          # execution date
 {{ macros.ds_add(ds, 7) }}  # date arithmetic
+{% endraw %}
 ```
 
 See the docs for the full list of template variables and macros.

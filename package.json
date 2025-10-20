@@ -1,0 +1,21 @@
+{
+  "name": "ppippi-dev.github.io",
+  "version": "1.0.0",
+  "description": "![Default Type Theme blog](https://user-images.githubusercontent.com/816965/30518919-d5978024-9bcd-11e7-81b3-3dd07e99a1f9.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppippi-dev/ppippi-dev.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ppippi-dev/ppippi-dev.github.io/issues"
+  },
+  "homepage": "https://github.com/ppippi-dev/ppippi-dev.github.io#readme"
+}

@@ -2,10 +2,25 @@
 layout: default
 ---
 
-{% assign collection_name = page.collection %}
+{% assign collection_name = page.collection | default: page.collection_name %}
 {% assign sort_key = page.collection_sort_key | default: 'order' %}
-{% assign collection_items = site[collection_name] | sort: sort_key %}
-{% assign collection_label = page.collection_label | default: collection_name | replace: '_', ' ' | capitalize %}
+{% if page.collection_path %}
+  {% if page.collection_name %}
+    {% assign base = site[page.collection_name] %}
+  {% elsif page.lang == "en" %}
+    {% assign base = site.posts_en %}
+  {% else %}
+    {% assign base = site.posts %}
+  {% endif %}
+  {% assign collection_items = base | where_exp: 'p', 'p.path contains page.collection_path' | sort: sort_key %}
+{% else %}
+  {% assign collection_items = site[collection_name] | sort: sort_key %}
+{% endif %}
+{% if page.collection_label %}
+  {% assign collection_label = page.collection_label %}
+{% else %}
+  {% assign collection_label = collection_name | replace: '_', ' ' | capitalize %}
+{% endif %}
 
 <article class="guide-wrapper">
   <aside class="guide-sidebar">
@@ -49,12 +64,16 @@ layout: default
         <a class="guide-nav-link prev" href="{{ prev_entry.url | relative_url }}">
           ← {{ prev_entry.title }}
         </a>
+      {% else %}
+        <span class="guide-nav-link prev is-disabled">← 이전 글 없음</span>
       {% endif %}
 
       {% if next_entry %}
         <a class="guide-nav-link next" href="{{ next_entry.url | relative_url }}">
           {{ next_entry.title }} →
         </a>
+      {% else %}
+        <span class="guide-nav-link next is-disabled">다음 글 없음 →</span>
       {% endif %}
     </nav>
     {% endif %}
