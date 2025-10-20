@@ -129,14 +129,6 @@
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
-    <loc>https://ppippi.dev/2022/09/19/deleting-stuck-namespace/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/09/19/deleting-stuck-namespace/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
     <loc>https://ppippi.dev/2022/09/17/GCP-secret-manager/</loc>
     <lastmod>2025-10-01T00:47:49+09:00</lastmod>
   </url>
@@ -181,23 +173,7 @@
     <lastmod>2025-10-01T00:47:49+09:00</lastmod>
   </url>
   <url>
-    <loc>https://ppippi.dev/2022/09/14/cloud-jam-intermediate-notes/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/09/14/pushing-gcp-container-images/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
     <loc>https://ppippi.dev/en/2022/09/14/PV,PVS,SC/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/09/14/cloud-jam-intermediate-notes/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/09/14/pushing-gcp-container-images/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
@@ -206,22 +182,6 @@
   </url>
   <url>
     <loc>https://ppippi.dev/en/2022/09/12/dbt1/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/09/06/expanding-pvc-capacity/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/09/06/expanding-pvc-capacity/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/08/19/terraform-5/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/08/19/terraform-5/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
@@ -277,15 +237,7 @@
     <lastmod>2025-10-01T00:47:49+09:00</lastmod>
   </url>
   <url>
-    <loc>https://ppippi.dev/2022/05/16/Configmap/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
     <loc>https://ppippi.dev/en/2022/05/16/ArgoCD/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/05/16/Configmap/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
@@ -313,27 +265,11 @@
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
-    <loc>https://ppippi.dev/2022/04/22/Docker-basic/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/04/22/Docker-basic/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
     <loc>https://ppippi.dev/2022/04/16/gcp-k8s-sticky-session/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
     <loc>https://ppippi.dev/en/2022/04/16/gcp-k8s-sticky-session/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/04/12/AWS-SQS/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/04/12/AWS-SQS/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
@@ -345,67 +281,11 @@
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
-    <loc>https://ppippi.dev/2022/03/25/aws-rds-setup-new/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/03/25/aws-rds-setup-new/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/03/24/google-analytics-4-book-review/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/03/24/google-analytics-4-book-review/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/03/06/building-simple-dashboard/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/03/06/building-simple-dashboard/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
     <loc>https://ppippi.dev/2022/03/02/Introduction_to_MongoDB_in_Python/</loc>
     <lastmod>2025-10-01T00:47:49+09:00</lastmod>
   </url>
   <url>
     <loc>https://ppippi.dev/en/2022/03/02/Introduction_to_MongoDB_in_Python/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/02/26/boto3/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/02/26/boto3/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/02/25/managing-env-variables/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/02/25/managing-env-variables/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/02/23/Airflow_with_Docker/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/02/23/Airflow_with_Docker/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2022/02/20/SQL_Cookbook_review/</loc>
-    <lastmod>2025-10-01T00:47:49+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2022/02/20/SQL_Cookbook_review/</loc>
     <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
@@ -503,22 +383,6 @@
   <url>
     <loc>https://ppippi.dev/en/2021/11/18/Introduction to Airflow in Python/</loc>
     <lastmod>2025-10-20T21:31:46+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2021/11/13/aws-deploy-django-website/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/2021/11/13/basic-git-usage-for-collaboration/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2021/11/13/aws-deploy-django-website/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
-  </url>
-  <url>
-    <loc>https://ppippi.dev/en/2021/11/13/basic-git-usage-for-collaboration/</loc>
-    <lastmod>2025-10-09T11:10:11+09:00</lastmod>
   </url>
   <url>
     <loc>https://ppippi.dev/2021/11/12/aws-amazon-web-services-cloud-computing/</loc>
