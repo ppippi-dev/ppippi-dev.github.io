@@ -115,7 +115,7 @@ header {
 .post-feature-image {
   text-align: center;
   margin: 2rem 0;
-  
+
   img {
     max-width: 100%;
     max-height: 550px;
@@ -123,5 +123,32 @@ header {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Image caption styling
+.guide-markdown p {
+  &:has(img) {
+    margin-bottom: 0.5rem !important;
+  }
+
+  img {
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  img + em {
+    display: block !important;
+    text-align: center !important;
+    color: #6c757d !important;
+    font-size: 0.9em !important;
+    margin-top: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    font-style: normal !important;
+    opacity: 0.7 !important;
+    width: 100% !important;
   }
 }
