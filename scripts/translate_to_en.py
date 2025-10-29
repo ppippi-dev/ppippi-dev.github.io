@@ -50,13 +50,14 @@ def load_korean_posts(only_paths: list[Path] | None = None) -> list[Path]:
                 results.append(abs_p)
         # de-duplicate and sort
         return sorted({p for p in results})
-    return sorted(POSTS_DIR.glob("*.md"))
+    return sorted(POSTS_DIR.glob("**/*.md"))
 
 
 def to_en_filename(source_path: Path) -> Path:
-    # Keep the exact same filename as the source for the English post
-    # Example: 2025-07-03-actions-runner-controller.md -> same name under _posts_en
-    return POSTS_EN_DIR / source_path.name
+    # Keep the exact same directory structure and filename as the source for the English post
+    # Example: _posts/adk/2025-10-20-01-introduction.md -> _posts_en/adk/2025-10-20-01-introduction.md
+    relative_path = source_path.relative_to(POSTS_DIR)
+    return POSTS_EN_DIR / relative_path
 
 
 def needs_translation(src_file: Path) -> bool:
@@ -152,8 +153,11 @@ def main() -> int:
         if "title" not in fm or not fm["title"]:
             fm["title"] = dict(post).get("title", "")
 
-        # Construct English filename by preserving the original filename
+        # Construct English filename by preserving the original filename and directory structure
         en_path = to_en_filename(src)
+
+        # Create parent directory if it doesn't exist
+        en_path.parent.mkdir(parents=True, exist_ok=True)
 
         # If the English file already exists, remove it first to ensure a clean overwrite
         if en_path.exists():
