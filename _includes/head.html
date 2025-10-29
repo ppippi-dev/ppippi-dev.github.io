@@ -39,7 +39,7 @@
 	{% endif %}
 
 	<!-- Google Analytics -->
-	{% if site.theme_settings.google_analytics %}
+	{% if site.theme_settings.google_analytics and jekyll.environment == 'production' %}
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id={{ site.theme_settings.google_analytics }}"></script>
 	<script>
