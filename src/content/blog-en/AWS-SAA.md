@@ -1,0 +1,186 @@
+---
+description: AWS – Theory Notes
+pubDate: '2022-01-29'
+tags:
+- AWS
+title: AWS – Theory Notes
+---
+
+> Quick-reference notes I compiled while studying for the AWS Solutions Architect Associate exam.
+
+#### Regions and Availability Zones
+
+- AWS regions are clusters of data centers (e.g., `us-east-1`, `ap-southeast-2`), each containing multiple **Availability Zones (AZs)**. AZs are isolated facilities connected by low-latency links.
+- Choose a region based on compliance, latency, available services, and cost. Some countries require local data residency.
+- AWS also operates 200+ edge locations in 80+ cities for low-latency content delivery.
+
+Global services (e.g., IAM, Route 53, CloudFront, WAF) are not tied to a region, but most services are region-scoped.
+
+<br>
+
+#### IAM Essentials
+
+- IAM = Identity and Access Management (global service).
+- Root account has full privileges—use MFA and avoid day-to-day operations with it.
+- Create users and groups; assign JSON-based policies according to the **principle of least privilege**.
+- Enforce strong password policies and enable MFA (virtual apps, U2F keys, hardware tokens).
+- Manage AWS via console, CLI, or SDKs (requires Access Key ID + Secret Access Key).
+- AWS CloudShell provides a browser-based CLI in supported regions.
+
+<br>
+
+#### EC2 Overview
+
+- Elastic Compute Cloud (IaaS). Core components: EC2 instances, EBS volumes, Elastic Load Balancing, Auto Scaling.
+- Supports Linux, Windows, macOS. Choose instance families based on compute, memory, storage, networking needs.
+- Security Groups control inbound/outbound traffic (check SGs for timeouts, app for “connection refused”).
+- Common ports: SSH 22, HTTP 80, HTTPS 443, FTP 21, SFTP 22, RDP 3389.
+- SSH for remote access; AWS Instance Connect offers browser-based SSH.
+- IPv4 vs IPv6: IPv4 is dominant; IPv6 used for IoT or dual-stack scenarios.
+- Public IPs change when an instance stops/starts. Use **Elastic IPs** to keep a static address (limited to 5 per account; consider DNS instead).
+- **Placement Groups**: Cluster (single AZ, low latency, higher risk), Spread (seven instances per AZ, critical workloads), Partition (hundreds of instances, isolate fault domains).
+- **Elastic Network Interfaces (ENIs)**: virtual NICs with private/public IPs and Security Groups; AZ-specific.
+- **Hibernate**: preserves RAM state to EBS for faster restarts.
+- **Nitro**: next-gen virtualization platform with better performance/security.
+- **vCPU** = physical cores × threads; optimize to reduce costs.
+- **Capacity Reservations**: reserve compute ahead of time.
+
+<br>
+
+#### EBS, Snapshots, AMIs
+
+- EBS = network-attached block storage for EC2 (per-AZ, detachable, provisioned size). Delete on termination toggles root volume behavior.
+- **Snapshots** back up volumes; can copy across AZs/regions.
+- **AMIs** package custom OS/software for fast launches (AMI is region-specific; copy if needed elsewhere).
+- **Instance Store**: ephemeral local disks with high I/O performance—use for caches, buffers; always back up critical data.
+- Volume types:
+  - `gp2/gp3`: general-purpose SSD.
+  - `io1/io2`: provisioned IOPS SSD (supports Multi-Attach).
+  - `st1`: throughput-optimized HDD.
+  - `sc1`: cold HDD.
+- Encryption (AES-256 via KMS) protects data at rest, in transit between instance/volume, and for snapshots/derived volumes.
+
+<br>
+
+#### EFS (Elastic File System)
+
+- Managed NFS (Linux only), accessible across AZs, highly available and scalable (pay per use).
+- Use Security Groups + KMS for access and encryption.
+- Performance modes: General Purpose vs. Max I/O.
+- Throughput modes: Bursting vs. Provisioned.
+- Lifecycle policies move infrequently accessed files to cheaper storage tiers.
+
+<br>
+
+#### Scalability & High Availability Basics
+
+- **Vertical scaling**: increase instance size.
+- **Horizontal scaling**: add more instances.
+- **High availability**: deploy across multiple AZs to survive failures.
+- **Load Balancers** distribute traffic, perform health checks, support SSL/TLS, and enable session stickiness.
+
+ELB types:
+- Classic (legacy).
+- Application (Layer 7, HTTP/HTTPS/WebSocket).
+- Network (Layer 4, TCP/UDP/TLS, fixed IPs, ultra-low latency).
+- Gateway (Layer 3, for inline appliances via GENEVE).
+
+Use X-Forwarded headers to retrieve client IP/Port/Scheme behind ALB.
+
+Stickiness uses cookies (`AWSALB`, `AWSALBAPP`, `AWSELB`). Cross-zone load balancing behavior differs by ALB/NLB/CLB; check defaults and billing.
+
+SSL/TLS: use ACM certificates; SNI allows multiple certs per listener (ALB/NLB/CloudFront support it).
+
+Connection draining (deregistration delay) gives in-flight requests time to finish when removing instances.
+
+<br>
+
+#### Auto Scaling Groups (ASG)
+
+- Define min/max/desired capacity, attach to load balancers.
+- Scale based on CloudWatch metrics (CPU, requests per target, network I/O, custom metrics).
+- Policies:
+  - Target tracking (simple).
+  - Simple/step scaling (explicit unit changes).
+  - Scheduled scaling (time-based).
+  - Predictive scaling (ML-based).
+- Cooldown period (default 300s) prevents rapid oscillations.
+
+<br>
+
+#### RDS & Aurora
+
+- Managed relational databases (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server, Aurora). AWS handles provisioning, patching, backups, failover.
+- Storage types: GP2/GP3, IO1; auto-scaling storage available.
+- **Read Replicas** scale read workloads (same AZ, cross-AZ, cross-region; asynchronous, read-only).
+- **Multi-AZ** provides synchronous standby for failover (same endpoint, zero-downtime updates).
+- Encryption: at rest (KMS), in transit (SSL/TLS). PostgreSQL: `rds.force_ssl=1`; MySQL: use SQL command. Encrypt snapshots via copy.
+- Deploy in private subnets; control access with Security Groups + IAM.
+- **Aurora**: AWS-built MySQL/PostgreSQL-compatible engine. 6 copies across 3 AZs, up to 15 replicas, high throughput, auto-scaling, serverless option, global databases, ML integration.
+
+<br>
+
+#### ElastiCache
+
+- Managed in-memory caching (Redis or Memcached) to offload read-heavy workloads.
+- **Redis**: multi-AZ with failover, read replicas, persistence, backups.
+- **Memcached**: multi-node sharding, no replication/persistence; multi-threaded.
+- Security: no IAM auth; use Redis AUTH or Memcached SASL, plus SGs and TLS.
+- Patterns:
+  - Lazy loading.
+  - Write-through.
+  - Session store with TTL.
+
+<br>
+
+#### Route 53
+
+- DNS service. Record types: A (IPv4), AAAA (IPv6), CNAME (hostname to hostname), NS (delegation).
+- Hosted zones: public or private (within a VPC).
+- **Alias records** map a name to AWS resources (ALB/NLB/CloudFront/S3) and support root domains; CNAMEs only for subdomains.
+- Routing policies:
+  - Simple (random).
+  - Weighted.
+  - Latency-based.
+  - Failover.
+  - Geolocation.
+  - Geoproximity (with bias, via Traffic Flow).
+  - Multi-value answer (health-checked).
+- Health checks monitor endpoints or CloudWatch alarms.
+- Route 53 can act as a domain registrar.
+
+<br>
+
+#### Elastic Beanstalk
+
+- PaaS for deploying code (Java, .NET, Python, Node.js, PHP, Ruby, Go, Docker). Manages environments, versions, scaling, and health.
+
+<br>
+
+#### S3 Essentials
+
+- Object storage; buckets are globally unique and scoped to a region. Objects (files) are stored by keys; up to 5 TB per object (multi-part uploads for >5 GB).
+- Versioning protects against accidental deletion (unversioned objects have `null` version until enabled).
+- Encryption options:
+  - SSE-S3 (managed keys).
+  - SSE-KMS (KMS keys).
+  - SSE-C (customer-supplied).
+  - Client-side encryption.
+- Security: control access via IAM policies, bucket policies, ACLs.
+- CORS handles cross-origin requests (origin = scheme + host + port).
+
+<br>
+
+#### EC2 Instance Metadata
+
+- Instances can query metadata at `http://169.254.169.254/latest/meta-data/` to learn about themselves (role, IP, user data, etc.). Useful for retrieving IAM role info and testing policies.
+
+Example:
+
+```bash
+curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
+```
+
+<br>
+
+This cheat sheet only scratches the surface but captures the exam topics I found most useful. Feel free to adapt it to your own study plan!

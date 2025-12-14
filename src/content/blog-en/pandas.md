@@ -1,0 +1,686 @@
+---
+description: Pandas/Database/SQL/JSON
+pubDate: '2021-09-07'
+tags:
+- DataCamp
+- pandas
+title: Pandas/Database/SQL/JSON
+---
+
+> Without collecting data, it is impossible to approach any Data Science or Data Analytics workflow.
+
+<br>
+
+#### Pandas
+- Created in 2008 by Wes McKinney.
+- Initially developed for quantitative finance.
+- Now used across a large developer community.
+- Makes it easy to load and manipulate data, and it integrates nicely with analytics and visualization libraries.
+
+<br>
+
+#### DataFrame
+- The core data structure in Pandas.
+- Two-dimensional data structure with column labels and row labels.
+- Pandas can handle a wide variety of data formats.
+
+<br>
+
+#### Flat Files
+- Have a very simple structure and are widely used for storing and sharing data.
+- Stored as plain text without formatting such as colors or fonts.
+- Each row is represented by characters separated with delimiters.
+- The comma is the most common delimiter, but any character can be used.
+
+Example with commas:
+```python
+import pandas as pd
+tax_data = pd.read_csv("us_tax_data.csv")
+tax_data.head(4)
+```
+Example with tabs:
+```python
+import pandas as pd
+tax_data = pd.read_csv("us_tax_data.tsv", sep="\t")
+tax_data.head(4)
+```
+
+<br>
+
+#### `usecols`
+Use the `usecols` parameter to load only the columns you need.
+
+Example using column names:
+```python
+col_names = ["STATEFIPS", "STATE", "zipcode", "agi_stub", "N1"]
+tax_data_v1 = pd.read_csv("us_tax_data.csv", usecols=col_names)
+```
+Example using column indices:
+```python
+col_nums = [0, 1, 2, 3, 4]
+tax_data_v2 = pd.read_csv("us_tax_data.csv", usecols=col_nums)
+```
+
+<br>
+
+#### `nrows`
+
+```python
+tax_data_first1000 = pd.read_csv("us_tax_data.csv", nrows=1000, skiprows=1000)
+```
+
+`nrows`: number of rows to load.  
+`skiprows`: number of initial rows to skip.
+
+Example: `nrows=500`, `skiprows=1000` loads rows 1000 through 1499.
+
+<br>
+
+#### `header`
+
+`header=None`: do not treat any row as the header.
+
+```python
+col_names = list(tax_data_first1000)
+tax_data_next500 = pd.read_csv(
+    "us_tax_data.csv",
+    nrows=500,
+    skiprows=1000,
+    header=None,
+    names=col_names,
+)
+```
+
+Because `skiprows` removes the original header, we provide the column names manually.
+
+<br>
+
+#### Common Errors
+1. Incorrect column data types that hinder analysis.
+2. Missing values.
+3. File formats that Pandas cannot read directly.
+
+<br>
+
+#### 1. Specifying Data Types
+
+When loading data Pandas infers column data types, and it can guess incorrectly.  
+Prevent that by declaring the type via `dtype`.
+
+```python
+tax_data = pd.read_csv("us_tax_data.csv", dtype={"zipcode": str})
+```
+
+<br>
+
+#### 2. Customizing Missing Data Values
+
+Pandas automatically recognizes some missing values such as `N/A` and `null`.  
+Data-cleaning helpers can fill the rest, but some placeholders are not detected automatically.  
+Use the `na_values` argument to instruct Pandas to treat specific values as missing.
+
+```python
+tax_data = pd.read_csv("us_tax_data.csv", na_values={"zipcode": 0})
+```
+
+<br>
+
+#### 3. Lines with Errors
+
+If Pandas cannot parse a line—for example because it has more values than expected—you can control how to handle it.
+
+`error_bad_lines=False`: skip malformed lines instead of raising an exception.  
+`warn_bad_lines=True`: show a message when skipping malformed lines.
+
+<br>
+
+#### Spreadsheets
+- Most commonly seen as Excel files.
+- Represent data in tables of rows and columns.
+- Unlike flat files, can include formatting.
+- A single workbook can contain multiple sheets.
+
+<br>
+
+#### Loading Spreadsheets
+
+```python
+survey_data = pd.read_excel("fcc_survey.xlsx")
+```
+
+Human-friendly formats are often harder for machines to read.  
+Spreadsheets typically contain non-tabular metadata such as headers and invoices.  
+Like CSVs, you can skip or limit rows and columns to load only what you need.
+
+`nrows`: number of rows to read.  
+`skiprows`: row indices or counts to skip.  
+`usecols`: column names or indices to include (Excel also supports ranges such as `"A:P"`).
+
+```python
+survey_data = pd.read_excel(
+    "fcc_survey_with_headers.xlsx",
+    skiprows=2,
+    usecols="W:AB, AR",
+)
+```
+
+<br>
+
+#### Getting Data from Multiple Worksheets
+
+Excel workbooks often contain several sheets.  
+By default `read_excel` loads the first sheet.  
+Use `sheet_name` to specify either an index or sheet name.
+
+```python
+survey_data_sheet2 = pd.read_excel("fcc_survey.xlsx", sheet_name=1)
+survey_data_2017 = pd.read_excel("fcc_survey.xlsx", sheet_name="2017")
+```
+
+<br>
+
+#### Loading All Sheets
+
+Pass `sheet_name=None` to read every sheet into a dictionary of DataFrames.
+
+```python
+survey_responses = pd.read_excel("fcc_survey.xlsx", sheet_name=None)
+```
+
+<br>
+
+#### Putting It All Together
+
+Combine the split sheets into a single DataFrame.
+
+```python
+all_responses = pd.DataFrame()
+for sheet_name, frame in survey_responses.items():
+    frame["Year"] = sheet_name
+    all_responses = all_responses.append(frame)
+```
+
+<br>
+
+#### Modifying Imports: True/False Data
+
+Pandas does not automatically store boolean values as native `bool`.
+
+```python
+bool_data = pd.read_excel(
+    "fcc_survey_booleans.xlsx",
+    dtype={"AttendedBootCamp": bool, "AttendedBootCampYesNo": bool},
+)
+```
+
+Pandas treats `NaN` as `True` when you simply set `dtype=bool`.  
+Use `true_value` and `false_value` to map textual values explicitly.
+
+```python
+bool_data = pd.read_excel(
+    "fcc_survey_booleans.xlsx",
+    dtype={"AttendedBootCamp": bool, "AttendedBootCampYesNo": bool},
+    true_value=["Yes"],
+    false_value=["No"],
+)
+```
+
+This preserves missing values as `NaN`.
+
+<br>
+
+#### Modifying Imports: Parsing Dates
+
+Python stores date-time values as the special `datetime` type, which can be represented in many formats.  
+By default Pandas loads them as `object` columns.  
+To work with `datetime` operations use the `parse_dates` keyword (note this is not part of `dtype`).
+
+`parse_dates` accepts column names, indices, lists, or nested lists.
+
+```python
+date_cols = ["Part1StartTime", "Part1EndTime"]
+survey_df = pd.read_excel("fcc_survey.xlsx", parse_dates=date_cols)
+```
+
+```python
+date_cols = [
+    "Part1StartTime",
+    "Part1EndTime",
+    [["Part2StartDate", "Part2StartTime"]],
+]
+survey_df = pd.read_excel("fcc_survey.xlsx", parse_dates=date_cols)
+```
+
+```python
+date_cols = {
+    "Part1Start": "Part1StartTime",
+    "Part1End": "Part1EndTime",
+    "Part2Start": ["Part2StartDate", "Part2StartTime"],
+}
+survey_df = pd.read_excel("fcc_survey.xlsx", parse_dates=date_cols)
+```
+
+This works when Pandas can understand the date strings.
+
+<br>
+
+#### Non-Standard Dates
+
+For unusual date formats, load them as `object` and convert later with `to_datetime()`.
+
+<br>
+
+#### Datetime Formatting
+
+| Code | Meaning             | Example |
+| ---- | ------------------- | ------- |
+| %Y   | Year (4-digit)      | 1999    |
+| %m   | Month (zero-padded) | 03      |
+| %d   | Day (zero-padded)   | 01      |
+| %H   | Hour (24-hour)      | 21      |
+| %M   | Minute (zero-padded)| 09      |
+| %S   | Second (zero-padded)| 05      |
+
+<br>
+
+#### Parsing Non-Standard Dates
+
+Example: `03292016 21:27:25`
+
+```python
+format_string = "%m%d%Y %H:%M:%S"
+survey_df["Part2EndTime"] = pd.to_datetime(
+    survey_df["Part2EndTime"],
+    format=format_string,
+)
+```
+
+<br>
+
+#### Introduction to Databases
+- Relational databases organize entity data in tables.
+- Like DataFrames, flat files, and many Excel sheets, they store data in tabular form.
+- The key difference is that relational tables can be linked via unique record identifiers (keys).
+- Databases handle more data, support more users, and offer stronger data-quality features than spreadsheets or flat files.
+
+SQL (Structured Query Language) is the interface language for these databases.
+
+<br>
+
+#### Common Relational Databases
+- Microsoft SQL Server
+- Oracle
+- PostgreSQL
+- SQLite
+
+Unlike many other databases, SQLite databases are self-contained files, making them easy to share—much like CSV or Excel files.
+
+<br>
+
+#### Connecting to Databases
+
+1. Create a connection to the database.  
+2. Run queries with SQL and Pandas.
+
+Use SQLAlchemy to work with relational databases.
+
+<br>
+
+#### Creating a Database Engine
+
+`sqlalchemy.create_engine()` builds an engine that manages the connection, based on a database URL. The URL pattern varies by database.  
+Example for SQLite:
+
+```python
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///filename.db")
+```
+
+<br>
+
+#### Querying Databases
+
+Use `pd.read_sql(query, engine)` to fetch data.
+
+- `query`: SQL statement or table name.
+- `engine`: the database connection.
+
+<br>
+
+#### SQL Review: `SELECT`
+
+`SELECT [column_names] FROM [table_name];` loads the chosen columns.  
+`SELECT * FROM [table_name];` loads every column.  
+SQL is case-insensitive, but upper case keywords and terminating statements with semicolons are standard practice.
+
+<br>
+
+#### Getting Data from a Database
+
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///data.db")
+weather = pd.read_sql("weather", engine)  # load entire table
+weather = pd.read_sql("SELECT * FROM weather", engine)  # equivalent
+```
+
+<br>
+
+#### Selecting Columns
+
+```sql
+SELECT [column_names]
+FROM [table_name];
+```
+
+Example:
+
+```sql
+SELECT date, tavg
+FROM weather;
+```
+
+<br>
+
+#### `WHERE` Clauses
+
+```sql
+SELECT [column_names]
+FROM [table_name]
+WHERE [condition];
+```
+
+<br>
+
+#### Filtering by Numbers
+- `=`
+- `>` and `>=`
+- `<` and `<=`
+- `<>` (not equal)
+
+```sql
+SELECT *
+FROM weather
+WHERE tmax > 32;
+```
+
+<br>
+
+#### Filtering Text
+
+Use `=` for string filters.
+
+```sql
+SELECT *
+FROM hpd311calls
+WHERE borough = 'BROOKLYN';
+```
+
+<br>
+
+#### SQL and Pandas
+
+```python
+import pandas as pd
+from sqlalchemy import create_engine
+
+engine = create_engine("sqlite:///data.db")
+query = """
+        SELECT *
+        FROM hpd311calls
+        WHERE borough = 'BROOKLYN';
+        """
+brooklyn_calls = pd.read_sql(query, engine)
+```
+
+<br>
+
+#### Combining Conditions: `AND`
+
+```python
+and_query = """
+            SELECT *
+            FROM hpd311calls
+            WHERE borough = 'BRONX'
+            AND complaint_type = 'PLUMBING';
+            """
+
+bx_plumbing_calls = pd.read_sql(and_query, engine)
+```
+
+<br>
+
+#### Combining Conditions: `OR`
+
+```python
+or_query = """
+            SELECT *
+            FROM hpd311calls
+            WHERE complaint_type = 'WATER LEAK'
+            OR complaint_type = 'PLUMBING';
+            """
+
+bx_plumbing_calls = pd.read_sql(or_query, engine)
+```
+
+<br>
+
+#### Getting `DISTINCT` Values
+
+```sql
+SELECT DISTINCT [column_names]
+FROM [table];
+```
+
+Examples:
+
+```sql
+SELECT DISTINCT *
+FROM [table];
+```
+
+```sql
+SELECT DISTINCT incident_address, borough
+FROM hpd311calls;
+```
+
+<br>
+
+#### Aggregate Functions
+- `SUM`
+- `AVG`
+- `MAX`
+- `MIN`
+- `COUNT`
+
+```sql
+SELECT AVG(tmax)
+FROM weather;
+```
+
+```sql
+SELECT COUNT(*)
+FROM [table_name];
+```
+
+```sql
+SELECT COUNT(DISTINCT [column_name])
+FROM [table_name];
+```
+
+<br>
+
+#### `GROUP BY`
+
+```sql
+SELECT borough, COUNT(*)
+FROM hpd311calls
+WHERE complaint_type = 'PLUMBING'
+GROUP BY borough;
+```
+
+```python
+engine = create_engine("sqlite:///data.db")
+query = """
+        SELECT borough, COUNT(*)
+        FROM hpd311calls
+        WHERE complaint_type = 'PLUMBING'
+        GROUP BY borough;
+        """
+plumbing_call_counts = pd.read_sql(query, engine)
+```
+
+<br>
+
+#### Loading Multiple Tables with Joins
+
+A hallmark of relational databases is linking tables through unique keys.
+
+<br>
+
+#### Keys
+
+Keys uniquely identify records.  
+Many databases automatically assign row IDs.
+
+<br>
+
+#### Joining Tables
+
+```sql
+SELECT *
+FROM hpd311calls
+JOIN weather
+ON hpd311calls.created_date = weather.date;
+```
+
+<br>
+
+#### `response.json()` and Pandas
+- `response.json()` returns a Python dictionary.
+- `pd.read_json()` expects a string (not a pre-parsed dictionary).
+- To turn JSON responses into DataFrames, wrap the dictionary in `pd.DataFrame()` (calling `read_json` on the dict raises an error).
+
+<br>
+
+#### Yelp Business Search API
+
+Example request:
+
+```python
+import requests
+import pandas as pd
+
+api_url = "https://api.yelp.com/v3/businesses/search"
+params = {"term": "bookstore", "location": "San Francisco"}
+headers = {"Authorization": "Bearer {}".format(api_key)}
+response = requests.get(api_url, params=params, headers=headers)
+```
+
+<br>
+
+#### Parsing Responses
+
+```python
+data = response.json()
+bookstores = pd.DataFrame(data["businesses"])
+```
+
+<br>
+
+#### Nested JSON
+
+JSON objects consist of attribute–value pairs, and those values can be nested objects.
+
+<br>
+
+#### `pandas.io.json`
+
+The `pandas.io.json` submodule provides helper functions for reading and writing JSON.  
+`json_normalize()` flattens nested data.  
+It accepts a dictionary or list of dictionaries and returns a flattened DataFrame.  
+Nested attribute names are joined using dot notation by default.  
+Because the dot conflicts with Pandas attribute access, provide a different separator (for example, an underscore) via the `sep` argument.
+
+<br>
+
+#### Loading Nested JSON Data
+
+```python
+import pandas as pd
+import requests
+from pandas.io.json import json_normalize
+
+api_url = "https://api.yelp.com/v3/businesses/search"
+headers = {"Authorization": "Bearer {}".format(api_key)}
+params = {"term": "bookstore", "location": "San Francisco"}
+response = requests.get(api_url, params=params, headers=headers)
+data = response.json()
+bookstores = json_normalize(data["businesses"], sep="_")
+```
+
+<br>
+
+#### Deeply Nested Data
+
+For deeply nested JSON you can either write custom flattening logic or decide that some nested structures are irrelevant for the analysis.
+
+- `json_normalize()`
+  - `record_path`: string or list describing the nested path, similar to a folder path.
+  - `meta`: list of higher-level attributes to retain in the result.
+  - `meta_prefix`: prefix applied to meta columns to avoid name clashes and show provenance.
+
+```python
+df = json_normalize(
+    data["businesses"],
+    sep="_",
+    record_path="categories",
+    meta=["name", "alias", "rating", ["coordinates", "latitude"], ["coordinates", "longitude"]],
+    meta_prefix="biz_",
+)
+```
+
+<br>
+
+#### Combining Multiple Datasets
+
+Real projects often pull data from several sources.
+
+<br>
+
+#### Appending
+
+The DataFrame `append()` method adds another DataFrame.  
+Example: `df1.append(df2)`  
+Use `ignore_index=True` to reset the index.
+
+```python
+params = {"term": "bookstore", "location": "San Francisco"}
+first_results = requests.get(api_url, headers=headers, params=params).json()
+first_20_bookstores = json_normalize(first_results["businesses"], sep="_")
+bookstores = first_20_bookstores.append(next_20_bookstores, ignore_index=True)
+```
+
+<br>
+
+#### Merging
+
+Behaves similarly to SQL joins.  
+Use `merge()` to combine DataFrames.
+
+<br>
+
+#### `df.merge()`
+
+- Merges with a second DataFrame.
+- If both DataFrames share the same column name, use `on` to specify the join key.
+- If the column names differ, provide `left_on` and `right_on`.
+- Column types must match.
+- By default `merge` keeps only rows with matching key values in both DataFrames.
+
+```python
+merged = call_counts.merge(weather, left_on="created_date", right_on="date")
+```

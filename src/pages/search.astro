@@ -1,0 +1,52 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={`Search | ${SITE_TITLE}`} description="블로그 포스트 검색" />
+		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+			h1 {
+				margin-bottom: 1.5rem;
+			}
+			:root {
+				--pagefind-ui-scale: 1;
+				--pagefind-ui-primary: rgb(var(--accent));
+				--pagefind-ui-text: rgb(var(--gray-dark));
+				--pagefind-ui-background: #fff;
+				--pagefind-ui-border: rgb(var(--gray-light));
+				--pagefind-ui-tag: rgb(var(--gray-light));
+				--pagefind-ui-border-width: 1px;
+				--pagefind-ui-border-radius: 8px;
+				--pagefind-ui-font: inherit;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Search</h1>
+			<div id="search"></div>
+		</main>
+		<Footer />
+		<script>
+			import { PagefindUI } from '@pagefind/default-ui';
+			new PagefindUI({
+				element: '#search',
+				showSubResults: true,
+				showImages: false,
+			});
+		</script>
+	</body>
+</html>

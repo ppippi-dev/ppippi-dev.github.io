@@ -1,0 +1,85 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="ko">
+	<head>
+		<BaseHead title={`Contact | ${SITE_TITLE}`} description="연락처 정보" />
+		<style>
+			main {
+				width: 960px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 3em 1em;
+			}
+			h1, h2, h3 {
+				line-height: 1.2;
+			}
+			h3 {
+				margin-top: 1.5rem;
+			}
+			p, ul {
+				line-height: 1.6;
+			}
+			ul {
+				padding-left: 1.5rem;
+			}
+			li {
+				margin-bottom: 0.5rem;
+			}
+			a {
+				color: rgb(var(--accent));
+			}
+			hr {
+				margin: 2rem 0;
+				border: none;
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>연락하기</h1>
+
+			<p>기술 관련 질문, 피드백, 협업 제안 등이 있으시면 언제든 연락 주세요.</p>
+
+			<h3>LinkedIn으로 연락하기</h3>
+			<p>가장 빠르고 확실한 연락 방법은 LinkedIn 메시지입니다:</p>
+			<p><strong><a href="https://www.linkedin.com/in/parkjeongbin/" target="_blank">LinkedIn 프로필 보기</a></strong></p>
+
+			<p>LinkedIn을 통해 다음과 같은 내용을 문의하실 수 있습니다:</p>
+			<ul>
+				<li>기술 관련 질문 및 토론</li>
+				<li>블로그 포스트에 대한 피드백</li>
+				<li>협업 및 프로젝트 제안</li>
+				<li>기술 컨설팅 문의</li>
+				<li>강연 및 발표 요청</li>
+			</ul>
+
+			<h3>GitHub</h3>
+			<p>코드 관련 문의나 오픈소스 프로젝트에 관심이 있으시다면:</p>
+			<p><strong><a href="https://github.com/ppippi-dev" target="_blank">GitHub 프로필 보기</a></strong></p>
+
+			<h3>응답 시간</h3>
+			<p>일반적으로 2-3일 이내에 응답드리고 있습니다. 업무 상황에 따라 조금 더 시간이 걸릴 수 있는 점 양해 부탁드립니다.</p>
+
+			<h3>문의 시 도움이 되는 정보</h3>
+			<p>효과적인 커뮤니케이션을 위해 다음 정보를 포함해 주시면 감사하겠습니다:</p>
+			<ul>
+				<li><strong>기술 질문</strong>: 사용 중인 환경, 발생한 에러 메시지, 시도해본 해결 방법</li>
+				<li><strong>협업 제안</strong>: 프로젝트 개요, 기대하는 역할, 예상 일정</li>
+				<li><strong>피드백</strong>: 구체적인 포스트 제목이나 링크</li>
+			</ul>
+
+			<hr />
+
+			<p>연락 주셔서 감사합니다. 좋은 대화를 나눌 수 있기를 기대합니다!</p>
+		</main>
+		<Footer />
+	</body>
+</html>

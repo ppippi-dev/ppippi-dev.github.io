@@ -1,0 +1,107 @@
+:root {
+	--text-primary: #111;
+	--text-secondary: #555;
+	--text-muted: #888;
+	--border-color: #f0f0f0;
+	--bg-primary: #fff;
+}
+@font-face {
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-regular.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Atkinson";
+	src: url("/fonts/atkinson-bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Atkinson", Roboto, Oxygen, Ubuntu, sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	background: var(--bg-primary);
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	color: var(--text-primary);
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 0.5rem 0;
+	color: var(--text-primary);
+	line-height: 1.3;
+	font-weight: 600;
+}
+strong, b {
+	font-weight: 600;
+}
+a {
+	color: var(--text-primary);
+	text-decoration: none;
+}
+a:hover {
+	color: var(--text-secondary);
+}
+p {
+	margin-bottom: 1em;
+}
+textarea, input {
+	font-size: 16px;
+}
+table {
+	width: 100%;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+code {
+	padding: 2px 6px;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	font-size: 0.8em;
+}
+pre {
+	padding: 1.25rem;
+	border-radius: 8px;
+	background: #1e1e1e;
+}
+pre > code {
+	all: unset;
+}
+blockquote {
+	border-left: 3px solid #e0e0e0;
+	padding: 0 0 0 1rem;
+	margin: 1rem 0;
+	color: var(--text-secondary);
+}
+hr {
+	border: none;
+	border-top: 1px solid var(--border-color);
+}
+@media (max-width: 768px) {
+	body {
+		font-size: 15px;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}

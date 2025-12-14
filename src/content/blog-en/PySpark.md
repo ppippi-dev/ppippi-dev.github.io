@@ -1,0 +1,181 @@
+---
+description: PySpark
+pubDate: '2022-02-10'
+tags:
+- DataCamp
+- Spark
+title: PySpark
+---
+
+#### What Counts as Big Data?
+
+There’s no single definition, but analysts often cite the **3 Vs**:
+- **Volume** – size of the data.
+- **Velocity** – speed of generation and processing.
+- **Variety** – multiple sources and formats.
+
+Big data frameworks rely on:
+- **Cluster computing** – pool resources from multiple machines.
+- **Parallel/distributed computing** – run tasks simultaneously across nodes.
+- **Batch vs. real-time processing** – choose based on latency requirements.
+
+Popular frameworks:
+- **Hadoop/MapReduce** – Java-based, batch-oriented.
+- **Apache Spark** – in-memory, batch + streaming, written in Scala but supports Java/Python/R/SQL.
+
+Spark Core underpins specialized libraries:
+- Spark SQL
+- MLlib (machine learning)
+- GraphX
+- Spark Streaming
+
+You can run Spark in **local mode** (single machine, great for prototyping) or **cluster mode** (production-scale). Code usually works unchanged when moving from local to cluster.
+
+<br>
+
+#### PySpark & the REPL
+
+PySpark is the Python API for Spark, mirroring the capabilities of its Scala counterpart. The interactive shell lets you prototype distributed code quickly.
+
+`SparkContext` (`sc`) is the entry point:
+
+```python
+sc.version     # Spark version
+sc.pythonVer   # Python version
+sc.master      # local[*] or cluster URL
+```
+
+Create RDDs via `parallelize()` or `textFile()`:
+
+```python
+rdd = sc.parallelize([1, 2, 3, 4, 5])
+lines = sc.textFile("README.md")
+```
+
+<br>
+
+#### Lambda Functions
+
+Python lambdas create anonymous functions at runtime:
+
+```python
+double = lambda x: x * 2
+double(3)  # 6
+
+items = [1, 2, 3, 4]
+list(map(lambda x: x + 2, items))              # [3,4,5,6]
+list(filter(lambda x: x % 2 != 0, items))      # [1,3]
+```
+
+Lambdas pair naturally with PySpark transformations (`map`, `filter`, etc.).
+
+<br>
+
+#### Understanding RDDs
+
+Resilient Distributed Datasets are Spark’s fundamental distributed collection:
+- **Resilient** – can recompute missing partitions.
+- **Distributed** – spread across cluster nodes.
+- **Dataset** – partitioned records (arrays, tuples, objects).
+
+Create RDDs from:
+- Python collections (`parallelize`).
+- External data (HDFS, S3, local files via `textFile`).
+- Transformations on existing RDDs.
+
+Control partitioning with `minPartitions` and introspect with `getNumPartitions()`.
+
+<br>
+
+#### Transformations vs. Actions
+
+Spark builds a DAG (directed acyclic graph) lazily. Transformations describe *what* to do; actions trigger execution.
+
+Common transformations:
+- `map(func)` – apply to every element.
+- `filter(func)` – keep elements matching a predicate.
+- `flatMap(func)` – map and flatten.
+- `union(otherRDD)` – combine RDDs.
+
+Common actions:
+- `collect()` – return all elements (use cautiously on big data!).
+- `take(n)` / `first()` – preview samples.
+- `count()` – number of elements.
+
+<br>
+
+#### Pair RDDs (Key–Value)
+
+Many datasets are naturally key/value (e.g., `("Messi", 23)`). Create them from tuples or by transforming regular RDDs:
+
+```python
+pairs = sc.parallelize([('Sam', 23), ('Mary', 34)])
+pairs_from_strings = sc.parallelize(['Sam 23', 'Mary 34']) \
+    .map(lambda s: (s.split()[0], int(s.split()[1])))
+```
+
+Key/value transformations:
+- `reduceByKey(func)` – aggregate values per key.
+- `groupByKey()` – group all values per key.
+- `sortByKey()` – order by key.
+- `join(other)` – combine by matching keys.
+
+Additional actions:
+- `countByKey()` – counts per key (small datasets only).
+- `collectAsMap()` – return a Python dict of key/value pairs.
+
+<br>
+
+#### Saving Results
+
+- `saveAsTextFile(path)` – write an RDD to a directory of text files (one per partition).
+- Use `coalesce(1)` to write a single file (only for small outputs).
+
+<br>
+
+#### Introducing DataFrames
+
+Spark SQL provides a higher-level API—DataFrames (immutable, named columns). Great for structured/semi-structured data from RDS, JSON, CSV, etc. Works with Python, Scala, Java, R.
+
+**SparkSession** (`spark`) is the entry point. Create DataFrames from:
+
+- RDDs + schema:
+
+```python
+iphones = sc.parallelize([
+    ("XS", 2018, 5.65, 2.79, 6.24),
+    ("XR", 2018, 5.94, 2.98, 6.84),
+])
+cols = ["Model", "Year", "Height", "Width", "Weight"]
+df = spark.createDataFrame(iphones, schema=cols)
+```
+
+- Files:
+
+```python
+df_csv = spark.read.csv("people.csv", header=True, inferSchema=True)
+df_json = spark.read.json("people.json")
+df_txt = spark.read.text("people.txt")
+```
+
+`header` tells Spark to treat the first row as column names; `inferSchema` detects types.
+
+<br>
+
+#### DataFrame Transformations & Actions
+
+- `select("col")`, `show(n)` – pick columns and display rows.
+- `filter(df.Age > 21)` – rows matching a condition.
+- `groupBy("Age").count()` – aggregations.
+- `orderBy("Age")` – sorting.
+- `dropDuplicates()` – remove duplicate rows.
+- `withColumnRenamed("Gender", "Sex")` – rename columns.
+- `printSchema()` – inspect column types.
+- `df.columns` – list column names.
+- `df.describe().show()` – summary statistics (numeric columns by default).
+
+DataFrames also support SQL queries and integrate tightly with MLlib and other Spark components.
+
+<br>
+
+PySpark combines Python’s expressiveness with Spark’s distributed engine, letting you tackle massive datasets with familiar idioms—while still accessing the full power of the Spark ecosystem.

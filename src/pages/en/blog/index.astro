@@ -1,0 +1,168 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import HeaderEn from '../../../components/HeaderEn.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../../consts';
+
+const posts = (await getCollection('blog-en')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 1200px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 60px 40px 0 40px;
+			}
+			.page-title {
+				font-size: 2rem;
+				font-weight: 700;
+				margin-bottom: 40px;
+				color: #000;
+			}
+			.posts-grid {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+			}
+			.post-card {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				gap: 40px;
+				padding: 40px 0;
+				border-bottom: 1px solid #eee;
+			}
+			.post-card:first-child {
+				padding-top: 0;
+			}
+			.post-card:last-child {
+				border-bottom: none;
+			}
+			.post-content {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				gap: 12px;
+			}
+			.category-badge {
+				color: #35C5F0;
+				font-size: 0.9rem;
+				font-weight: 600;
+				text-decoration: none;
+			}
+			.category-badge:hover {
+				color: #0099CC;
+			}
+			.post-info h2 {
+				color: #000;
+				font-size: 1.5rem;
+				font-weight: 700;
+				line-height: 1.3;
+				letter-spacing: -0.5px;
+				margin: 0 0 8px 0;
+			}
+			.post-info h2 a {
+				color: inherit;
+				text-decoration: none;
+				transition: color 0.2s;
+			}
+			.post-info h2 a:hover {
+				color: #35C5F0;
+			}
+			.post-description {
+				color: #666;
+				font-size: 1rem;
+				line-height: 1.5;
+				margin: 0 0 8px 0;
+				font-weight: 400;
+			}
+			.post-meta {
+				font-size: 0.875rem;
+				color: #999;
+			}
+			.post-image {
+				flex-shrink: 0;
+				width: 200px;
+				height: 140px;
+				overflow: hidden;
+				border-radius: 8px;
+			}
+			.post-image img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+			.post-image:hover img {
+				transform: scale(1.05);
+			}
+			@media (max-width: 768px) {
+				main {
+					padding: 40px 20px 0 20px;
+				}
+				.page-title {
+					font-size: 1.5rem;
+					margin-bottom: 30px;
+				}
+				.post-card {
+					flex-direction: column;
+					gap: 20px;
+					padding: 32px 0;
+				}
+				.post-image {
+					width: 100%;
+					height: 180px;
+					order: -1;
+				}
+				.post-info h2 {
+					font-size: 1.25rem;
+				}
+				.post-description {
+					font-size: 0.9rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<HeaderEn />
+		<main>
+			<h1 class="page-title">All Posts</h1>
+			<div class="posts-grid">
+				{posts.map((post) => (
+					<article class="post-card">
+						<div class="post-content">
+							{post.data.tags && post.data.tags.length > 0 && (
+								<a href={`/en/tags/${post.data.tags[0]}/`} class="category-badge">{post.data.tags[0]}</a>
+							)}
+							<div class="post-info">
+								<h2><a href={`/en/blog/${post.id}/`}>{post.data.title}</a></h2>
+								{post.data.description && (
+									<p class="post-description">{post.data.description}</p>
+								)}
+								<div class="post-meta">
+									<FormattedDate date={post.data.pubDate} />
+								</div>
+							</div>
+						</div>
+						{post.data.heroImage && (
+							<a href={`/en/blog/${post.id}/`} class="post-image">
+								<img src={post.data.heroImage} alt={post.data.title} />
+							</a>
+						)}
+					</article>
+				))}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

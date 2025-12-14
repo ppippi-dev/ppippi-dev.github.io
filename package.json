@@ -1,21 +1,22 @@
 {
-  "name": "ppippi-dev.github.io",
-  "version": "1.0.0",
-  "description": "![Default Type Theme blog](https://user-images.githubusercontent.com/816965/30518919-d5978024-9bcd-11e7-81b3-3dd07e99a1f9.png)",
-  "main": "index.js",
+  "name": "astro-temp",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist",
+    "preview": "astro preview",
+    "postbuild": "pagefind --site dist",
+    "astro": "astro"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ppippi-dev/ppippi-dev.github.io.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/ppippi-dev/ppippi-dev.github.io/issues"
-  },
-  "homepage": "https://github.com/ppippi-dev/ppippi-dev.github.io#readme"
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.13",
+    "@astrojs/rss": "^4.0.14",
+    "@astrojs/sitemap": "^3.6.0",
+    "@pagefind/default-ui": "^1.4.0",
+    "astro": "^5.16.5",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "sharp": "^0.34.3"
+  }
 }
