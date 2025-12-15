@@ -204,14 +204,26 @@ const { title, description, pubDate, updatedDate, heroImage, tags, slug } = Astr
 			@media (max-width: 768px) {
 				main {
 					padding: 40px 20px;
+					max-width: 100%;
+					box-sizing: border-box;
+				}
+				article {
+					overflow-x: hidden;
+				}
+				.post-content {
+					font-size: 0.95rem;
+					overflow-x: hidden;
+				}
+				.post-content pre {
+					max-width: calc(100vw - 40px);
+				}
+				.post-content img {
+					max-width: 100%;
 				}
 				.post-title {
 					font-size: 1.5rem;
 				}
 				.post-description {
-					font-size: 0.95rem;
-				}
-				.post-content {
 					font-size: 0.95rem;
 				}
 				.post-content h2 {

@@ -5,6 +5,9 @@ const today = new Date();
 <footer>
 	<div class="footer-content">
 		<span class="copyright">&copy; {today.getFullYear()} ppippi-dev</span>
+		<a href="https://buymeacoffee.com/ppippi" target="_blank" class="bmc-link">
+			<img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" />
+		</a>
 	</div>
 </footer>
 <style>
@@ -16,6 +19,12 @@ const today = new Date();
 	.footer-content {
 		max-width: 800px;
 		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.bmc-link img {
+		height: 36px;
 	}
 	.copyright {
 		font-size: 0.8rem;
@@ -24,6 +33,11 @@ const today = new Date();
 	@media (max-width: 768px) {
 		footer {
 			padding: 24px 20px;
+		}
+		.footer-content {
+			flex-direction: column;
+			gap: 12px;
+			text-align: center;
 		}
 	}
 </style>
