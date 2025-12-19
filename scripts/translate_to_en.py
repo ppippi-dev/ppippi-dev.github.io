@@ -47,7 +47,10 @@ Translate the given Korean Astro blog post into professional, SEO-optimized Amer
 - Do NOT change the filename or slug.
 
 ## Output Format
-Return the complete translated Markdown file with YAML front matter."""
+Return the complete translated Markdown file with YAML front matter.
+- IMPORTANT: The title and description MUST be translated to English. Do NOT keep them in Korean.
+- Do NOT wrap the output in markdown code blocks (no ``` markers).
+- Start directly with --- and the YAML front matter."""
 
 
 def normalize_repo_path(path_like: str | Path) -> Path:
@@ -105,10 +108,32 @@ def call_openai(model: str, system_prompt: str, user_prompt: str) -> str:
     return resp.choices[0].message.content
 
 
+def strip_markdown_codeblock(text: str) -> str:
+    """Strip markdown code block wrappers if present."""
+    text = text.strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        text = "\n".join(lines)
+    return text.strip()
+
+
+def contains_korean(text: str) -> bool:
+    """Check if text contains Korean characters (Hangul)."""
+    for char in str(text):
+        if "\uac00" <= char <= "\ud7a3" or "\u1100" <= char <= "\u11ff":
+            return True
+    return False
+
+
 def split_front_matter(translated_markdown: str) -> tuple[dict, str]:
-    m = re.match(r"^---\n([\s\S]+?)\n---\n?([\s\S]*)$", translated_markdown.strip())
+    text = strip_markdown_codeblock(translated_markdown)
+    m = re.match(r"^---\n([\s\S]+?)\n---\n?([\s\S]*)$", text)
     if not m:
-        return {}, translated_markdown
+        return {}, text
     fm_text, body = m.group(1), m.group(2)
     try:
         fm = yaml.safe_load(fm_text) or {}
@@ -154,11 +179,20 @@ def main() -> int:
         prompt = build_prompt(post)
         translated = call_openai(model, PROMPT_SYSTEM, prompt)
         fm, body = split_front_matter(translated)
+        original_fm = dict(post)
 
         if not fm:
-            fm = dict(post)
-        if "title" not in fm or not fm["title"]:
-            fm["title"] = dict(post).get("title", "")
+            print(f"[translate] Warning: Could not parse frontmatter, using original")
+            fm = original_fm.copy()
+
+        for key in original_fm:
+            if key not in fm:
+                fm[key] = original_fm[key]
+
+        if contains_korean(fm.get("title", "")):
+            print(f"[translate] Warning: title still contains Korean: {fm.get('title')}")
+        if contains_korean(fm.get("description", "")):
+            print(f"[translate] Warning: description still contains Korean")
 
         en_path = to_en_filename(src)
         en_path.parent.mkdir(parents=True, exist_ok=True)
