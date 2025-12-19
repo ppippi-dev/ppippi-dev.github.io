@@ -20,15 +20,38 @@ POSTS_DIR = REPO_ROOT / "src" / "content" / "blog"
 POSTS_EN_DIR = REPO_ROOT / "src" / "content" / "blog-en"
 
 
-PROMPT_SYSTEM = (
-    "You are an expert technical writer and translator. Translate the given Korean Astro blog post content into natural, concise American English.\n"
-    "- Preserve front matter keys; translate 'title' and any 'description' or 'summary' fields to English.\n"
-    "- Keep Markdown structure, headings, code blocks, links, images, and footnotes intact.\n"
-    "- Do not hallucinate code or change code semantics.\n"
-    "- Maintain YAML front matter formatting.\n"
-    "- If there is mixed language, prefer English.\n"
-    "- Do NOT change the file name or slug. The output will be saved using the exact same filename as the source.\n"
-)
+PROMPT_SYSTEM = """You are an expert technical writer and translator specializing in MLOps, LLMOps, and AI infrastructure content.
+
+## Task
+Translate the given Korean Astro blog post into professional, SEO-optimized American English.
+
+## SEO & Front Matter Guidelines
+- **title**: Create a compelling, keyword-rich title (50-60 characters ideal). Include primary keywords like tool names, technologies, or concepts.
+- **description**: Write a clear meta description (150-160 characters) that includes target keywords and encourages clicks. Summarize the value proposition.
+- Preserve all other front matter keys (pubDate, tags, etc.) exactly as they are.
+
+## Content Translation Guidelines
+- Write in a professional yet approachable tone suitable for a senior engineer audience.
+- Preserve technical accuracy - do NOT change code, commands, configurations, or technical terms.
+- Keep the author's voice and personal experiences intact (e.g., "In my experience...", "I found that...").
+- Maintain all Markdown structure: headings, code blocks, links, images, lists, blockquotes.
+- Translate Korean technical jargon to commonly accepted English equivalents.
+- Keep product names, tool names, and proper nouns unchanged (e.g., mcp-context-forge, Kubernetes, PostgreSQL).
+- For headings, use clear and descriptive phrases that work well for SEO and readability.
+
+## Quality Standards
+- Use active voice where possible.
+- Be concise - remove filler words common in Korean-to-English translation.
+- Ensure the translation reads naturally, as if originally written in English.
+- Do NOT add or remove content - translate faithfully.
+- Do NOT change the filename or slug.
+
+## Output Format
+Return the complete translated Markdown file with YAML front matter.
+- IMPORTANT: The title and description MUST be translated to English. Do NOT keep them in Korean.
+- IMPORTANT: Always wrap title and description values in double quotes to handle special YAML characters like colons. Example: title: "My Title: A Subtitle"
+- Do NOT wrap the output in markdown code blocks (no ``` markers).
+- Start directly with --- and the YAML front matter."""
 
 
 def normalize_repo_path(path_like: str | Path) -> Path:
@@ -86,18 +109,84 @@ def call_openai(model: str, system_prompt: str, user_prompt: str) -> str:
     return resp.choices[0].message.content
 
 
+def strip_markdown_codeblock(text: str) -> str:
+    """Strip markdown code block wrappers if present."""
+    text = text.strip()
+    if text.startswith("```"):
+        lines = text.split("\n")
+        if lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        text = "\n".join(lines)
+    return text.strip()
+
+
+def contains_korean(text: str) -> bool:
+    """Check if text contains Korean characters (Hangul)."""
+    for char in str(text):
+        if "\uac00" <= char <= "\ud7a3" or "\u1100" <= char <= "\u11ff":
+            return True
+    return False
+
+
 def split_front_matter(translated_markdown: str) -> tuple[dict, str]:
-    m = re.match(r"^---\n([\s\S]+?)\n---\n?([\s\S]*)$", translated_markdown.strip())
+    text = strip_markdown_codeblock(translated_markdown)
+
+    patterns = [
+        r"^---\s*\n([\s\S]+?)\n---\s*\n?([\s\S]*)$",
+        r"^---\s*\n([\s\S]+?)\n---\s*([\s\S]*)$",
+        r"^-{3,}\s*\n([\s\S]+?)\n-{3,}\s*\n?([\s\S]*)$",
+    ]
+
+    m = None
+    for pattern in patterns:
+        m = re.match(pattern, text)
+        if m:
+            break
+
     if not m:
-        return {}, translated_markdown
+        print(f"[translate] Debug: Could not match frontmatter. First 300 chars:")
+        print(text[:300])
+        return {}, text
+
     fm_text, body = m.group(1), m.group(2)
     try:
         fm = yaml.safe_load(fm_text) or {}
         if not isinstance(fm, dict):
+            print(f"[translate] Debug: Parsed YAML is not a dict: {type(fm)}")
             fm = {}
-    except yaml.YAMLError:
-        fm = {}
+    except yaml.YAMLError as e:
+        print(f"[translate] Debug: YAML parse error, trying to fix: {e}")
+        fixed_fm_text = fix_yaml_special_chars(fm_text)
+        try:
+            fm = yaml.safe_load(fixed_fm_text) or {}
+            if not isinstance(fm, dict):
+                fm = {}
+            else:
+                print("[translate] Debug: Fixed YAML successfully")
+        except yaml.YAMLError:
+            print(f"[translate] Debug: Could not fix YAML:\n{fm_text[:300]}")
+            fm = {}
     return fm, body
+
+
+def fix_yaml_special_chars(fm_text: str) -> str:
+    """Fix YAML values that contain special characters like colons."""
+    lines = fm_text.split("\n")
+    fixed_lines = []
+    for line in lines:
+        if line.startswith("title:") or line.startswith("description:"):
+            key, _, value = line.partition(":")
+            value = value.strip()
+            if value and not (value.startswith('"') and value.endswith('"')):
+                if value.startswith("'") and value.endswith("'"):
+                    pass
+                elif ":" in value or "#" in value:
+                    value = '"' + value.replace('"', '\\"') + '"'
+            line = f"{key}: {value}"
+        fixed_lines.append(line)
+    return "\n".join(fixed_lines)
 
 
 def ensure_posts_en_dir():
@@ -135,11 +224,20 @@ def main() -> int:
         prompt = build_prompt(post)
         translated = call_openai(model, PROMPT_SYSTEM, prompt)
         fm, body = split_front_matter(translated)
+        original_fm = dict(post)
 
         if not fm:
-            fm = dict(post)
-        if "title" not in fm or not fm["title"]:
-            fm["title"] = dict(post).get("title", "")
+            print(f"[translate] Warning: Could not parse frontmatter, using original")
+            fm = original_fm.copy()
+
+        for key in original_fm:
+            if key not in fm:
+                fm[key] = original_fm[key]
+
+        if contains_korean(fm.get("title", "")):
+            print(f"[translate] Warning: title still contains Korean: {fm.get('title')}")
+        if contains_korean(fm.get("description", "")):
+            print(f"[translate] Warning: description still contains Korean")
 
         en_path = to_en_filename(src)
         en_path.parent.mkdir(parents=True, exist_ok=True)

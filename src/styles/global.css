@@ -44,15 +44,21 @@ h1, h2, h3, h4, h5, h6 {
 	line-height: 1.3;
 	font-weight: 600;
 }
+h2 {
+	margin-top: 2.5rem;
+}
+h3 {
+	margin-top: 2rem;
+}
 strong, b {
 	font-weight: 600;
 }
 a {
-	color: var(--text-primary);
+	color: #2563eb;
 	text-decoration: none;
 }
 a:hover {
-	color: var(--text-secondary);
+	color: #1d4ed8;
 }
 p {
 	margin-bottom: 1em;
