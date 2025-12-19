@@ -131,15 +131,33 @@ def contains_korean(text: str) -> bool:
 
 def split_front_matter(translated_markdown: str) -> tuple[dict, str]:
     text = strip_markdown_codeblock(translated_markdown)
-    m = re.match(r"^---\n([\s\S]+?)\n---\n?([\s\S]*)$", text)
+
+    patterns = [
+        r"^---\s*\n([\s\S]+?)\n---\s*\n?([\s\S]*)$",
+        r"^---\s*\n([\s\S]+?)\n---\s*([\s\S]*)$",
+        r"^-{3,}\s*\n([\s\S]+?)\n-{3,}\s*\n?([\s\S]*)$",
+    ]
+
+    m = None
+    for pattern in patterns:
+        m = re.match(pattern, text)
+        if m:
+            break
+
     if not m:
+        print(f"[translate] Debug: Could not match frontmatter. First 300 chars:")
+        print(text[:300])
         return {}, text
+
     fm_text, body = m.group(1), m.group(2)
     try:
         fm = yaml.safe_load(fm_text) or {}
         if not isinstance(fm, dict):
+            print(f"[translate] Debug: Parsed YAML is not a dict: {type(fm)}")
             fm = {}
-    except yaml.YAMLError:
+    except yaml.YAMLError as e:
+        print(f"[translate] Debug: YAML parse error: {e}")
+        print(f"[translate] Debug: FM text:\n{fm_text[:300]}")
         fm = {}
     return fm, body
 
