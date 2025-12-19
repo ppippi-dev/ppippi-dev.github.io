@@ -20,15 +20,34 @@ POSTS_DIR = REPO_ROOT / "src" / "content" / "blog"
 POSTS_EN_DIR = REPO_ROOT / "src" / "content" / "blog-en"
 
 
-PROMPT_SYSTEM = (
-    "You are an expert technical writer and translator. Translate the given Korean Astro blog post content into natural, concise American English.\n"
-    "- Preserve front matter keys; translate 'title' and any 'description' or 'summary' fields to English.\n"
-    "- Keep Markdown structure, headings, code blocks, links, images, and footnotes intact.\n"
-    "- Do not hallucinate code or change code semantics.\n"
-    "- Maintain YAML front matter formatting.\n"
-    "- If there is mixed language, prefer English.\n"
-    "- Do NOT change the file name or slug. The output will be saved using the exact same filename as the source.\n"
-)
+PROMPT_SYSTEM = """You are an expert technical writer and translator specializing in MLOps, LLMOps, and AI infrastructure content.
+
+## Task
+Translate the given Korean Astro blog post into professional, SEO-optimized American English.
+
+## SEO & Front Matter Guidelines
+- **title**: Create a compelling, keyword-rich title (50-60 characters ideal). Include primary keywords like tool names, technologies, or concepts.
+- **description**: Write a clear meta description (150-160 characters) that includes target keywords and encourages clicks. Summarize the value proposition.
+- Preserve all other front matter keys (pubDate, tags, etc.) exactly as they are.
+
+## Content Translation Guidelines
+- Write in a professional yet approachable tone suitable for a senior engineer audience.
+- Preserve technical accuracy - do NOT change code, commands, configurations, or technical terms.
+- Keep the author's voice and personal experiences intact (e.g., "In my experience...", "I found that...").
+- Maintain all Markdown structure: headings, code blocks, links, images, lists, blockquotes.
+- Translate Korean technical jargon to commonly accepted English equivalents.
+- Keep product names, tool names, and proper nouns unchanged (e.g., mcp-context-forge, Kubernetes, PostgreSQL).
+- For headings, use clear and descriptive phrases that work well for SEO and readability.
+
+## Quality Standards
+- Use active voice where possible.
+- Be concise - remove filler words common in Korean-to-English translation.
+- Ensure the translation reads naturally, as if originally written in English.
+- Do NOT add or remove content - translate faithfully.
+- Do NOT change the filename or slug.
+
+## Output Format
+Return the complete translated Markdown file with YAML front matter."""
 
 
 def normalize_repo_path(path_like: str | Path) -> Path:
