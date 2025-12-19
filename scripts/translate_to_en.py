@@ -49,6 +49,7 @@ Translate the given Korean Astro blog post into professional, SEO-optimized Amer
 ## Output Format
 Return the complete translated Markdown file with YAML front matter.
 - IMPORTANT: The title and description MUST be translated to English. Do NOT keep them in Korean.
+- IMPORTANT: Always wrap title and description values in double quotes to handle special YAML characters like colons. Example: title: "My Title: A Subtitle"
 - Do NOT wrap the output in markdown code blocks (no ``` markers).
 - Start directly with --- and the YAML front matter."""
 
@@ -156,10 +157,36 @@ def split_front_matter(translated_markdown: str) -> tuple[dict, str]:
             print(f"[translate] Debug: Parsed YAML is not a dict: {type(fm)}")
             fm = {}
     except yaml.YAMLError as e:
-        print(f"[translate] Debug: YAML parse error: {e}")
-        print(f"[translate] Debug: FM text:\n{fm_text[:300]}")
-        fm = {}
+        print(f"[translate] Debug: YAML parse error, trying to fix: {e}")
+        fixed_fm_text = fix_yaml_special_chars(fm_text)
+        try:
+            fm = yaml.safe_load(fixed_fm_text) or {}
+            if not isinstance(fm, dict):
+                fm = {}
+            else:
+                print("[translate] Debug: Fixed YAML successfully")
+        except yaml.YAMLError:
+            print(f"[translate] Debug: Could not fix YAML:\n{fm_text[:300]}")
+            fm = {}
     return fm, body
+
+
+def fix_yaml_special_chars(fm_text: str) -> str:
+    """Fix YAML values that contain special characters like colons."""
+    lines = fm_text.split("\n")
+    fixed_lines = []
+    for line in lines:
+        if line.startswith("title:") or line.startswith("description:"):
+            key, _, value = line.partition(":")
+            value = value.strip()
+            if value and not (value.startswith('"') and value.endswith('"')):
+                if value.startswith("'") and value.endswith("'"):
+                    pass
+                elif ":" in value or "#" in value:
+                    value = '"' + value.replace('"', '\\"') + '"'
+            line = f"{key}: {value}"
+        fixed_lines.append(line)
+    return "\n".join(fixed_lines)
 
 
 def ensure_posts_en_dir():
