@@ -69,4 +69,5 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: add English translations for PR #${{ github.event.pull_request.number }}"
-          file_pattern: src/content/blog-en/**/*.md
+          file_pattern: 'src/content/blog-en/*.md'
+          add_options: '-A'
