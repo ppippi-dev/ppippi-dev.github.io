@@ -15,6 +15,16 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = FallbackImage } = Astro.props;
+
+// Generate hreflang URLs for multilingual SEO
+const pathname = Astro.url.pathname;
+const isEnglish = pathname.startsWith('/en/');
+const koURL = isEnglish
+	? new URL(pathname.replace('/en/', '/'), Astro.site).href
+	: canonicalURL.href;
+const enURL = isEnglish
+	? canonicalURL.href
+	: new URL(pathname === '/' ? '/en/' : `/en${pathname}`, Astro.site).href;
 ---
 
 <!-- Global Metadata -->
@@ -26,8 +36,8 @@ const { title, description, image = FallbackImage } = Astro.props;
 <link
 	rel="alternate"
 	type="application/rss+xml"
-	title={SITE_TITLE}
-	href={new URL('rss.xml', Astro.site)}
+	title={isEnglish ? `${SITE_TITLE} (English)` : SITE_TITLE}
+	href={new URL(isEnglish ? 'en/rss.xml' : 'rss.xml', Astro.site)}
 />
 <meta name="generator" content={Astro.generator} />
 
@@ -40,6 +50,11 @@ const { title, description, image = FallbackImage } = Astro.props;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+
+<!-- Hreflang for multilingual SEO -->
+<link rel="alternate" hreflang="ko" href={koURL} />
+<link rel="alternate" hreflang="en" href={enURL} />
+<link rel="alternate" hreflang="x-default" href={koURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -68,3 +83,18 @@ const { title, description, image = FallbackImage } = Astro.props;
 	gtag('js', new Date());
 	gtag('config', 'G-KQYDN19HGC');
 </script>
+
+<!-- JSON-LD for WebSite -->
+<script type="application/ld+json" set:html={JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	"name": "ppippi-dev Blog",
+	"url": "https://ppippi.dev",
+	"description": "My personal blog for organizing learnings and experiences in MLOps, AI, and Cloud.",
+	"inLanguage": ["ko", "en"],
+	"author": {
+		"@type": "Person",
+		"name": "ppippi",
+		"url": "https://ppippi.dev"
+	}
+})} />
