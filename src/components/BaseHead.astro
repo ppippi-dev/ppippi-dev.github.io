@@ -98,3 +98,12 @@ const enURL = isEnglish
 		"url": "https://ppippi.dev"
 	}
 })} />
+
+<!-- JSON-LD for Organization (Google 검색 로고용) -->
+<script type="application/ld+json" set:html={JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	"name": "ppippi-dev",
+	"url": "https://ppippi.dev",
+	"logo": "https://ppippi.dev/img/avatar.png"
+})} />
