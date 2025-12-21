@@ -156,7 +156,7 @@ const posts = (await getCollection('blog-en')).sort(
 						</div>
 						{post.data.heroImage && (
 							<a href={`/en/blog/${post.id}/`} class="post-image">
-								<img src={post.data.heroImage} alt={post.data.title} />
+								<img src={post.data.heroImage} alt={post.data.title} width="200" height="140" loading="lazy" />
 							</a>
 						)}
 					</article>
