@@ -239,6 +239,14 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				font-size: 0.9rem;
 				margin-right: 8px;
 			}
+			.translation-notice {
+				text-align: center;
+				padding: 10px 16px;
+				margin-bottom: 28px;
+				font-size: 0.85rem;
+				color: #888;
+				border-bottom: 1px solid #eee;
+			}
 			.footer-tag {
 				color: #666;
 				padding: 6px 16px;
@@ -318,6 +326,9 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 					</div>
 				</header>
 				<div class="post-content">
+					<div class="translation-notice">
+						This article was translated using AI.
+					</div>
 					<slot />
 				</div>
 				{tags && tags.length > 0 && (
