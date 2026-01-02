@@ -27,6 +27,16 @@ const enURL = isEnglish
 	: new URL(pathname === '/' ? '/en/' : `/en${pathname}`, Astro.site).href;
 ---
 
+<!-- Theme initialization (prevent flash) -->
+<script is:inline>
+	(function() {
+		const stored = localStorage.getItem('theme');
+		const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const theme = stored || (prefersDark ? 'dark' : 'light');
+		document.documentElement.setAttribute('data-theme', theme);
+	})();
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

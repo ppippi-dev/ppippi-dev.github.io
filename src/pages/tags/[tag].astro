@@ -41,12 +41,12 @@ const { tag, posts } = Astro.props;
 			.tag-title {
 				font-size: 1.5rem;
 				font-weight: 600;
-				color: #111;
+				color: var(--text-primary);
 				margin: 0;
 			}
 			.tag-count {
 				font-size: 0.9rem;
-				color: #888;
+				color: var(--text-muted);
 				margin-top: 8px;
 			}
 			.posts-list {
@@ -55,7 +55,7 @@ const { tag, posts } = Astro.props;
 			}
 			.post-item {
 				padding: 24px 0;
-				border-bottom: 1px solid #f0f0f0;
+				border-bottom: 1px solid var(--border-color);
 			}
 			.post-item:first-child {
 				padding-top: 0;
@@ -65,25 +65,25 @@ const { tag, posts } = Astro.props;
 			}
 			.post-meta {
 				font-size: 0.8rem;
-				color: #888;
+				color: var(--text-muted);
 				margin-bottom: 8px;
 				display: flex;
 				align-items: center;
 				gap: 12px;
 			}
 			.post-tag {
-				color: #555;
+				color: var(--text-secondary);
 				text-decoration: none;
 				font-weight: 500;
 			}
 			.post-tag:hover {
-				color: #111;
+				color: var(--text-primary);
 			}
 			.post-title {
 				margin: 0 0 6px 0;
 			}
 			.post-title a {
-				color: #111;
+				color: var(--text-primary);
 				font-size: 1.1rem;
 				font-weight: 600;
 				line-height: 1.4;
@@ -92,10 +92,10 @@ const { tag, posts } = Astro.props;
 				transition: color 0.15s;
 			}
 			.post-title a:hover {
-				color: #555;
+				color: var(--text-secondary);
 			}
 			.post-description {
-				color: #666;
+				color: var(--text-secondary);
 				font-size: 0.9rem;
 				line-height: 1.5;
 				margin: 0;

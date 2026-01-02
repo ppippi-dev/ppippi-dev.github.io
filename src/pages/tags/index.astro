@@ -15,7 +15,10 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort
 		<BaseHead title={`Tags | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 48px 40px 80px;
 			}
 			.tags-container {
 				display: flex;
@@ -24,19 +27,25 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort
 				margin-top: 2rem;
 			}
 			.tag {
-				background: rgb(var(--gray-light));
+				background: var(--border-color);
 				padding: 0.5rem 1rem;
 				border-radius: 8px;
 				text-decoration: none;
-				color: rgb(var(--black));
+				color: var(--text-primary);
 				transition: 0.2s ease;
 			}
 			.tag:hover {
-				background: rgb(var(--accent));
+				background: #35C5F0;
 				color: white;
 			}
 			h1 {
 				margin-bottom: 1rem;
+				color: var(--text-primary);
+			}
+			@media (max-width: 768px) {
+				main {
+					padding: 32px 20px 60px;
+				}
 			}
 		</style>
 	</head>
