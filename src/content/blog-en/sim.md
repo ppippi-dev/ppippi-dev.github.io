@@ -33,7 +33,7 @@ However, its core feature—Copilot (LLM-based workflow generation)—has a stru
 ---
 
 <video autoplay loop muted playsinline style="max-width:100%">
-  <source src="../../../public/img/sim/action1.mp4" type="video/mp4">
+  <source src="/img/sim/action1.mp4" type="video/mp4">
 </video>
 
 
@@ -180,7 +180,7 @@ The debugging experience is pretty impressive.
 Even when it’s hard to find what needs to be fixed—a common issue with no-code tools—the Fix in Copilot feature resolves problems automatically. You click a button, and the LLM debugs and repairs the workflow on its own. I find this part especially compelling.
 
 <video autoplay loop muted playsinline style="max-width:100%">
-  <source src="../../../public/img/sim/action2.mp4" type="video/mp4">
+  <source src="/img/sim/action2.mp4" type="video/mp4">
 </video>
 
 ---

@@ -34,7 +34,7 @@ done < <(find public/img -name '*.gif' -print0)
 
 echo "Updating markdown files..."
 find src/content -name '*.md' -exec perl -i -pe '
-  s/!\[([^\]]*)\]\(([^)]*?)\.gif\)/<video autoplay loop muted playsinline style="max-width:100%">\n  <source src="$2.mp4" type="video\/mp4">\n<\/video>/g
+  s/!\[([^\]]*)\]\([^)]*public(\/img\/[^)]*?)\.gif\)/<video autoplay loop muted playsinline style="max-width:100%">\n  <source src="$2.mp4" type="video\/mp4">\n<\/video>/g
 ' {} \;
 
 echo "Done!"

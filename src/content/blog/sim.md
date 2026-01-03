@@ -32,7 +32,7 @@ tags:
 ---
 
 <video autoplay loop muted playsinline style="max-width:100%">
-  <source src="../../../public/img/sim/action1.mp4" type="video/mp4">
+  <source src="/img/sim/action1.mp4" type="video/mp4">
 </video>
 
 
@@ -181,7 +181,7 @@ OCR도 지원해 이미지 문서 처리도 가능하다고 한다. RAG 시스�
 노코드 툴 특성상 수정 포인트를 찾기 어려운 상황에서도 Fix in Copilot 기능이 자동으로 문제를 해결해준다. 버튼을 누르고 LLM이 알아서 디버깅해서 워크플로우를 고친다. 이 부분은 참 매력적이라고 생각한다.
 
 <video autoplay loop muted playsinline style="max-width:100%">
-  <source src="../../../public/img/sim/action2.mp4" type="video/mp4">
+  <source src="/img/sim/action2.mp4" type="video/mp4">
 </video>
 
 ---
