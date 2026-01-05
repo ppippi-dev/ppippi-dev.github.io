@@ -6,15 +6,44 @@ export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: post,
+		props: { post, allPosts: posts },
 	}));
 }
-type Props = CollectionEntry<'blog'>;
+type Props = { post: CollectionEntry<'blog'>; allPosts: CollectionEntry<'blog'>[] };
 
-const post = Astro.props;
+const { post, allPosts } = Astro.props;
 const { Content } = await render(post);
+
+// Sort posts by date for prev/next navigation
+const sortedPosts = [...allPosts].sort((a, b) =>
+	new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+const currentIndex = sortedPosts.findIndex(p => p.id === post.id);
+const prevPost = currentIndex < sortedPosts.length - 1
+	? { slug: sortedPosts[currentIndex + 1].id, title: sortedPosts[currentIndex + 1].data.title }
+	: null;
+const nextPost = currentIndex > 0
+	? { slug: sortedPosts[currentIndex - 1].id, title: sortedPosts[currentIndex - 1].data.title }
+	: null;
+
+// Find related posts based on matching tags
+const currentTags = post.data.tags || [];
+const relatedPosts = allPosts
+	.filter(p => p.id !== post.id)
+	.map(p => {
+		const matchingTags = (p.data.tags || []).filter(tag => currentTags.includes(tag));
+		return { post: p, matchCount: matchingTags.length };
+	})
+	.filter(({ matchCount }) => matchCount > 0)
+	.sort((a, b) => {
+		// Sort by matching tags count, then by date
+		if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+		return new Date(b.post.data.pubDate).getTime() - new Date(a.post.data.pubDate).getTime();
+	})
+	.slice(0, 3)
+	.map(({ post }) => ({ slug: post.id, title: post.data.title, pubDate: post.data.pubDate }));
 ---
 
-<BlogPost {...post.data} slug={post.id}>
+<BlogPost {...post.data} slug={post.id} body={post.body} relatedPosts={relatedPosts} prevPost={prevPost} nextPost={nextPost}>
 	<Content />
 </BlogPost>

@@ -7,9 +7,29 @@ import Giscus from '../components/Giscus.astro';
 import Header from '../components/Header.astro';
 import FallbackImage from '../assets/default_img.webp';
 
-type Props = CollectionEntry<'blog'>['data'] & { slug?: string };
+type RelatedPost = { slug: string; title: string; pubDate: Date };
+type NavPost = { slug: string; title: string };
+type Props = CollectionEntry<'blog'>['data'] & { slug?: string; body?: string; relatedPosts?: RelatedPost[]; prevPost?: NavPost | null; nextPost?: NavPost | null };
 
-const { title, description, pubDate, updatedDate, heroImage, tags, slug } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, slug, body, relatedPosts, prevPost, nextPost } = Astro.props;
+
+// Calculate reading time for Korean text (characters per minute)
+function calculateReadingTime(text: string): number {
+	if (!text) return 1;
+	// Remove markdown syntax, code blocks, URLs, etc.
+	const cleanText = text
+		.replace(/```[\s\S]*?```/g, '') // code blocks
+		.replace(/`[^`]*`/g, '') // inline code
+		.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1') // links
+		.replace(/[#*_~>\-|]/g, '') // markdown symbols
+		.replace(/\s+/g, ''); // all whitespace
+	// Korean reading speed: ~500 characters per minute
+	const charsPerMinute = 500;
+	const minutes = Math.ceil(cleanText.length / charsPerMinute);
+	return Math.max(1, minutes);
+}
+
+const readingTime = calculateReadingTime(body || '');
 const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(FallbackImage.src, Astro.site).href;
 ---
 
@@ -238,6 +258,172 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			border-color: #35C5F0;
 			color: #35C5F0;
 		}
+		:global(.toc) {
+			margin-bottom: 2.5rem;
+			padding-left: 1rem;
+			border-left: 2px solid var(--border-color, #e0e0e0);
+		}
+		:global(.toc:empty) {
+			display: none;
+		}
+		:global(.toc-title) {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #666;
+			margin: 0 0 1rem 0;
+		}
+		:global(.toc-list) {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		:global(.toc-list li) {
+			margin: 0.35rem 0;
+		}
+		:global(.toc-list a) {
+			color: #888 !important;
+			text-decoration: none;
+			font-size: 0.95rem;
+			line-height: 1.6;
+			transition: color 0.2s;
+		}
+		:global(.toc-list a:hover) {
+			color: #555 !important;
+		}
+		:global(.toc-h3 a) {
+			padding-left: 1rem;
+			font-size: 0.85rem;
+		}
+		.related-posts {
+			margin-top: 40px;
+			padding: 24px;
+			background: var(--bg-secondary, #f8f9fa);
+			border-radius: 8px;
+		}
+		.related-title {
+			font-size: 1rem;
+			font-weight: 600;
+			color: var(--text-primary);
+			margin: 0 0 16px 0;
+		}
+		.related-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.related-list li {
+			margin: 0;
+			border-bottom: 1px solid var(--border-color);
+		}
+		.related-list li:last-child {
+			border-bottom: none;
+		}
+		.related-list a {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 12px 0;
+			text-decoration: none;
+			transition: color 0.2s;
+		}
+		.related-list a:hover .related-post-title {
+			color: var(--link-color, #35C5F0);
+		}
+		.related-post-title {
+			color: var(--text-primary);
+			font-size: 0.95rem;
+			flex: 1;
+			margin-right: 16px;
+		}
+		.related-list time {
+			color: var(--text-muted);
+			font-size: 0.85rem;
+			flex-shrink: 0;
+		}
+		.code-block-wrapper {
+			position: relative;
+		}
+		.copy-button {
+			position: absolute;
+			top: 8px;
+			right: 8px;
+			padding: 6px 10px;
+			background: rgba(255, 255, 255, 0.1);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			border-radius: 4px;
+			color: #aaa;
+			font-size: 0.75rem;
+			cursor: pointer;
+			opacity: 0;
+			transition: opacity 0.2s, background 0.2s;
+		}
+		.code-block-wrapper:hover .copy-button {
+			opacity: 1;
+		}
+		.copy-button:hover {
+			background: rgba(255, 255, 255, 0.2);
+			color: #fff;
+		}
+		.copy-button.copied {
+			background: #35C5F0;
+			border-color: #35C5F0;
+			color: #fff;
+		}
+		.reading-progress-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 0%;
+			height: 3px;
+			background: linear-gradient(90deg, #35C5F0, #00a8cc);
+			z-index: 9999;
+			transition: width 0.1s ease-out;
+		}
+		.post-navigation {
+			display: flex;
+			justify-content: space-between;
+			gap: 20px;
+			margin-top: 40px;
+			padding-top: 30px;
+			border-top: 1px solid var(--border-color);
+		}
+		.nav-link {
+			flex: 1;
+			padding: 16px;
+			border: 1px solid var(--border-color);
+			border-radius: 8px;
+			text-decoration: none;
+			transition: all 0.2s;
+		}
+		.nav-link:hover {
+			border-color: #35C5F0;
+			background: var(--bg-secondary, #f8f9fa);
+		}
+		.nav-link.prev {
+			text-align: left;
+		}
+		.nav-link.next {
+			text-align: right;
+		}
+		.nav-label {
+			display: block;
+			font-size: 0.8rem;
+			color: var(--text-muted);
+			margin-bottom: 4px;
+		}
+		.nav-title {
+			display: block;
+			font-size: 0.95rem;
+			color: var(--text-primary);
+			font-weight: 500;
+			line-height: 1.4;
+		}
+		.nav-link:hover .nav-title {
+			color: #35C5F0;
+		}
+		.nav-placeholder {
+			flex: 1;
+		}
 			@media (max-width: 768px) {
 				main {
 					padding: 40px 20px;
@@ -274,6 +460,7 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 	</head>
 
 	<body>
+		<div class="reading-progress-bar"></div>
 		<Header slug={slug} />
 		<main>
 			<article>
@@ -298,9 +485,11 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 								(수정: <FormattedDate date={updatedDate} />)
 							</span>
 						)}
+						<span class="reading-time">{readingTime}분 읽기</span>
 					</div>
 				</header>
 				<div class="post-content">
+					<nav class="toc" aria-label="목차"></nav>
 					<slot />
 				</div>
 				{tags && tags.length > 0 && (
@@ -313,9 +502,133 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 						</div>
 					</footer>
 				)}
+				{(prevPost || nextPost) && (
+					<nav class="post-navigation">
+						{prevPost ? (
+							<a href={`/blog/${prevPost.slug}/`} class="nav-link prev">
+								<span class="nav-label">← 이전 글</span>
+								<span class="nav-title">{prevPost.title}</span>
+							</a>
+						) : <div class="nav-placeholder"></div>}
+						{nextPost ? (
+							<a href={`/blog/${nextPost.slug}/`} class="nav-link next">
+								<span class="nav-label">다음 글 →</span>
+								<span class="nav-title">{nextPost.title}</span>
+							</a>
+						) : <div class="nav-placeholder"></div>}
+					</nav>
+				)}
+				{relatedPosts && relatedPosts.length > 0 && (
+					<aside class="related-posts">
+						<h3 class="related-title">관련 글</h3>
+						<ul class="related-list">
+							{relatedPosts.map((post) => (
+								<li>
+									<a href={`/blog/${post.slug}/`}>
+										<span class="related-post-title">{post.title}</span>
+										<time datetime={post.pubDate.toISOString()}>
+											{`${post.pubDate.getFullYear()}.${String(post.pubDate.getMonth() + 1).padStart(2, '0')}.${String(post.pubDate.getDate()).padStart(2, '0')}`}
+										</time>
+									</a>
+								</li>
+							))}
+						</ul>
+					</aside>
+				)}
 				<Giscus lang="ko" />
 			</article>
 		</main>
 		<Footer />
+		<script>
+			// Reading progress bar
+			const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
+			if (progressBar) {
+				window.addEventListener('scroll', () => {
+					const scrollTop = window.scrollY;
+					const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+					const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+					progressBar.style.width = `${Math.min(progress, 100)}%`;
+				});
+			}
+
+			// Add lazy loading to all images in post content
+			document.querySelectorAll('.post-content img').forEach(img => {
+				img.setAttribute('loading', 'lazy');
+				img.setAttribute('decoding', 'async');
+			});
+
+			// Generate Table of Contents
+			(function() {
+				const content = document.querySelector('.post-content');
+				const toc = document.querySelector('.toc');
+				if (!content || !toc) return;
+
+				const headings = content.querySelectorAll('h2, h3');
+				if (headings.length < 3) return; // Only show TOC for posts with 3+ headings
+
+				// Add IDs to headings if missing
+				headings.forEach((heading, index) => {
+					if (!heading.id) {
+						heading.id = `heading-${index}`;
+					}
+				});
+
+				// Generate TOC HTML
+				const tocTitle = document.createElement('p');
+				tocTitle.className = 'toc-title';
+				tocTitle.textContent = '목차';
+
+				const tocList = document.createElement('ul');
+				tocList.className = 'toc-list';
+
+				headings.forEach(heading => {
+					const li = document.createElement('li');
+					li.className = heading.tagName === 'H3' ? 'toc-h3' : '';
+					const a = document.createElement('a');
+					a.href = `#${heading.id}`;
+					a.textContent = heading.textContent;
+					li.appendChild(a);
+					tocList.appendChild(li);
+				});
+
+				toc.appendChild(tocTitle);
+				toc.appendChild(tocList);
+			})();
+
+			// Add copy button to code blocks
+			document.querySelectorAll('.post-content pre').forEach(pre => {
+				// Wrap pre in a div for positioning
+				const wrapper = document.createElement('div');
+				wrapper.className = 'code-block-wrapper';
+				pre.parentNode?.insertBefore(wrapper, pre);
+				wrapper.appendChild(pre);
+
+				// Create copy button
+				const button = document.createElement('button');
+				button.className = 'copy-button';
+				button.textContent = '복사';
+				button.setAttribute('aria-label', '코드 복사');
+
+				button.addEventListener('click', async () => {
+					const code = pre.querySelector('code')?.textContent || pre.textContent || '';
+					try {
+						await navigator.clipboard.writeText(code);
+						button.textContent = '복사됨!';
+						button.classList.add('copied');
+						setTimeout(() => {
+							button.textContent = '복사';
+							button.classList.remove('copied');
+						}, 2000);
+					} catch (err) {
+						button.textContent = '실패';
+						setTimeout(() => {
+							button.textContent = '복사';
+						}, 2000);
+					}
+				});
+
+				wrapper.appendChild(button);
+			});
+		</script>
 	</body>
 </html>
