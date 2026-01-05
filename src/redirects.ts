@@ -42,6 +42,8 @@ export const redirects: Record<string, string> = {
 	'/2022/05/15/building-ci-with-github-actions/': '/blog/building-ci-with-github-actions/',
 	'/2022/05/18/cronjob/': '/blog/cronjob/',
 	'/blog/SpringBoot_서버배포/': '/blog/spring-boot-k8s-deployment/',
+	'/blog/GCP환경-k8s-Sticky-Session/': '/blog/gcp-k8s-sticky-session/',
+	'/blog/k8s구성하기/': '/blog/setting-up-kubernetes/',
 	'/2022/09/12/dbt1/': '/blog/dbt1/',
 	'/2022/09/15/회고1/': '/blog/new-developer-retrospective/',
 	'/2022/09/17/GKE-워크로드아이덴티티/': '/blog/gke-workload-identity/',
