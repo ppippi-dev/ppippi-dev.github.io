@@ -94,9 +94,23 @@ export const redirects: Record<string, string> = {
 	// Static pages
 	'/tags.html': '/tags/',
 	'/en/tags.html': '/en/tags/',
+	'/en/tags/': '/en/',
 	'/search.html': '/search/',
 	'/blog/': '/',
 	'/en/blog/': '/en/',
+	'/feed.xml': '/rss.xml',
+
+	// Additional blog redirects (different slug formats)
+	'/blog/Writing-Functions-in-Python/': '/blog/writing-functions-in-python/',
+	'/2021/12/03/Building-Data-Engineering-Pipelines-in-Python/':
+		'/blog/building-data-engineering-pipelines-in-python/',
+	'/2022/09/15/BigSeries/': '/blog/bigseries/',
+	'/en/2022/01/01/NLP_XAI/': '/en/blog/nlp_xai/',
+	'/en/2022/02/10/PySpark/': '/en/blog/pyspark/',
+	'/en/2022/01/29/AWS-SAA/': '/en/blog/aws-saa/',
+	'/en/2022/02/03/Scala/': '/en/blog/scala/',
+	'/en/2021/12/03/Building-Data-Engineering-Pipelines-in-Python/':
+		'/en/blog/building-data-engineering-pipelines-in-python/',
 
 	// Deleted posts -> redirect to home (not /blog/ to avoid chain redirects)
 	// (posts that no longer exist in the current site)
