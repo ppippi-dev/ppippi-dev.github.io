@@ -3,37 +3,37 @@
  * Generated from Google Search Console 404 report.
  *
  * Old pattern: /{YYYY}/{MM}/{DD}/{slug}/
- * New pattern: /blog/{slug}/
+ * New pattern: /blog/{slug}/ (lowercase, hyphenated)
  */
 
 export const redirects: Record<string, string> = {
 	// Korean posts
 	'/2021/09/07/pandas/': '/blog/pandas/',
-	'/2021/09/14/Writing Efficient Python Code/': '/blog/Writing Efficient Python Code/',
-	'/2021/09/14/Writing-Efficient-Python-Code/': '/blog/Writing Efficient Python Code/',
-	'/2021/09/16/Writing Functions in Python/': '/blog/Writing Functions in Python/',
-	'/2021/10/07/Data Processing in Shell/': '/blog/Data Processing in Shell/',
-	'/2021/10/07/Data-Processing-in-Shell/': '/blog/Data Processing in Shell/',
-	'/2021/10/14/Introduction to Bash Scripting/': '/blog/Introduction to Bash Scripting/',
-	'/2021/10/28/objective oriented programming/': '/blog/objective oriented programming/',
+	'/2021/09/14/Writing Efficient Python Code/': '/blog/writing-efficient-python-code/',
+	'/2021/09/14/Writing-Efficient-Python-Code/': '/blog/writing-efficient-python-code/',
+	'/2021/09/16/Writing Functions in Python/': '/blog/writing-functions-in-python/',
+	'/2021/10/07/Data Processing in Shell/': '/blog/data-processing-in-shell/',
+	'/2021/10/07/Data-Processing-in-Shell/': '/blog/data-processing-in-shell/',
+	'/2021/10/14/Introduction to Bash Scripting/': '/blog/introduction-to-bash-scripting/',
+	'/2021/10/28/objective oriented programming/': '/blog/objective-oriented-programming/',
 	'/2021/11/11/Unit Testing for Data Science in Python/':
-		'/blog/Unit Testing for Data Science in Python/',
+		'/blog/unit-testing-for-data-science-in-python/',
 	'/2021/11/12/AWS - 아마존 웹서비스/': '/blog/aws-amazon-web-services-cloud-computing/',
 	'/2021/11/12/AWS-아마존-웹서비스/': '/blog/aws-amazon-web-services-cloud-computing/',
-	'/2021/11/18/Introduction to Airflow in Python/': '/blog/Introduction to Airflow in Python/',
-	'/2021/11/24/Introduction to PySpark/': '/blog/Introduction to PySpark/',
-	'/2021/11/24/Introduction-to-PySpark/': '/blog/Introduction to PySpark/',
+	'/2021/11/18/Introduction to Airflow in Python/': '/blog/introduction-to-airflow-in-python/',
+	'/2021/11/24/Introduction to PySpark/': '/blog/introduction-to-pyspark/',
+	'/2021/11/24/Introduction-to-PySpark/': '/blog/introduction-to-pyspark/',
 	'/2021/12/03/Building Data Engineering Pipelines in Python/':
-		'/blog/Building Data Engineering Pipelines in Python/',
-	'/2022/01/04/Introduction to AWS Boto in Python/': '/blog/Introduction to AWS Boto in Python/',
+		'/blog/building-data-engineering-pipelines-in-python/',
+	'/2022/01/04/Introduction to AWS Boto in Python/': '/blog/introduction-to-aws-boto-in-python/',
 	'/2022/01/20/Introduction to Relational Databases in SQL/':
-		'/blog/Introduction to Relational Databases in SQL/',
+		'/blog/introduction-to-relational-databases-in-sql/',
 	'/2022/01/20/Introduction-to-Relational-Databases-in-SQL/':
-		'/blog/Introduction to Relational Databases in SQL/',
-	'/2022/01/27/Database Design/': '/blog/Database Design/',
-	'/2022/01/29/AWS-SAA/': '/blog/AWS-SAA/',
-	'/2022/02/03/Scala/': '/blog/Scala/',
-	'/2022/02/10/PySpark/': '/blog/PySpark/',
+		'/blog/introduction-to-relational-databases-in-sql/',
+	'/2022/01/27/Database Design/': '/blog/database-design/',
+	'/2022/01/29/AWS-SAA/': '/blog/aws-saa/',
+	'/2022/02/03/Scala/': '/blog/scala/',
+	'/2022/02/10/PySpark/': '/blog/pyspark/',
 	'/2022/02/16/AWS-SAA후기/': '/blog/aws-saa-exam-review/',
 	'/2022/04/24/GCP-GKE자동배포/': '/blog/gcp-gke-automated-deployment/',
 	'/2022/04/24/gcp-gke-automated-deployment/': '/blog/gcp-gke-automated-deployment/',
@@ -59,25 +59,25 @@ export const redirects: Record<string, string> = {
 	'/2025/10/01/openai-agent-sdk/': '/blog/openai-agent-sdk/',
 
 	// English posts
-	'/en/2021/09/16/Writing Functions in Python/': '/en/blog/Writing Functions in Python/',
-	'/en/2021/10/07/Data Processing in Shell/': '/en/blog/Data Processing in Shell/',
-	'/en/2021/10/14/Introduction to Bash Scripting/': '/en/blog/Introduction to Bash Scripting/',
-	'/en/2021/10/28/objective oriented programming/': '/en/blog/objective oriented programming/',
+	'/en/2021/09/16/Writing Functions in Python/': '/en/blog/writing-functions-in-python/',
+	'/en/2021/10/07/Data Processing in Shell/': '/en/blog/data-processing-in-shell/',
+	'/en/2021/10/14/Introduction to Bash Scripting/': '/en/blog/introduction-to-bash-scripting/',
+	'/en/2021/10/28/objective oriented programming/': '/en/blog/objective-oriented-programming/',
 	'/en/2021/11/11/Unit Testing for Data Science in Python/':
-		'/en/blog/Unit Testing for Data Science in Python/',
+		'/en/blog/unit-testing-for-data-science-in-python/',
 	'/en/2021/11/12/aws-amazon-web-services-cloud-computing/':
 		'/en/blog/aws-amazon-web-services-cloud-computing/',
-	'/en/2021/11/24/Introduction to PySpark/': '/en/blog/Introduction to PySpark/',
+	'/en/2021/11/24/Introduction to PySpark/': '/en/blog/introduction-to-pyspark/',
 	'/en/2021/12/03/Building Data Engineering Pipelines in Python/':
-		'/en/blog/Building Data Engineering Pipelines in Python/',
+		'/en/blog/building-data-engineering-pipelines-in-python/',
 	'/en/2022/01/04/Introduction to AWS Boto in Python/':
-		'/en/blog/Introduction to AWS Boto in Python/',
+		'/en/blog/introduction-to-aws-boto-in-python/',
 	'/en/2022/01/20/Introduction to Relational Databases in SQL/':
-		'/en/blog/Introduction to Relational Databases in SQL/',
+		'/en/blog/introduction-to-relational-databases-in-sql/',
 	'/en/2022/04/24/gcp-gke-automated-deployment/': '/en/blog/gcp-gke-automated-deployment/',
 	'/en/2022/08/17/terraform-3/': '/en/blog/terraform-3/',
 	'/en/2022/09/12/dbt1/': '/en/blog/dbt1/',
-	'/en/2022/09/17/GCP-secret-manager/': '/en/blog/GCP-secret-manager/',
+	'/en/2022/09/17/GCP-secret-manager/': '/en/blog/gcp-secret-manager/',
 	'/en/2022/09/17/using-keda-pubsub-autoscaling/': '/en/blog/using-keda-pubsub-autoscaling/',
 	'/en/2022/10/01/GKE업데이트/': '/en/blog/gke-automatic-updates/',
 	'/en/2023/01/08/k8s구성하기/': '/en/blog/setting-up-kubernetes/',
