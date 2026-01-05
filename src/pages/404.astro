@@ -28,6 +28,14 @@ import { SITE_TITLE } from '../consts';
 					window.location.replace('/en/blog/' + slug + '/');
 					return;
 				}
+
+				// GA4 404 에러 추적
+				if (typeof gtag === 'function') {
+					gtag('event', '404_error', {
+						page_path: path,
+						page_referrer: document.referrer || '(direct)'
+					});
+				}
 			})();
 		</script>
 		<style>
