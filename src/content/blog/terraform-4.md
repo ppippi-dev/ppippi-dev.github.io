@@ -188,7 +188,7 @@ terraform apply
 
 이후 terraform apply 입력하면 이전과 다르게 새로운 자원이 생성됩니다. (단 terraform name이 아닌 aws 리소스 name이 같은 경우 에러가 날 수도 있음)
 
-<p align="center"><img src="/img/post_img/terraform2.png"></p>
+<p align="center"><img src="/img/post_img/terraform2.webp"></p>
 
 S3를 확인해보면 env:/ 라는 폴더에 생성한 tfstate가 있음을 알 수 있습니다.
 

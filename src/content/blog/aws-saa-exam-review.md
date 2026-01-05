@@ -8,7 +8,7 @@ tags:
 title: AWS-SAA C02 후기
 ---
 
-<p align="center"><img src="/img/post_img/AWS_SAA1.png"></p>
+<p align="center"><img src="/img/post_img/AWS_SAA1.webp"></p>
 
 드디어 올해 목표 중 하나인 AWS SAA자격증 취득 했습니다.
 

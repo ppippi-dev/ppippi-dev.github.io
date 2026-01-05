@@ -52,13 +52,13 @@ LIMIT 3;
 
 #### One "entity type" in the database
 
-<p align="center"><img src="/img/post_img/sql1.png"></p>
+<p align="center"><img src="/img/post_img/sql1.webp"></p>
 
 위와 같은 그림을 엔티티-관계 다이어그램이라고 합니다.
 
 사각형은 소위 엔티티 유형을 나타내고, 연결된 원은 속성(또는 열)을 나타냅니다.
 
-<p align="center"><img src="/img/post_img/sql2.png"></p>
+<p align="center"><img src="/img/post_img/sql2.webp"></p>
 
 위와 같이 이용하면, 중복성이 줄어들게 됩니다. 하지만, 원래 속성 중 하나인 기능이 여전히 누락되어 있습니다. 이를 위해서 제휴 테이블을 따로 생성하는 것이 올바른 방법입니다.
 

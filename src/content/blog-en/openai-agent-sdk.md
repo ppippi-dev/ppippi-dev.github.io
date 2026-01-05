@@ -12,7 +12,7 @@ As 2025 kicks off, the word “Agent” seems to pop up in the news feed almost 
 
 > In Agent Builder, click the Code button and it instantly renders Agent SDK code.
 
-![image-20251009212618233](/img/2025-10-08-openai-agent-sdk/image-20251009212618233.png)
+![image-20251009212618233](/img/2025-10-08-openai-agent-sdk/image-20251009212618233.webp)
 
 Of course, there are many tools that take different approaches, like Google ADK or Microsoft Autogen. The best choice ultimately depends on your team’s requirements and existing infrastructure. In this post, I’ll summarize what the OpenAI Agent SDK aims for and which features stand out.
 
@@ -152,7 +152,7 @@ os.environ["OPENAI_AGENTS_DISABLE_TRACING"] = "1"
 
 Here’s what the tracing looks like:
 
-![image-20251009215019250](/img/2025-10-08-openai-agent-sdk/image-20251009215019250.png)
+![image-20251009215019250](/img/2025-10-08-openai-agent-sdk/image-20251009215019250.webp)
 
 You can keep tracing even when you’re not using an OpenAI model. Attach other models via an adapter like LiteLLM, and pass a separate OpenAI API key to `set_tracing_export_api_key`. That lets you collect logs without incurring model costs.
 

@@ -8,7 +8,7 @@ title: Building a Kubernetes Cluster from Scratch
 
 Because most of my workloads run on managed services like EKS and GKE, I rarely think about provisioning Kubernetes myself. That changed when I needed an on-demand cluster (and wanted hands-on practice for the CKA exam). I followed the guide [Install Kubernetes with kubeadm](https://mud-riddle-377.notion.site/Install-Kubernetes-with-kubeadm-c990d74012a34cefbff6d3f1c7455853) and documented the process here.
 
-<p align="center"><img src="/img/post_img/make_kubernetes_1.png"></p>
+<p align="center"><img src="/img/post_img/make_kubernetes_1.webp"></p>
 
 Instead of bare-metal hardware I used AWS EC2 instances. Note: the control plane must have enough memory—if it drops below ~1.7 GB `kubeadm init` fails—so I provisioned `t3.medium` instances (2 vCPU / 4 GB RAM).
 
@@ -124,7 +124,7 @@ Edit `/etc/containerd/config.toml`:
 vi /etc/containerd/config.toml
 ```
 
-<p align="center"><img src="/img/post_img/make_kubernetes2.png"></p>
+<p align="center"><img src="/img/post_img/make_kubernetes2.webp"></p>
 
 Set `SystemdCgroup = true` under `plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options`, then restart containerd:
 

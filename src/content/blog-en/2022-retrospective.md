@@ -93,7 +93,7 @@ Seeing the list of things I still don’t know reminds me there’s so much left
 Time to set next year’s intentions.
 
 #### 1. One GitHub Commit a Day
-<p align="center"><img src="/img/post_img/2022-review.png"></p>
+<p align="center"><img src="/img/post_img/2022-review.webp"></p>
 
 My activity log thins out around June (when I started working). I had a brief stretch of green squares again, but it didn’t last. In 2023 I want a lush lawn.
 

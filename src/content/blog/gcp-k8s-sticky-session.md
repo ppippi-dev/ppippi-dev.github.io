@@ -21,7 +21,7 @@ k8s를 배포하기 위해 AWS와 GCP 중 고민을 했지만, GCP에서 제공�
 
 AWS의 Kubernetes서비스인 EKS는 프리티어에 해당하지 않습니다. ( 돈이 없네요... )
 
-<p align="center"><img src="/img/post_img/gcp1.png"></p>
+<p align="center"><img src="/img/post_img/gcp1.webp"></p>
 
 Cloud에서 Kubernetes 환경을 구축하는 방법은 간단합니다. GCP 홈페이지에서 Kubernetes Engine을 검색해서 만들기를 생성하면 원하는 환경을 구축할 수 있습니다.
 
@@ -29,7 +29,7 @@ Cloud에서 Kubernetes 환경을 구축하는 방법은 간단합니다. GCP 홈
 
 저는 GKE Standard를 통해서 구축했습니다.
 
-<p align="center"><img src="/img/post_img/gcp2.png"></p>
+<p align="center"><img src="/img/post_img/gcp2.webp"></p>
 
 제가 변경한 설정은 리전 하나입니다. 서울을 서버로 사용하기 위해서 asia-northeast3로 변경하고 나머지 옵션은 default값으로 설정하였습니다.
 
@@ -41,13 +41,13 @@ Cloud에서 Kubernetes 환경을 구축하는 방법은 간단합니다. GCP 홈
 
 #### GCP CLI 접속하기
 
-<p align="center"><img src="/img/post_img/gcp3.png"></p>
+<p align="center"><img src="/img/post_img/gcp3.webp"></p>
 
 CLI를 접속하는 방법 또한 간단합니다. 접속하고자하는 쿠버네티스 클러스터에 오른쪽 점세개 있는것을 클릭하고 연결을 클릭합니다.
 
 연결을 클릭하면 위와같이 모달이 뜰텐데, CLOUD SHELL에서 실행을 누르면 GCP 하단에 터미널 창이 나오고,
 
-<p align="center"><img src="/img/post_img/gcp4.png"></p>
+<p align="center"><img src="/img/post_img/gcp4.webp"></p>
 
 ```shell
 gcloud container clusters get-credentials ....

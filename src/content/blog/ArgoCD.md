@@ -9,7 +9,7 @@ title: argoCD를 이용한 CD구축하기
 
 지난 Github Actions를 이용해서 CI/CD 중 CI 라인을 구축하고 이제, CD라인을 구축 할 차례입니다.
 
-<p align="center"><img src="/img/post_img/argocd.png"></p>
+<p align="center"><img src="/img/post_img/argocd.webp"></p>
 
 제가 사용할 CD파이프 라인은 Argo CD입니다.
 
@@ -61,7 +61,7 @@ kubectl get service -n argocd
 
 위의 명령어로, argocd를 어떤 ip에 노출했는지 확인한 뒤, 설정한 포트포워딩 포트를 이용해서 접속합니다.
 
-<p align="center"><img src="/img/post_img/argocd2.png"></p>
+<p align="center"><img src="/img/post_img/argocd2.webp"></p>
 
 (사이트에 접속하니 귀여운 문어가 저를 맞이해주네요.)
 
@@ -85,7 +85,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 먼저 CD라인을 구축하고 싶은 레파지토리를 정하고, 해당 URL을 복사합니다.
 
-<p align="center"><img src="/img/post_img/argocd3.png"></p>
+<p align="center"><img src="/img/post_img/argocd3.webp"></p>
 
 다시 argoCD에 접속해서 톱니바퀴모양의 설정을 들어가면 Repositories가 보이네요.
 
@@ -93,7 +93,7 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 CONNECT REPO USING HTTPS를 클릭합니다.
 
-<p align="center"><img src="/img/post_img/argocd4.png"></p>
+<p align="center"><img src="/img/post_img/argocd4.webp"></p>
 
 이후 복사한 URL을 입력합니다. 이러면 간단하게 연결이 됨을 알 수 있습니다.
 
@@ -105,7 +105,7 @@ CONNECT REPO USING HTTPS를 클릭합니다.
 
 깃과 연동까지 완료되었으면, 이제 애플리케이션을 배포할 차례입니다.
 
-<p align="center"><img src="/img/post_img/argocd5.png"></p>
+<p align="center"><img src="/img/post_img/argocd5.webp"></p>
 
 좌측 사이트바에서 맨위 스택같은 모양을 클릭하고 NEW APP을 클릭합니다. 그러면 위와 같은 모습이 보일 겁니다.
 

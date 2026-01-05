@@ -11,7 +11,7 @@ title: kubernetes 구성하기
 
 [따라배우는 쿠버네티스 - AWS EC2에 시험 환경 구축하기](https://mud-riddle-377.notion.site/Install-Kubernetes-with-kubeadm-c990d74012a34cefbff6d3f1c7455853)를 참고하여 정리하였습니다.
 
-<p align="center"><img src="/img/post_img/make_kubernetes_1.png"></p>
+<p align="center"><img src="/img/post_img/make_kubernetes_1.webp"></p>
 
 먼저,온디맨드 대신, AWS인스턴스를 사용하여 진행하였습니다. 사용한 환경은 위와 같습니다.
 
@@ -172,7 +172,7 @@ containerd config default | sudo tee /etc/containerd/config.toml
 ```shell
 vi /etc/containerd/config.toml
 ```
-<p align="center"><img src="/img/post_img/make_kubernetes2.png"></p>
+<p align="center"><img src="/img/post_img/make_kubernetes2.webp"></p>
 
 `plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options` 부분의 `SystemCgroup` 을 true로 변경해준다,
 

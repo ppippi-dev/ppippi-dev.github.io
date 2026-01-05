@@ -13,11 +13,11 @@ This post documents how I deployed a service on Google Kubernetes Engine (GKE) a
 <br>
 
 ### Provisioning a GKE Cluster
-<p align="center"><img src="/img/post_img/gcp1.png"></p>
+<p align="center"><img src="/img/post_img/gcp1.webp"></p>
 
 In the Google Cloud console search for **Kubernetes Engine**, click **Create**, and follow the wizard. GCP handles the heavy lifting that would otherwise be required if you wired up your own VMs.
 
-<p align="center"><img src="/img/post_img/gcp2.png"></p>
+<p align="center"><img src="/img/post_img/gcp2.webp"></p>
 
 I only changed the region to `asia-northeast3 (Seoul)` and kept the remaining options at their defaults. GKE lets you tailor machine types (general purpose, compute optimized, memory optimized, GPU), size your nodes, choose storage, security, metadata options, and more. Pick what fits your workload.
 
@@ -26,11 +26,11 @@ After confirming the settings it takes a few minutes for the cluster to be provi
 <br>
 
 ### Connecting via GCP Cloud Shell
-<p align="center"><img src="/img/post_img/gcp3.png"></p>
+<p align="center"><img src="/img/post_img/gcp3.webp"></p>
 
 From the cluster list click the three-dot menu next to your cluster and choose **Connect**.
 
-<p align="center"><img src="/img/post_img/gcp4.png"></p>
+<p align="center"><img src="/img/post_img/gcp4.webp"></p>
 
 Click **Run in Cloud Shell** and a terminal opens at the bottom of the console with the following command pre-populated:
 

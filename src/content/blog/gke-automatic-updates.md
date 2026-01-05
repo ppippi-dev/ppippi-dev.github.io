@@ -35,7 +35,7 @@ GCP에서 또한, 이러한 쿠버네티스 버전에 맞춰 사용자에게 최
 
 
 
-<p align="center"><img src="/img/post_img/update1.png"></p>
+<p align="center"><img src="/img/post_img/update1.webp"></p>
 
 
 
@@ -43,7 +43,7 @@ GCP에서 또한, 이러한 쿠버네티스 버전에 맞춰 사용자에게 최
 
 #### Static (no channel)
 
-<p align="center"><img src="/img/post_img/update2.png"></p>
+<p align="center"><img src="/img/post_img/update2.webp"></p>
 
 Static 버전은 말 그대로 고정된 버전입니다. 이는 고정된 버전을 사용하지만, GCP측에서 보안 및 호환성의 유지가 필요한 경우에는 개입해서 자동 업데이트를 진행합니다.
 
@@ -53,7 +53,7 @@ Static 버전은 말 그대로 고정된 버전입니다. 이는 고정된 버�
 
 #### Rapid
 
-<p align="center"><img src="/img/post_img/update3.png"></p>
+<p align="center"><img src="/img/post_img/update3.webp"></p>
 
 Rapid 채널은 말 그대로 신속합니다.
 
@@ -63,7 +63,7 @@ Rapid 채널은 말 그대로 신속합니다.
 
 #### Regular
 
-<p align="center"><img src="/img/post_img/update4.png"></p>
+<p align="center"><img src="/img/post_img/update4.webp"></p>
 
 일반채널입니다. 이는 GCP의 권장 옵션입니다. 새로운 버전이 출시되면 충분한 검증 기간을 가진 ( 1~2주 뒤에 업데이트를 진행합니다. )
 
@@ -71,7 +71,7 @@ Rapid 채널은 말 그대로 신속합니다.
 
 #### Stable
 
-<p align="center"><img src="/img/post_img/update5.png"></p>
+<p align="center"><img src="/img/post_img/update5.webp"></p>
 
 Stable은 공개 버전 채널입니다. 이는 GCP에서 공개적으로 일반채널에서 충분히 검증을 맞췄다고 판단되는 버전을 사용합니다.
 
@@ -99,7 +99,7 @@ Channel에 대해서 알아봤으니 이제, 자동 업데이트에 대해 알�
 
 Node Pool의 경우 간단한게 UI 및 CLI를 통해 비활성화 할 수 있습니다.
 
-<p align="center"><img src="/img/post_img/update6.png"></p>
+<p align="center"><img src="/img/post_img/update6.webp"></p>
 
 ### 강제로 업데이트 되는 케이스
 
@@ -107,7 +107,7 @@ GKE에서는 보안 및 호환성의 유지가 필요한 경우 Static Channel �
 
 이러한 내용에 대해서는 [Release Note](https://cloud.google.com/kubernetes-engine/docs/release-notes#September_23_2022) 에서 소개해주고 있습니다.
 
-<p align="center"><img src="/img/post_img/update7.png"></p>
+<p align="center"><img src="/img/post_img/update7.webp"></p>
 
 위의 예시에서 설명하듯이, no longer available에 해당하는 버전에 대해서는 강제로 업데이트가 진행됩니다.
 
@@ -123,7 +123,7 @@ Control Plane의 자동 업데이트는 위에서 언급한 것처럼 항상 활
 
 즉, 위의 사진에서 no longer available에 해당하지 않더라도, 아래 부분에 의해 업데이트가 진행됩니다.
 
-<p align="center"><img src="/img/post_img/update8.png"></p>
+<p align="center"><img src="/img/post_img/update8.webp"></p>
 
 <br>
 
@@ -137,11 +137,11 @@ Control Plane의 자동 업데이트는 위에서 언급한 것처럼 항상 활
 
 단, no longer available에 해당하는 경우 이야기가 달라집니다.
 
-<p align="center"><img src="/img/post_img/update9.png"></p>
+<p align="center"><img src="/img/post_img/update9.webp"></p>
 
 이 경우, 자동 업그레이드 사용 여부와 상관없이 업데이트를 진행합니다.
 
-<p align="center"><img src="/img/post_img/update10.png"></p>
+<p align="center"><img src="/img/post_img/update10.webp"></p>
 
 또한, 노드는 Control Plane보다 버전 3개 이상 뒤쳐지면 안된다는 조건이 존재합니다. 뒤쳐지는 경우 업데이트를 진행하게 됩니다.
 
@@ -151,7 +151,7 @@ Control Plane의 자동 업데이트는 위에서 언급한 것처럼 항상 활
 
 Control Plane의 업데이트는 유지보수 기간 제외를 통해서 막을 수 있습니다.
 
-<p align="center"><img src="/img/post_img/update11.png"></p>
+<p align="center"><img src="/img/post_img/update11.webp"></p>
 
 하지만 이는 영원히 막는 것이 아닌, 단지 업데이트 하는 시간을 설정 혹은 업데이트하면 안되는 시간을 제한하는 방법입니다.
 

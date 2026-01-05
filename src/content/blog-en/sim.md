@@ -56,7 +56,7 @@ sim is available as open source, and it also offers a Managed Cloud-hosted servi
 
 On Cloud-hosted, the free plan includes $20 in credits.
 
-![image-20260103230746221](../../../public/img/sim/image-20260103230746221.png)
+![image-20260103230746221](../../../public/img/sim/image-20260103230746221.webp)
 
 The LLM used within workflows can be configured in two ways. (Copilot provided by sim does not fall into this category.)
 
@@ -65,8 +65,8 @@ The LLM used within workflows can be configured in two ways. (Copilot provided b
 
 If you use the platform key instead of your own API Key, the cost increases by about 2x. Judging by the warning message shown when you delete a personal API Key, it feels like even sim recommends using your own LLM API Key for workflows.
 
-![image-20260103144757557](../../../public/img/sim/image-20260103144757557.png)
-![image-20260103144629767](../../../public/img/sim/image-20260103144629767.png)
+![image-20260103144757557](../../../public/img/sim/image-20260103144757557.webp)
+![image-20260103144629767](../../../public/img/sim/image-20260103144629767.webp)
 
 ---
 
@@ -91,15 +91,15 @@ sim’s basic flow works like this:
 2. Enter the task you want in natural language.  
 3. The LLM interprets it and automatically generates a workflow.
 
-![image-20260103225328920](../../../public/img/sim/image-20260103225328920.png)
+![image-20260103225328920](../../../public/img/sim/image-20260103225328920.webp)
 
 The generated workflow isn’t just simple node connections—  
 it can also include Code execution steps as needed.
 
 You can run it immediately using the RUN button at the top of the UI.
 
-![test_img](../../../public/img/sim/test_img.png)
-![test_img2](../../../public/img/sim/test_img2.png)
+![test_img](../../../public/img/sim/test_img.webp)
+![test_img2](../../../public/img/sim/test_img2.webp)
 
 ---
 
@@ -131,7 +131,7 @@ sim supports not only LLM-based auto-generation, but also manual configuration.
 The Toolbar provides a large number of Tools and Integrations,  
 and it’s already connected to many external services. It looks like it includes pretty much anything you’d want to build.
 
-![toolbar](../../../public/img/sim/toolbar.png)
+![toolbar](../../../public/img/sim/toolbar.webp)
 
 ---
 
@@ -139,8 +139,8 @@ and it’s already connected to many external services. It looks like it include
 
 The execution logging system is also well built. It tracks run success/failure, trigger type, and even detailed error messages—overall, the logging is quite solid.
 
-![image-20260103135535936](../../../public/img/sim/image-20260103135535936.png)
-![image-20260103151610221](../../../public/img/sim/image-20260103151610221.png)
+![image-20260103135535936](../../../public/img/sim/image-20260103135535936.webp)
+![image-20260103151610221](../../../public/img/sim/image-20260103151610221.webp)
 
 It’s at a level that’s fully usable in production operations.
 
@@ -154,7 +154,7 @@ You can import pre-built workflows in the form of Templates.
 
 This is practical because you don’t have to generate everything via LLM from scratch.
 
-![image-20260103135553368](../../../public/img/sim/image-20260103135553368.png)
+![image-20260103135553368](../../../public/img/sim/image-20260103135553368.webp)
 
 ---
 
@@ -164,8 +164,8 @@ sim supports Vector Store-based RAG via its Knowledge feature.
 
 I tested it by uploading the Transformer paper, and chunking and vectorization completed quickly.
 
-![rag1](../../../public/img/sim/rag1.png)
-![rag2](../../../public/img/sim/rag2.png)
+![rag1](../../../public/img/sim/rag1.webp)
+![rag2](../../../public/img/sim/rag2.webp)
 
 It also supports OCR, so it can process image-based documents as well. The fact that you can set up a RAG system this easily is compelling. I didn’t measure performance, so I’m not sure. Depending on the documents, I suspect you’d need to tune it yourself.
 
@@ -190,7 +190,7 @@ Even when it’s hard to find what needs to be fixed—a common issue with no-co
 Basic MCPs are already registered,  
 and if needed, you can add MCPs yourself.
 
-![image-20260103143506983](../../../public/img/sim/image-20260103143506983.png)
+![image-20260103143506983](../../../public/img/sim/image-20260103143506983.webp)
 
 ---
 
@@ -207,9 +207,9 @@ To use sim’s Copilot, even in Self-hosted deployments, you must use an API Key
 For someone like me who wants to build an Agentic AI system using Self-hosted open source plus my own LLM API Key, I don’t like the fact that another SaaS tool gets inserted.  
 This structure becomes a clear constraint for engineers who care about controlling LLM costs and maintaining data sovereignty in Self-hosted environments.
 
-![image-20260103220522907](../../../public/img/sim/image-20260103220522907.png)
-![image-20260103220724061](../../../public/img/sim/image-20260103220724061.png)
-![image-20260103221515111](../../../public/img/sim/image-20260103221515111.png)
+![image-20260103220522907](../../../public/img/sim/image-20260103220522907.webp)
+![image-20260103220724061](../../../public/img/sim/image-20260103220724061.webp)
+![image-20260103221515111](../../../public/img/sim/image-20260103221515111.webp)
 
 Copilot pricing is set higher than using the base LLM directly. This appears to be sim’s core business model.
 

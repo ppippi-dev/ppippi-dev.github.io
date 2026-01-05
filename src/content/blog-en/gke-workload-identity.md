@@ -44,7 +44,7 @@ I wanted to eliminate that risk by adopting Workload Identity.
 ### Test Setup
 To reproduce the need for credentials, I used the [pub/sub sample job](https://github.com/wjdqlsdlsp/secret-keda-test/tree/main/python_code/publish) from GCP’s Python examples, containerized it, and pushed the image to `gcr.io`. Running it as a Kubernetes Job failed immediately—exactly because no credentials were provided.
 
-<p align="center"><img src="/img/post_img/workload-error1.png"></p>
+<p align="center"><img src="/img/post_img/workload-error1.webp"></p>
 
 Let’s fix that with Workload Identity.
 
@@ -53,7 +53,7 @@ Let’s fix that with Workload Identity.
 ### Enable Workload Identity on the Cluster
 Workload Identity lets resources in your GKE cluster impersonate IAM service accounts. The official [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity) is thorough; I followed it closely.
 
-<p align="center"><img src="/img/post_img/workload1.png"></p>
+<p align="center"><img src="/img/post_img/workload1.webp"></p>
 
 First, verify that Workload Identity is enabled on the cluster. If not, turn it on. You can do this via the console or the CLI:
 
@@ -65,7 +65,7 @@ gcloud container clusters update CLUSTER_NAME \
 
 Next, enable the metadata server for each node pool that will run workloads using Workload Identity:
 
-<p align="center"><img src="/img/post_img/workload2.png"></p>
+<p align="center"><img src="/img/post_img/workload2.webp"></p>
 
 ```shell
 gcloud container node-pools update NODEPOOL_NAME \
@@ -80,7 +80,7 @@ I prefer the console UI, but the commands above achieve the same result.
 ### Create a Google Service Account
 Now create the Google service account (GSA) that the workload should impersonate.
 
-<p align="center"><img src="/img/post_img/workload3.png"></p>
+<p align="center"><img src="/img/post_img/workload3.webp"></p>
 
 Assign the necessary IAM roles in the GCP IAM console—or use `gcloud iam service-accounts create` if you prefer the CLI. No JSON key files are required.
 

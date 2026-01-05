@@ -525,7 +525,7 @@ cron 이란?  시간을 뜻하는 그리스어 chronos에서 유래되었습니�
 
 `crontab -l`: 를이용해서 현재 작업(cronjob)이 뭐가 있는지 알 수 있습니다.
 
-<p align="center"><img src="/img/post_img/2419CA4E58D9A21732.jpg"></p>
+<p align="center"><img src="/img/post_img/2419CA4E58D9A21732.webp"></p>
 
 
 

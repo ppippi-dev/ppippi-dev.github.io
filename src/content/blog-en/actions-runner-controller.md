@@ -126,7 +126,7 @@ spec:
 
 With this configured, you can check the self-hosted runner in your GitHub repo’s Actions settings.
 
-<img src="/img/2025-07-03/1.png">
+<img src="/img/2025-07-03/1.webp">
 
 Once the deployment is up, after a short while you’ll see a new runner with labels self-hosted and arc-runner under Settings > Actions > Runners in your repository.
 
@@ -153,7 +153,7 @@ You can also configure additional metrics to create pods whenever there’s a wo
 
 > When using HorizontalRunnerAutoscaler, runners are created only when needed. During idle periods (when there are zero runners), you won’t see any runners in the GitHub UI.
 
-<img src="/img/2025-07-03/2.png">
+<img src="/img/2025-07-03/2.webp">
 
 ```yaml
 apiVersion: actions.summerwind.dev/v1alpha1

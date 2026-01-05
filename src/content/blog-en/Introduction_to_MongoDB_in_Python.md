@@ -7,7 +7,7 @@ tags:
 title: Introduction to MongoDB in Python
 ---
 
-<p align="center"><img src="/img/post_img/mongodb1.png"></p>
+<p align="center"><img src="/img/post_img/mongodb1.webp"></p>
 
 MongoDB excels at exploring data without rigid schemas. If you can model your data in JSON, you can likely store and analyze it in MongoDB.
 

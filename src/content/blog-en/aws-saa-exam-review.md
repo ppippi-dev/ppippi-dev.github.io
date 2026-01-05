@@ -8,7 +8,7 @@ tags:
 title: AWS SAA C02 Exam Review
 ---
 
-<p align="center"><img src="/img/post_img/AWS_SAA1.png"></p>
+<p align="center"><img src="/img/post_img/AWS_SAA1.webp"></p>
 
 I finally achieved one of my goals for the year: passing the AWS Solutions Architect Associate (SAA-C02) exam. The passing score is 720 out of 1000; I scored 841—relief after worrying about that pricey registration fee. Courage rewarded!
 

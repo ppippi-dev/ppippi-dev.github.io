@@ -10,7 +10,7 @@ title: Terraform – Creating an AWS EC2 Instance
 
 Infrastructure as Code (IaC) turns cloud resources into versioned, shareable code. Terraform is the most popular cross-cloud IaC tool—it supports AWS, GCP, Azure, and many others.
 
-<p align="center"><img src="/img/post_img/terraform.png" width="600"></p>
+<p align="center"><img src="/img/post_img/terraform.webp" width="600"></p>
 
 <br>
 

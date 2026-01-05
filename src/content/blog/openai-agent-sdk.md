@@ -13,7 +13,7 @@ title: OpenAI Agent SDK - 간단하게 Agent를 구축하자
 
 > Agent Builder 화면에서 **Code** 버튼을 누르면 바로 Agent SDK 코드가 출력된다.
 
-![image-20251009212618233](/img/2025-10-08-openai-agent-sdk/image-20251009212618233.png)
+![image-20251009212618233](/img/2025-10-08-openai-agent-sdk/image-20251009212618233.webp)
 
 물론 Google ADK나 Microsoft Autogen처럼 다른 접근을 제공하는 툴도 많다. 결국 팀의 요구사항과 사용 중인 인프라에 따라 최적의 선택은 달라질 것이다. 이 글에서는 OpenAI Agent SDK가 어떤 지향점을 갖고 있는지, 어떤 기능이 돋보이는지 정리해 본다.
 
@@ -156,7 +156,7 @@ os.environ["OPENAI_AGENTS_DISABLE_TRACING"] = "1"
 
 다음과 같이 트레이싱이 된다고 보면 된다.
 
-![image-20251009215019250](/img/2025-10-08-openai-agent-sdk/image-20251009215019250.png)
+![image-20251009215019250](/img/2025-10-08-openai-agent-sdk/image-20251009215019250.webp)
 
 OpenAI 모델이 아니더라도 트레이싱은 유지할 수 있다. LiteLLM 같은 어댑터로 다른 모델을 붙이고, 별도로 발급한 OpenAI API Key를 `set_tracing_export_api_key`에 전달하면 된다. 비용 없이 로그만 수집하는 용도로 사용할 수 있다는 뜻이다.
 

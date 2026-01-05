@@ -226,7 +226,7 @@ metadata의 경우, pub/sub의 구독이름 및 해당 이벤트가 어떨때, �
 
 위와 같이 설정하고 실행하면 pod들이 증가합니다.
 
-<p align="center"><img src="/img/post_img/keda1.png"></p>
+<p align="center"><img src="/img/post_img/keda1.webp"></p>
 
 ### 나만의 정리
 

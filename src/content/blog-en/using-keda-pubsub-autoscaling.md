@@ -118,7 +118,7 @@ spec:
 
 When messages arrive, the number of running jobs increases accordingly:
 
-<p align="center"><img src="/img/post_img/keda1.png"></p>
+<p align="center"><img src="/img/post_img/keda1.webp"></p>
 
 <br>
 

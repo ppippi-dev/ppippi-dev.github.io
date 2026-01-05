@@ -96,7 +96,7 @@ dbt에서는 oauth를 사용하는 방식을 권장하고 있지만, 이번 포�
 
 GCP - IAM 및 관리자 - 서비스 계정에서 새로운 서비스 계정을 생성해 줍니다.
 
-<p align="center"><img src="/img/post_img/dbt1.png"></p>
+<p align="center"><img src="/img/post_img/dbt1.webp"></p>
 
 필요한 권한은 아래와같이, 두가지입니다.
 
@@ -116,7 +116,7 @@ GCP - IAM 및 관리자 - 서비스 계정에서 새로운 서비스 계정을 �
 dbt를 사용하기 위해, Dataset을 생성해줍니다.
 
 GCP - BigQuery에서 간단하게 Dataset을 생성할 수 있습니다.
-<p align="center"><img src="/img/post_img/dbt2.png"></p>
+<p align="center"><img src="/img/post_img/dbt2.webp"></p>
 
 
 ---
@@ -208,7 +208,7 @@ jaffle_shop 폴더를 보면, seeds라는 폴더가 있습니다. 폴더안에�
 
 해당 데이터들을, `dbt seed`명령어를 통해서 bigquery로 전송할 수 있습니다.
 
-<p align="center"><img src="/img/post_img/dbt3.png" width="500"></p>
+<p align="center"><img src="/img/post_img/dbt3.webp" width="500"></p>
 
 BigQuery를 보면 위와 같이, 데이터 테이블들이 생성되어있음을 알 수 있습니다.
 
@@ -364,7 +364,7 @@ dbt run
 
 위의 명령어를 통해서 정의한 sql 및 yml에 따라서 데이터 마트를 생성합니다.
 
-<p align="center"><img src="/img/post_img/dbt4.png"></p>
+<p align="center"><img src="/img/post_img/dbt4.webp"></p>
 
 ---
 
@@ -452,7 +452,7 @@ dbt docs generate & dbt docs serve
 
 위의 명령어로 간단하게 웹사이트를 통한 정보를 확인할 수 있습니다.
 
-<p align="center"><img src="/img/post_img/dbt5.png"></p>
+<p align="center"><img src="/img/post_img/dbt5.webp"></p>
 
 ---
 

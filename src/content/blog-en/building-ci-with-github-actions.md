@@ -63,7 +63,7 @@ Docker Hub login & build steps:
 
 Sensitive values (like `DOCKER_PASSWORD`) come from GitHub Secrets: Repository Settings → Secrets → Actions.
 
-<p align="center"><img src="/img/post_img/action2.png"></p>
+<p align="center"><img src="/img/post_img/action2.webp"></p>
 
 The final step builds the Docker image and pushes it.
 
@@ -73,7 +73,7 @@ The final step builds the Docker image and pushes it.
 
 After committing the workflow, GitHub runs it automatically. Future pushes/PRs trigger new runs.
 
-<p align="center"><img src="/img/post_img/action3.png"></p>
+<p align="center"><img src="/img/post_img/action3.webp"></p>
 
 A green check means success. Click through for logs and errors. If something fails, GitHub emails you (if notifications are enabled).
 

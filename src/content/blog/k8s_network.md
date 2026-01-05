@@ -25,7 +25,7 @@ title: 쿠버네티스 Web-DB pod 연결하기
 
 하나의 파드 안에 2개의 컨테이너, 즉 DB와 Web server 컨테이너가 같이 존재하는 구조입니다.
 
-<p align="center"><img src="/img/post_img/k8s-sidecar.png"></p>
+<p align="center"><img src="/img/post_img/k8s-sidecar.webp"></p>
 
 
 
@@ -108,7 +108,7 @@ spec:
 
 ##$# 각각 다른 Service를 이용한 연결
 
-<p align="center"><img src="/img/post_img/k8s-svc-svc.png"></p>
+<p align="center"><img src="/img/post_img/k8s-svc-svc.webp"></p>
 
 다음 구조는 서로 다른 서비스끼리의 연결입니다.
 

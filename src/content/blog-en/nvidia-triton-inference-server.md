@@ -156,7 +156,7 @@ I0516 13:09:23.607014 1 http_server.cc:358] "Started Metrics Service at 0.0.0.0:
 
 > **Note**: The Triton Inference Server image is very large. Please be aware of this!
 
-<img src="/img/2025-05-16/1.png">
+<img src="/img/2025-05-16/1.webp">
 
 ## 3. Run Triton Client (Image Classification Test)
 

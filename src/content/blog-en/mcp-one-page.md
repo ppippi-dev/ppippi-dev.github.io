@@ -39,7 +39,7 @@ Compared to Function Calling, instead of following a single vendor’s JSON sche
 
 
 
-![img](/img/2025-09-15-mcp-one-page/mcp-simple-diagram.png)
+![img](/img/2025-09-15-mcp-one-page/mcp-simple-diagram.webp)
 
 
 
@@ -59,7 +59,7 @@ Let’s keep terminology light and just cover the essentials.
 
 MCP has two main roles: Client and Server. MCP Docs also mention an MCP Host, which you can think of as an app like Cursor that manages multiple clients.
 
-![image-20250916001157470](/img/2025-09-15-mcp-one-page/image-20250916001157470.png)
+![image-20250916001157470](/img/2025-09-15-mcp-one-page/image-20250916001157470.webp)
 
 Roles:
 

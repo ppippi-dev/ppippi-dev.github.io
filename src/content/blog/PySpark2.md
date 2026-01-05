@@ -36,7 +36,7 @@ Spark의 장점
 
 #### 데이터 정제 예시
 
-<p align="center"><img src="/img/post_img/spark8.png"></p>
+<p align="center"><img src="/img/post_img/spark8.webp"></p>
 
 OLTP -> OLAP 구조로 변경해야 사용하기 좋습니다.
 
@@ -448,7 +448,7 @@ user_df = user_df.withColumn('Class', udfSortingCap())
 - 이러한 ID는 반드시 순차적인 것은 아닙니다. ( 값 사이에 종종 매우 큰 간격이 있을 수 있습니다. )
 - 일반 관계형 ID와 달리 Spark는 완전히 병렬입니다.
 
-<p align="center"><img src="/img/post_img/spark9.png"></p>
+<p align="center"><img src="/img/post_img/spark9.webp"></p>
 
 테이블의 ID필드는 값이 증가하는 정수이지만 순차적이지 않습니다.
 
@@ -658,7 +658,7 @@ voter_df = df.select(df['VOTER NAME']).distinct()
 voter_df.explain()
 ```
 
-<p align="center"><img src="/img/post_img/spark10.png"></p>
+<p align="center"><img src="/img/post_img/spark10.webp"></p>
 
 <br>
 
@@ -767,7 +767,7 @@ df.write.json('outdata.json')
 - 여러 개가 같은 이미지에 있는 경우를 포함하는 이미지도 존재
 - ImageNet 내의 폴더를 포함한 기타 메타데이터가 포함됩니다. ( 데이터 세트, 이미지 크기 및 이미지 경계 )
 
-<p align="center"><img src="/img/post_img/spark11.png"></p>
+<p align="center"><img src="/img/post_img/spark11.webp"></p>
 
 <br>
 

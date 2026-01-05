@@ -16,7 +16,7 @@ While analyzing shopping-mall review data we wanted a differentiator from typica
 
 KeyBERT and similar tools crossed our minds, but the team decided to craft a custom approach. That led us to XAI—if we could calculate which tokens influenced the prediction, we could highlight them automatically.
 
-<p align="center"><img src="/img/post_img/네이버쇼핑리뷰.png"><br><em>Naver Shopping review highlighting</em></p>
+<p align="center"><img src="/img/post_img/네이버쇼핑리뷰.webp"><br><em>Naver Shopping review highlighting</em></p>
 
 #### First Steps with XAI
 
@@ -50,8 +50,8 @@ Because we balanced positive and negative samples, we computed the relative freq
 
 Values range from −1 to 1 (negative tokens near −1, positive tokens near 1).
 
-<p align="center"><img src="/img/post_img/임베딩공식.png"></p>
-<p align="center"><img src="/img/post_img/임베딩예시.png"></p>
+<p align="center"><img src="/img/post_img/임베딩공식.webp"></p>
+<p align="center"><img src="/img/post_img/임베딩예시.webp"></p>
 
 #### Model Choice
 
@@ -61,7 +61,7 @@ We eventually used a two-layer DNN. Originally we aimed for Transformer-based XA
 
 LRP was simpler than expected: propagate relevance from output back to each input using learned weights and biases.
 
-<p align="center"><img src="/img/post_img/LRP.png"><br><em>Illustration from the LRP paper</em></p>
+<p align="center"><img src="/img/post_img/LRP.webp"><br><em>Illustration from the LRP paper</em></p>
 
 Implementation snippet:
 
@@ -92,7 +92,7 @@ Full code lives in [`DNN_func` on GitHub](https://github.com/Sejong-Talk-With/Re
 
 This produced relevance scores per token (after converting morphemes back into words).
 
-<p align="center"><img src="/img/post_img/xai.png"></p>
+<p align="center"><img src="/img/post_img/xai.webp"></p>
 
 The output looked decent, but we worried users would see disjoint words. We needed post-processing.
 
@@ -107,7 +107,7 @@ else:
     x[i] = (min(x[i - 1], x[i], x[i + 1]) + x[i]) / 2
 ```
 
-<p align="center"><img src="/img/post_img/xai2.png"></p>
+<p align="center"><img src="/img/post_img/xai2.webp"></p>
 
 We then tuned thresholds statistically: if the summed relevance exceeded −2.16 we labeled the review positive (green highlight above threshold, red below). Interestingly accuracy rose to **84.3%**, surpassing the plain DNN.
 

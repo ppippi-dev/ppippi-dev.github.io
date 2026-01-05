@@ -133,7 +133,7 @@ spec:
 
 다음과 같이 설정하면, Github Repo Actions self-hosted runner를 확인할 수 있습니다.
 
-<img src="/img/2025-07-03/1.png">
+<img src="/img/2025-07-03/1.webp">
 
 배포가 완료되면 잠시 후 GitHub 저장소의 **Settings > Actions > Runners** 탭에 `self-hosted`와 `arc-runner` 레이블을 가진 새로운 Runner가 등록된 것을 확인할 수 있습니다.
 
@@ -161,7 +161,7 @@ minReplicas와 maxReplicas를 지정하여, 리소스에 따라 스케일업, �
 
 > HorizontalRunnerAutoscaler 를 구성했을 경우, 필요할 때만 Runner가 생성되는 구조로, 평시에는(runner가 0개일 경우) Github UI에서 Runner를 확인할 수 없습니다.
 
-<img src="/img/2025-07-03/2.png">
+<img src="/img/2025-07-03/2.webp">
 
 
 

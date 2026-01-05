@@ -71,7 +71,7 @@ Control Plane에서 나머지 etcd, kubelet, kube-scheduler, kube-controller-man
 
 그래서 궁금해진 것이 "GKE에서는 어떻게 운영하고 있을까?" 이였으며, 몇가지 테스트해보았다.
 
-<p align="center"><img src="/img/post_img/default-gcp.png"></p>
+<p align="center"><img src="/img/post_img/default-gcp.webp"></p>
 
 위는 GKE를 생성했을 때, GCP에서 자동으로 생성해주는 VPC의 방화벽이다.
 

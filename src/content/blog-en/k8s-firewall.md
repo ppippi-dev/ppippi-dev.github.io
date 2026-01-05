@@ -41,7 +41,7 @@ Every component talks to the API server over port 6443. etcd, the scheduler, con
 ## How Does GKE Handle This?
 I was curious which firewall rules Google configures for GKE.
 
-<p align="center"><img src="/img/post_img/default-gcp.png"></p>
+<p align="center"><img src="/img/post_img/default-gcp.webp"></p>
 
 When a cluster is created, GKE provisions VPC firewall rules automatically:
 

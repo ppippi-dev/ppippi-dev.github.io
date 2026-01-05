@@ -31,13 +31,13 @@ In contrast, an AI Agent has a higher level of autonomy and makes independent de
 
 Of course, it is difficult to draw a clear line between an AI Assistant and an AI Agent.
 
-<img src="/img/2025-04-14/1.png">
+<img src="/img/2025-04-14/1.webp">
 
 The speaker uses Cursor as an IDE. (I've become someone who can't develop without Cursor...)
 
 Cursor has already introduced an AI Agent.
 
-<img src="/img/2025-04-14/2.png">
+<img src="/img/2025-04-14/2.webp">
 
 As shown in the picture above, when you give the Agent a goal, it performs the goal in various ways, such as checking my folder structure, using the knowledge that the LLM has, and searching the web if necessary.
 

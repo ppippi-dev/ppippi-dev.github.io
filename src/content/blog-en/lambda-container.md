@@ -86,7 +86,7 @@ Lambda loads container images from Amazon ECR. Make sure your AWS CLI credential
 
 Create a private ECR repository (I used the console with default settings and only set the repository name).
 
-<p align="center"><img src="/img/post_img/lambda-container-2.png"></p>
+<p align="center"><img src="/img/post_img/lambda-container-2.webp"></p>
 
 Then push the image:
 
@@ -105,7 +105,7 @@ docker push <account-id>.dkr.ecr.ap-northeast-2.amazonaws.com/<repository>
 
 ## Create the Lambda Function
 
-<p align="center"><img src="/img/post_img/lambda-container-3.png"></p>
+<p align="center"><img src="/img/post_img/lambda-container-3.webp"></p>
 
 When creating a Lambda function, select **Container image** and choose the image you just pushed to ECR. If IAM permissions are missing, attach the relevant policies to the function’s execution role. You can override the image entrypoint or CMD directly in the console if needed.
 

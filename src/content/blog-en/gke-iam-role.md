@@ -64,7 +64,7 @@ gcloud container clusters update $YOUR_GKE_CLUSTER_NAME \
 
 If you are creating a new GKE cluster, you can skip this step by checking the 'Enable Workload Identity' option in the 'Security' section of the creation process.
 
-<img src="/img/2025-05-03/1.png">
+<img src="/img/2025-05-03/1.webp">
 
 
 #### 2. Create and Grant Permissions to a GCP Service Account (IAM Service Account)
@@ -185,7 +185,7 @@ Create an IAM Role using the AWS Management Console or AWS CLI. In this article,
 
 As shown in the picture below, create an IAM Role. The selected options are as follows:
 
-<img src="/img/2025-05-03/2.png">
+<img src="/img/2025-05-03/2.webp">
 
 
 The custom trust policy you enter is as follows. (Enter UNIQUE_ID as a string).
@@ -212,12 +212,12 @@ The custom trust policy you enter is as follows. (Enter UNIQUE_ID as a string).
 
 Afterward, to check if it works correctly, I granted S3 FullAccess permission.
 
-<img src="/img/2025-05-03/3.png">
+<img src="/img/2025-05-03/3.webp">
 
 
 In the next step, I created an AWS IAM Role named `aws_role`.
 
-<img src="/img/2025-05-03/4.png">
+<img src="/img/2025-05-03/4.webp">
 
 
 #### 3. Add AWS IAM Annotation to GKE Service Account

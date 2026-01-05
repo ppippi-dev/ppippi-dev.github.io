@@ -63,7 +63,7 @@ stringData:
 
 이를 GKE에서 사용을 하니, 당연히 오류가 났습니다. 이유는 권한 문제입니다. Credentials를 따로 지정하지 않았으니 당연한 결과입니다.
 
- <p align="center"><img src="/img/post_img/workload-error1.png"></p>
+ <p align="center"><img src="/img/post_img/workload-error1.webp"></p>
 
 이제 이 오류를 해결하고자, GCP 워크로드 아이덴티티를 적용하고자 합니다.
 
@@ -79,7 +79,7 @@ stringData:
 
 먼저, 이를 적용하기 위해서는 GKE 셋팅을 해야합니다.
 
- <p align="center"><img src="/img/post_img/workload1.png"></p>
+ <p align="center"><img src="/img/post_img/workload1.webp"></p>
 
 GKE 클러스터 설정을 보면, 워크로드 아이덴티티 관련 설정이 있습니다. 저는 이를 켜둔 상태라 저렇게 뜨는데, 껴둔 상태면 사용 중지됨 이라고 표기 됩니다.
 
@@ -89,7 +89,7 @@ GKE 클러스터 설정을 보면, 워크로드 아이덴티티 관련 설정이
 
 클러스터만 한다고 끝이아니고, 워크로드 아이덴티티를 적용하고자 하는 노드풀에 대해서도 설정을 추가해야합니다.
 
- <p align="center"><img src="/img/post_img/workload2.png"></p>
+ <p align="center"><img src="/img/post_img/workload2.webp"></p>
 
 클러스터와 동일하게, GKE 메타데이터 서버 설정을 활성화 해주면 준비가 완료됩니다.
 
@@ -113,7 +113,7 @@ gcloud container node-pools update NODEPOOL_NAME \
 
 이제 워크로드 아이덴티티를 적용할 service account를 생성해줍니다.
 
- <p align="center"><img src="/img/post_img/workload3.png"></p>
+ <p align="center"><img src="/img/post_img/workload3.webp"></p>
 
 GCP IAM에서 적용하고자하는 권한을 추가하여 생성하면 완료됩니다.
 

@@ -22,7 +22,7 @@ TMI) Low Code, No Code를 도전하고 있는 현재 프로그래밍과 비교�
 
 이러한 IaC에서 가장 유명하고 많이 사용 중인 것 중 하나가 Terraform 입니다.
 
-<p align="center"><img src="/img/post_img/terraform.png" width=600px></p>
+<p align="center"><img src="/img/post_img/terraform.webp" width=600px></p>
 
 HashiCorp사에서 만든 Terraform은 AWS, GCP, Azure를 포함한 다양한 퍼블릭 클라우드환경을 지원하여 IaC를 대표하고 있습니다.
 
@@ -150,7 +150,7 @@ terraform apply
 
 
 
-<p align="center"><img src="/img/post_img/terraform1.png"></p>
+<p align="center"><img src="/img/post_img/terraform1.webp"></p>
 
 해당 명령이 성공적으로 끝났다면, AWS UI를 통해서 새로운 인스턴스가 생성되었음을 알 수 있습니다.
 

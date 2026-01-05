@@ -9,7 +9,7 @@ title: Continuous Delivery with Argo CD
 
 After setting up CI with GitHub Actions, the next step was automating deployments. I chose **Argo CD**, a GitOps controller for Kubernetes.
 
-<p align="center"><img src="/img/post_img/argocd.png"></p>
+<p align="center"><img src="/img/post_img/argocd.webp"></p>
 
 Argo CD monitors a Git repository and reconciles the cluster to match it—exactly what I wanted for CD.
 
@@ -56,7 +56,7 @@ Log in and change the password.
 
 In the Argo CD UI, click the gear icon → **Repositories** → **CONNECT REPO USING HTTPS**. Provide the Git URL; for private repos, include credentials or deploy keys.
 
-<p align="center"><img src="/img/post_img/argocd3.png"></p>
+<p align="center"><img src="/img/post_img/argocd3.webp"></p>
 
 <br>
 
@@ -70,7 +70,7 @@ Click the stack icon → **NEW APP**. Fill in:
 - **Cluster URL / Namespace** – target cluster and namespace.
 - **Sync Policy** – I checked both options to enable automated sync/prune.
 
-<p align="center"><img src="/img/post_img/argocd5.png"></p>
+<p align="center"><img src="/img/post_img/argocd5.webp"></p>
 
 <br>
 

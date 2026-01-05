@@ -76,13 +76,13 @@ The start screen looks like this. You get a colorful UI, and it also provides a 
 
 The default email address and password are `admin@example.com`, `changeme`.
 
-![image-20251218010740484](/img/mcp-context-forge/image-20251218010740484.png)
+![image-20251218010740484](/img/mcp-context-forge/image-20251218010740484.webp)
 
 
 
 After logging in, you’ll see a screen like the following. I’ve been watching this project since v0.8, and as of v1.0.0-BETA-1, you can really feel how much the design has evolved.
 
-![image-20251219001536178](/img/mcp-context-forge/image-20251219001536178.png)
+![image-20251219001536178](/img/mcp-context-forge/image-20251219001536178.webp)
 
 In the sidebar, there are various options:
 
@@ -95,41 +95,41 @@ In the sidebar, there are various options:
 - Metrics: You can view mcp-context-forge metrics. You can see which tools are called frequently, when they were used most recently, and identify unused tools.
 - Teams / Users: You can manage mcp-context-forge user permissions.
 
-![image-20251219001059140](/img/mcp-context-forge/image-20251219001059140.png)
+![image-20251219001059140](/img/mcp-context-forge/image-20251219001059140.webp)
 
 The screen above is the MCP Registry. If you click Add Server for a few entries for testing, you’ll see them registered like in the screenshot below.
 
 Of course, for most tools, adding the server isn’t the end—you still need to use whatever authentication each server requires.
 
-![image-20251219001727809](/img/mcp-context-forge/image-20251219001727809.png)
+![image-20251219001727809](/img/mcp-context-forge/image-20251219001727809.webp)
 
 The screen above shows what gets created when you register GitHub, for example.
 
-![image-20251219002025981](/img/mcp-context-forge/image-20251219002025981.png)
+![image-20251219002025981](/img/mcp-context-forge/image-20251219002025981.webp)
 
 I also registered a few registries for testing besides GitHub. Once configuration is complete, you can browse the tools provided by each MCP server in Tools.
 
-![image-20251219002100211](/img/mcp-context-forge/image-20251219002100211.png)
+![image-20251219002100211](/img/mcp-context-forge/image-20251219002100211.webp)
 
 As shown above, you can test a registered tool.
 
-![image-20251219002139585](/img/mcp-context-forge/image-20251219002139585.png)
+![image-20251219002139585](/img/mcp-context-forge/image-20251219002139585.webp)
 
 This is the Virtual Servers screen—the core feature I emphasized earlier. As you can see, you can select the MCP Servers and the Tools / Resources / Prompts you want.
 
-![image-20251219002209987](/img/mcp-context-forge/image-20251219002209987.png)
+![image-20251219002209987](/img/mcp-context-forge/image-20251219002209987.webp)
 
 After selecting a Virtual Server, you can confirm it gets created like this.
 
-![image-20251219002222560](/img/mcp-context-forge/image-20251219002222560.png)
+![image-20251219002222560](/img/mcp-context-forge/image-20251219002222560.webp)
 
 When you view Config, you can choose as shown above. It supports Stdio, SSE, and HTTP, so there’s no issue using it for MCP.
 
-![image-20251219002234945](/img/mcp-context-forge/image-20251219002234945.png)
+![image-20251219002234945](/img/mcp-context-forge/image-20251219002234945.webp)
 
 This is an example of the SSE method, showing the familiar MCP registration configuration. If you look at the headers, you’ll see it requires a Bearer token—mcp-context-forge uses tokens to control authorization.
 
-![image-20251219002305321](/img/mcp-context-forge/image-20251219002305321.png)
+![image-20251219002305321](/img/mcp-context-forge/image-20251219002305321.webp)
 
 The token configuration screen looks like this. For each token, you can specify which Virtual Servers it can access. There’s also an IP restriction feature, but I haven’t used it. You can also configure permissions, but in my case I typically just define which tools each agent can access, so I haven’t used that either.
 

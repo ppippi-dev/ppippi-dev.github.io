@@ -8,7 +8,7 @@ title: lambda container 배포하기
 
 AWS의 대표적인 serverless 서비스인 lambda에는 흔히 우리가 아는 코드로 배포하는 방식과 컨테이너로 배포하는 방식이 있다.
 
-<p align="center"><img src="/img/post_img/lambda-container-1.png"></p>
+<p align="center"><img src="/img/post_img/lambda-container-1.webp"></p>
 
 [AWS 2020:reivnet에서 새로 공개](https://aws.amazon.com/ko/blogs/korea/new-for-aws-lambda-container-image-support/)되고 현재는 많은 사람들이 사용하고 있다.
 
@@ -132,7 +132,7 @@ lambda에서 컨테이너 기반으로 동작하려면 이미지를 가져오는
 
 ECR생성의 경우 콘솔에서 진행했으며, 프라이빗으로 설정했고, 리포지토리 이름만 지정하고 모두 디폴트값으로 설정했다.
 
-<p align="center"><img src="/img/post_img/lambda-container-2.png"></p>
+<p align="center"><img src="/img/post_img/lambda-container-2.webp"></p>
 
 
 
@@ -161,7 +161,7 @@ docker push <계정-ID>.dkr.ecr.ap-northeast-2.amazonaws.com/<리포지토리이
 
 ## lambda 함수 만들기
 
-<p align="center"><img src="/img/post_img/lambda-container-3.png"></p>
+<p align="center"><img src="/img/post_img/lambda-container-3.webp"></p>
 
 
 

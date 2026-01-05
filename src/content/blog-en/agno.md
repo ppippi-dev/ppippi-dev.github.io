@@ -34,7 +34,7 @@ As of January 1, 2026, Agno is a popular agent framework with about 36.5k GitHub
 
 According to the [performance benchmark](https://docs.agno.com/get-started/performance#results) Agno published in October 2025, results measured on an Apple M4 MacBook Pro show strong instantiation speed and memory usage compared to other agent frameworks. It includes a claim of being up to 529x faster than LangGraph-based agents, and says memory usage is also efficiently optimized.
 
-![image-20260101180709381](../../../public/img/agno/image-20260101180709381.png)
+![image-20260101180709381](../../../public/img/agno/image-20260101180709381.webp)
 
 ### Questions about instantiation time
 
@@ -157,7 +157,7 @@ app = agent_os.get_app()
 
 If you run this with a FastAPI dev server, you can test the agent easily through the UI. This is especially useful for quickly validating an agent before production, or when you need to share results with non-developers.
 
-![image-20260101225757855](../../../public/img/agno/image-20260101225757855.png)
+![image-20260101225757855](../../../public/img/agno/image-20260101225757855.webp)
 
 ## Multi-Agent Framework – Agno Teams
 
@@ -209,7 +209,7 @@ pprint_run_response(response, markdown=True)
 
 With a small amount of code, you can build a multi-agent setup that supports role-based delegation and collaboration.
 
-![image-20260101230908515](../../../public/img/agno/image-20260101230908515.png)
+![image-20260101230908515](../../../public/img/agno/image-20260101230908515.webp)
 
 ## Knowledge & Memory – Designing Agno Agents
 

@@ -1030,7 +1030,7 @@ Cron은 "crontab" 파일로 알려진 구성 파일을 읽습니다.
 
 Airflow가 앞서 본 워크 플로 회로도를 시각화 하는 방법은 다음과 같습니다.
 
-<p align="center"><img src="/img/post_img/data_airflow.png"></p>
+<p align="center"><img src="/img/post_img/data_airflow.webp"></p>
 
 이러한 도구를 통해 워크 플로를 모니터링 할 수도 있습니다.
 
@@ -1050,7 +1050,7 @@ Airflow 워크 플로의 중심 부분은 Directed Acyclic Graph인 DAG입니다
 
 그래프는 간선으로 연결된 노드 모음입니다.
 
-<p align="center"><img src="/img/post_img/data_airflow2.png"></p>
+<p align="center"><img src="/img/post_img/data_airflow2.webp"></p>
 
 두문자어의 지시 된 부분은, 노드 사이에 방향 감각이 있음을 의미합니다.
 
@@ -1306,7 +1306,7 @@ unittests의 구성 파일에서 이것은 미리 설정되어 있습니다.
 
 프로덕션에서 사용할 다른 구성 파일에서 여기에 표시된 "핵심" 섹션에서도 유사한 설정을 찾을 수 있습니다.
 
-<p align="center"><img src="/img/post_img/data_airflow3.png"></p>
+<p align="center"><img src="/img/post_img/data_airflow3.webp"></p>
 
 <br>
 
@@ -1316,7 +1316,7 @@ unittests의 구성 파일에서 이것은 미리 설정되어 있습니다.
 
 특히 "dags"폴더는 이전 강의에서 작성하는 방법을 배운 DAG를 배치하는 위치입니다.
 
-<p align="center"><img src="/img/post_img/data_airflow4.png"></p>
+<p align="center"><img src="/img/post_img/data_airflow4.webp"></p>
 
 또한 "tests" 폴더를 확인하십시오
 

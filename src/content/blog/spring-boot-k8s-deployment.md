@@ -13,11 +13,11 @@ title: Spring Boot k8s 배포
 
 저는 여기서 Ubuntu Sever 20.04 LTS를 선택하였고, 프리티어로 진행하기 위해 t2.micro로 진행하였습니다.
 
-<p align="center"><img src="/img/post_img/spring1.png"></p>
+<p align="center"><img src="/img/post_img/spring1.webp"></p>
 
 이후 보안 설정을 제외하고 모든 설정은 기본값으로 설정하였습니다.
 
-<p align="center"><img src="/img/post_img/spring2.png"></p>
+<p align="center"><img src="/img/post_img/spring2.webp"></p>
 
 보안 설정같은 경우, 이후 서버가 정상적으로 작동하는지 확인하기 의해 모든 트래픽에 개방하였습니다. ( 절대 이러지 마세요. 필요한 포트만 개방하는 것을 추천드립니다. )
 
@@ -134,7 +134,7 @@ gradle build
 
 이후 빌드가 완료되면, build/libs/ 폴더에 jar 파일이 생성됩니다.
 
-<p align="center"><img src="/img/post_img/spring3.png"></p>
+<p align="center"><img src="/img/post_img/spring3.webp"></p>
 
 위와 같이 2개의 jar이 보일텐데, 이중 plain이 아닌 SNAPSHOT.jar를 실행시킬 예정입니다.
 
@@ -150,7 +150,7 @@ java -jar build/libs/[jar파일]
 
 이후 서버에 접속하기 위해서는 각자의 퍼블릭 IP주소:8080 를 입력하면 정상적으로 접속 할 수 있음을 알 수 있습니다.
 
-<p align="center"><img src="/img/post_img/spring4.png"></p>
+<p align="center"><img src="/img/post_img/spring4.webp"></p>
 
 저 같은 경우, 팀원들과 현재 진행중인 프로젝트 메인사이트가 잘 출력되네요.
 
@@ -240,11 +240,11 @@ sudo docker run -p 8080:8080 -e DB_URL=$DB_URL -e DB_NAME=$DB_NAME -e DB_PASSWOR
 
 #### Docker hub로 이미지 올리기
 
-<p align="center"><img src="/img/post_img/spring5.png"></p>
+<p align="center"><img src="/img/post_img/spring5.webp"></p>
 
 저는 Docker hub에 레파지토리를 생성해놨습니다. 각자 원하는 이름으로 생성하면 됩니다.
 
-<p align="center"><img src="/img/post_img/spring6.png"></p>
+<p align="center"><img src="/img/post_img/spring6.webp"></p>
 
 ```shell
 sudo docker tag 9f5351093984 wjdqlsdlsp/semogong

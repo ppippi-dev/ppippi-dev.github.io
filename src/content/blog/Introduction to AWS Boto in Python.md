@@ -29,7 +29,7 @@ response = s3.list_buckets()
 
 먼저 `boto3`를 선언하고, AWS 서비스 이름, 리전, 키 및 시크릿를 통해 클라이언트를 초기화 합니다.
 
-<p align="center"><img src="/img/post_img/boto1.png"></p>
+<p align="center"><img src="/img/post_img/boto1.webp"></p>
 
 Boto3의 키/시크릿을 생성하기 위해 IAM(Identity Acess Management Service)를 사용합니다.
 
@@ -37,7 +37,7 @@ Boto3의 키/시크릿을 생성하기 위해 IAM(Identity Acess Management Serv
 
 #### 권한 부여 방법
 
-<p align="center"><img src="/img/post_img/boto2.png"></p>
+<p align="center"><img src="/img/post_img/boto2.webp"></p>
 
 아마존 IAM 사용자에 다음과 같은 권한을 부여합니다.
 
@@ -366,7 +366,7 @@ df = pd.read_csv(url)
 
 미리 서명 된 URL 인 경우 요청이 들어 오면 다운로드가 허용되고, 미리 서명되지 않은 경우, 정책에서 다운로드를 허용하는지 확인합니다. AWS의 기본 동작은 액세서를 거부하는 것입니다.
 
-<p align="center"><img src="/img/post_img/boto3.png"></p>
+<p align="center"><img src="/img/post_img/boto3.webp"></p>
 
 <br>
 
@@ -689,7 +689,7 @@ AWS SNS을 검색해서 들어가면, 대시보드가 있는데, Topics 와 Subs
 
 모든 Topics는, ARN 또는 Amazon 리소스 이름이 있습니다. 이는 고유 ID입니다.
 
-<p align="center"><img src="/img/post_img/boto4.png"></p>
+<p align="center"><img src="/img/post_img/boto4.webp"></p>
 
 하단에는 구독 정보가 표시됩니다. 이또한 고유 ID를 가지고 있습니다.
 

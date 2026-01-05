@@ -429,7 +429,7 @@ echo "30F in Celsius is $converted C"
 Cron (from the Greek *chronos*, meaning time) automates tasks on a schedule.  
 Use `crontab -l` to list current cron jobs.
 
-<p align="center"><img src="/img/post_img/2419CA4E58D9A21732.jpg" alt="Cron example"></p>
+<p align="center"><img src="/img/post_img/2419CA4E58D9A21732.webp" alt="Cron example"></p>
 
 ```bash
 # Run every day at 2:30am

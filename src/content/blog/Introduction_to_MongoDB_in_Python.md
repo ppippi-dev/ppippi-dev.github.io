@@ -7,7 +7,7 @@ tags:
 title: Introduction to MongoDB in Python
 ---
 
-<p align="center"><img src="/img/post_img/mongodb1.png"></p>
+<p align="center"><img src="/img/post_img/mongodb1.webp"></p>
 
 #### Flexibly Structured Data
 
@@ -224,7 +224,7 @@ db.laureates.find_one({
 
 위는 **find_one** 를 이용해서 검색하는 방법입니다.
 
-<p align="center"><img src="/img/post_img/mongodb2.png"></p>
+<p align="center"><img src="/img/post_img/mongodb2.webp"></p>
 
 ```python
 db.laureates.count_documents({
@@ -248,7 +248,7 @@ MongoDB를 사용하면, 컬렉션에 대한 스키마를 지정하고 적용할
 db.laureates.find_one({'surname': 'Naipaul'})
 ```
 
-<p align="center"><img src="/img/post_img/mongodb3.png"></p>
+<p align="center"><img src="/img/post_img/mongodb3.webp"></p>
 
 위와 같이, pirzes 부분이 비어있을 수 있습니다.
 
@@ -441,7 +441,7 @@ elemMatch 연산자를 사용하면, 해당 조건 모두 해당하는 문서를
 db.laureates.find_one({"firstname": "Marie"})
 ```
 
-<p align="center"><img src="/img/post_img/mongodb4.png"></p>
+<p align="center"><img src="/img/post_img/mongodb4.webp"></p>
 
 위와 같은 출력에서, bornCountry 속 Poland 를 가지는 문서를 출력하고 싶을때, regex를 사용합니다.
 
@@ -451,7 +451,7 @@ db.laureates.distinct("bornCountry", {"bornCountry": {"$regex": "Poland"}})
 
 위와 같이, 폴란드 문자열에 정규식 연산자를 사용합니다.
 
-<p align="center"><img src="/img/post_img/mongodb5.png"></p>
+<p align="center"><img src="/img/post_img/mongodb5.webp"></p>
 
 
 위와 같이, 폴란드를 포함한 문서를 출력할 수 있습니다.

@@ -62,7 +62,7 @@ gcloud container clusters update $YOUR_GKE_CLUSTER_NAME \
 
 GKE 클러스터를 새로 생성하는 경우, 생성 과정의 '보안' 섹션에서 'Workload Identity 사용 설정' 옵션을 체크하면 이 단계를 생략할 수 있습니다.
 
-<img src="/img/2025-05-03/1.png">
+<img src="/img/2025-05-03/1.webp">
 
 
 #### 2\. GCP 서비스계정 (IAM Service Account) 생성 및 권한 부여
@@ -183,7 +183,7 @@ AWS Management Console 또는 AWS CLI를 사용하여 IAM Role을 생성합니�
 
 아래의 사진과 같이, IAM 역할(Role)을 생성합니다. 선택한 내용은 다음과 같습니다.
 
-<img src="/img/2025-05-03/2.png">
+<img src="/img/2025-05-03/2.webp">
 
 
 입력한 사용자 지정 신뢰 정책은 다음과 같습니다. (UNIQUE\_ID는 string 형식으로 기입합니다.)
@@ -210,12 +210,12 @@ AWS Management Console 또는 AWS CLI를 사용하여 IAM Role을 생성합니�
 
 이후 정상적으로 동작하는지 확인하기 위해, S3 FullAccess 권한을 부여했습니다.
 
-<img src="/img/2025-05-03/3.png">
+<img src="/img/2025-05-03/3.webp">
 
 
 이후 단계에서 aws\_role이라는 이름으로 AWS IAM Role를 생성했습니다.
 
-<img src="/img/2025-05-03/4.png">
+<img src="/img/2025-05-03/4.webp">
 
 
 #### 3\. GKE service account에 AWS IAM Annotation추가

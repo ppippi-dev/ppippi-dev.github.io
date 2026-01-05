@@ -215,7 +215,7 @@ dbt docs serve
 
 Open the local web UI to explore lineage, models, columns, and tests.
 
-<p align="center"><img src="/img/post_img/dbt5.png"></p>
+<p align="center"><img src="/img/post_img/dbt5.webp"></p>
 
 ---
 

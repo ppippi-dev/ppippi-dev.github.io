@@ -56,7 +56,7 @@ title: PySpark
 
 #### Spark 구성
 
-<p align="center"><img src="/img/post_img/spark1.png"></p>
+<p align="center"><img src="/img/post_img/spark1.webp"></p>
 
 Spark Core가 구축되고 나머지 Spark 라이브러리는 그 위에 구축됩니다.
 
@@ -236,7 +236,7 @@ list(filter(lambda x: (x%2 != 0), items))
 - RDD는 PySpark의 기본 및 백본 데이터 유형
 - Spark가 데이터 처리를 시작하면 데이터를 파티션으로 나누고, 각 노드가 데이터 조각을 포함하여 클러스터 노드에 데이터를 분배
 
-<p align="center"><img src="/img/post_img/spark2.png"></p>
+<p align="center"><img src="/img/post_img/spark2.webp"></p>
 
 <br>
 
@@ -335,7 +335,7 @@ fileRDD = sc.textFile("README.md", minPartitions = 6)
 - Lazy evaluation
   - Spark는 RDD 및 실행에서 수행하는 모든 작업에서 그래프를 만듭니다.
 
-<p align="center"><img src="/img/post_img/spark3.png"></p>
+<p align="center"><img src="/img/post_img/spark3.webp"></p>
 
 그림과 같이 RDD에 대해 조치가 수행 될 때만 그래프가 시작됩니다. 이를 Spark의 Lzy evaluation 이라고 합니다.
 
@@ -345,7 +345,7 @@ fileRDD = sc.textFile("README.md", minPartitions = 6)
 
 - map 변환은 함수를 받아서 RDD의 각 요소에 적용합니다.
 
-<p align="center"><img src="/img/post_img/spark4.png"></p>
+<p align="center"><img src="/img/post_img/spark4.webp"></p>
 
 1,2,3,4의 요소를 가진 RDD로 부터, map 변환은 함수를 받아서 RDD의 각 요소에 적용합니다.
 
@@ -360,7 +360,7 @@ RDD_map = RDD.map(lambda x: x * x)
 
 - Filter 변환은 함수를 받아서 조건을 통과하는 요소 만있는 RDD를 반환합니다.
 
-<p align="center"><img src="/img/post_img/spark5.png"></p>
+<p align="center"><img src="/img/post_img/spark5.webp"></p>
 
 ```python
 RDD = sc.parallelize([1,2,3,4])
@@ -373,7 +373,7 @@ RDD_filter = RDD.filter(lambda x: x > 2)
 
 - RDD의 각 요소에 대해 여러 값을 리턴한다는 점을 제외하고 map 변환과 유사
 
-<p align="center"><img src="/img/post_img/spark6.png"></p>
+<p align="center"><img src="/img/post_img/spark6.webp"></p>
 
 위의 사진과 같이 문자열을 split하거나 할 때 자주 사용합니다.
 
@@ -388,7 +388,7 @@ RDD_flatmap = RDD.flatMap(lambda x: x.split(" "))
 
 - Union 변환은 한 RDD와 다른 RDD의 통합을 리턴합니다.
 
-<p align="center"><img src="/img/post_img/spark7.png"></p>
+<p align="center"><img src="/img/post_img/spark7.webp"></p>
 
 위의 그림을 보면, inputRDD를 필터링하고, 두개의 RDD인 errorsRDD, warningsRDD를 만듭니다.
 

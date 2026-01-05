@@ -619,7 +619,7 @@ val maxHand = if (handA > handB) handA else handB
 
 다음과 같이 if else 문을 활용하여 해당 값을 변수에 저장할 수도 있습니다.
 
-<p align="center"><img src="/img/post_img/scala1.png"></p>
+<p align="center"><img src="/img/post_img/scala1.webp"></p>
 
 다른 언어들과 유사하게 연산자 사용이 가능합니다.
 

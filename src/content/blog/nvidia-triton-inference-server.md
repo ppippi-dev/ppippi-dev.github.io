@@ -156,7 +156,7 @@ I0516 13:09:23.607014 1 http_server.cc:358] "Started Metrics Service at 0.0.0.0:
 
 > **주의**: triton inference server의 이미지 크기가 매우 큽니다. 참고하세요!
 
-<img src="/img/2025-05-16/1.png">
+<img src="/img/2025-05-16/1.webp">
 
 ## 3. Triton 클라이언트 실행 (이미지 분류 테스트)
 

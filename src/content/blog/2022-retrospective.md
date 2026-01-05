@@ -204,7 +204,7 @@ title: 2022년을 돌아보며
 #### 깃헙 1일 1커밋 도전
 
 가장 먼저 생각나는 건 깃헙 1일 1커밋이다.
-<p align="center"><img src="/img/post_img/2022-review.png"></p>
+<p align="center"><img src="/img/post_img/2022-review.webp"></p>
 
 위의 사진은 나의 잔디밭이다. 확실히 6월을 기준으로 잔디가 많이 사라졌다. 중간에 다시 정신차리고 잔디를 열심히 심은적이 있었지만, 오래가지 못했다.
 

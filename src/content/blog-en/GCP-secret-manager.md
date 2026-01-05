@@ -18,7 +18,7 @@ In the GCP console:
 2. Click **Create Secret**.
 3. Supply a name and the secret value.
 
-<p align="center"><img src="/img/post_img/secret1.png"></p>
+<p align="center"><img src="/img/post_img/secret1.webp"></p>
 
 <br>
 

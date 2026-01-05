@@ -23,11 +23,11 @@ title: GCP - Secret-Manager 구현하기
 
 
 
-<p align="center"><img src="/img/post_img/secret1.png"></p>
+<p align="center"><img src="/img/post_img/secret1.webp"></p>
 
 사용법은 매우 간단합니다. GCP - Secret Manager에 접속하여 보안 비밀 만들기를 진행하시면 됩니다.
 
-<p align="center"><img src="/img/post_img/secret2.png"></p>
+<p align="center"><img src="/img/post_img/secret2.webp"></p>
 
 이름에는 사용하실 이름을 입력하시고, 보안 비밀값에 숨기고 싶은 시크릿 정보를 입력하여 변수처럼 사용할 수 있습니다.
 
@@ -39,7 +39,7 @@ title: GCP - Secret-Manager 구현하기
 
 Secret Manager에 등록된 시크릿 정보를 사용하기 위해 Kubernetes 환경에서는 [External Secret Operator](https://external-secrets.io/v0.6.0-rc1/)라는 오픈소스를 사용합니다.
 
-<p align="center"><img src="/img/post_img/secret3.png"></p>
+<p align="center"><img src="/img/post_img/secret3.webp"></p>
 
 external secret operator에서 설명하는 구조입니다. 즉, 쿠버네티스 안에서 pod형태로 띄어두고, 외부 public cloud로 부터 데이터를 받아오는 형식입니다.
 

@@ -39,7 +39,7 @@ Github Actions는 간단하게 말하면, Github 에서 제공하는 CI/CD 툴�
 
 Jenkins와 비교해서 매우 간단하게 환경을 구축 할 수 있다는 장점이 있습니다.
 
-<p align="center"><img src="/img/post_img/action1.png"></p>
+<p align="center"><img src="/img/post_img/action1.webp"></p>
 
 CI/CD 환경을 구축하고 싶은 레파지토리를 하나 선택해서 Actions를 눌러보면, 다양한 workflow template이 존재합니다.
 
@@ -128,7 +128,7 @@ actions/checkout@v2같은 경우, 깃헙 레파지토리에서 소스코드를 �
 
 여기서 secrets.DOCKER_PASSWORD 가 나오는데, 이는 제가 설정한 환경변수입니다. 깃헙에 공개할 내용이기에, 시크릿한 정보는 위와 같이 숨길 수 있습니다.
 
-<p align="center"><img src="/img/post_img/action2.png"></p>
+<p align="center"><img src="/img/post_img/action2.webp"></p>
 
 설정하는 방법은, 깃헙 레파지토리에서 Settings에서 Secrets - Action에서 정의하면됩니다.
 
@@ -148,7 +148,7 @@ actions/checkout@v2같은 경우, 깃헙 레파지토리에서 소스코드를 �
 
 이후 제가 설정한 on 조건에 따라서, CI라인이 작동하게 됩니다.
 
-<p align="center"><img src="/img/post_img/action3.png"></p>
+<p align="center"><img src="/img/post_img/action3.webp"></p>
 
 제가 구현한 환경을 팀원들이 잘 사용해주고 있네요. 위와같이 초록불이 뜨면 정상적으로 CI가 된 상태입니다.
 

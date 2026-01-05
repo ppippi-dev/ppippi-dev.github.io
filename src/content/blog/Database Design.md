@@ -88,7 +88,7 @@ OLAP 작업은 모호하고 비지니스 의사 결정에 중점을 둡니다.
 
 <br>
 
-<p align="center"><img src="/img/post_img/design1.png"></p>
+<p align="center"><img src="/img/post_img/design1.webp"></p>
 
 OLTP 및 OLAP 시스템은 함께 작동합니다. 그들은 서로를 필요 합니다.
 
@@ -130,7 +130,7 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 - 일부 구조가 있습니다.
 - Ex) NoSQL, XML, JSON
 
-<p align="center"><img src="/img/post_img/design2.png"></p>
+<p align="center"><img src="/img/post_img/design2.webp"></p>
 
 깔끔하고 체계화 된 데이터는 분석하기 더 쉽습니다. 그러나 스키마를 따라야 하기 때문에 확장성이 떨어집니다.
 
@@ -173,7 +173,7 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 - Extract - Transform - Load
 - 데이터 웨어하우징 및 소규모 분석을 위한 전통적인 접근 방식
 
- <p align="center"><img src="/img/post_img/design3.png"></p>
+ <p align="center"><img src="/img/post_img/design3.webp"></p>
 
 <br>
 
@@ -183,7 +183,7 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 - Extract - Load - Transform
 - ELT는 빅데이터 프로젝트에서 일반화 되었습니다.
 
- <p align="center"><img src="/img/post_img/design4.png"></p>
+ <p align="center"><img src="/img/post_img/design4.webp"></p>
 
 <br>
 
@@ -232,7 +232,7 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 
 스타 스키마는 차원 모델의 가장 단순한 형태입니다. ( 일부는 스타 스키마와 차원 모델링 이라는 용어를 같은 의미로 사용합니다. )
 
- <p align="center"><img src="/img/post_img/design5.png"></p>
+ <p align="center"><img src="/img/post_img/design5.webp"></p>
 
 기본 및 외래 키를 제외하고 팩트 테이블에는 판매 금액과 책 수량이 포함됩니다.
 
@@ -242,7 +242,7 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 
 #### Snowflake schema
 
- <p align="center"><img src="/img/post_img/design6.png"></p>
+ <p align="center"><img src="/img/post_img/design6.webp"></p>
 
 스노우플레이크 스키마는 스타스키마의 확장입니다. 스노우플레이크 스키마는 1차원 보다 큰데, 이는 차원테이블이 정규화(Normalized) 되었기 때문입니다.
 
@@ -260,19 +260,19 @@ OLAP 시스템의 분석은 비지니스에 정보를 제공하는데 사용합�
 
 #### 정규화 예시
 
- <p align="center"><img src="/img/post_img/design7.png"></p>
+ <p align="center"><img src="/img/post_img/design7.webp"></p>
 
 다음 테이블이 있을 때, Author, Publisher, Genre는 중복이 될 수 있으므로, 새 테이블을 만들 수 있습니다.
 
- <p align="center"><img src="/img/post_img/design8.png"></p>
+ <p align="center"><img src="/img/post_img/design8.webp"></p>
 
 이를 정규화하면 다음과 같은 테이블 구조를 가지게 됩니다.
 
- <p align="center"><img src="/img/post_img/design9.png"></p>
+ <p align="center"><img src="/img/post_img/design9.webp"></p>
 
 다른 예시로 다음을 정규화 한다면,
 
- <p align="center"><img src="/img/post_img/design10.png"></p>
+ <p align="center"><img src="/img/post_img/design10.webp"></p>
 
 이는 위의 스타 스키마와 다른 모습을 보입니다.
 
@@ -330,11 +330,11 @@ WHERE  dim_city_sf.city = `Vancouver`  AND   dim_author_sf.author = `Octavia E. 
 
 정규화 된 데이터베이스에 더 많은 테이블이 있는 방식은 보는 것에도 직관적이 않습니다.
 
-<p align="center"><img src="/img/post_img/design11.png"></p>
+<p align="center"><img src="/img/post_img/design11.webp"></p>
 
 
 
-<p align="center"><img src="/img/post_img/design12.png"></p>
+<p align="center"><img src="/img/post_img/design12.webp"></p>
 
 정규화된 테이블 위와 같이 직관적이지 않습니다. 하지만 이를 통해서 중복되는 데이터를 제거할 수 있습니다.
 
@@ -386,7 +386,7 @@ OLAP는 데이터에 대한 분석을 실행하기 때문에 읽기 집약적입
 
 정규화 할 수 있는 범위는 다양합니다.  이를 작은 것부터 큰 것까지 정규화 할 수 있습니다.
 
- <p align="center"><img src="/img/post_img/design13.png"></p>
+ <p align="center"><img src="/img/post_img/design13.webp"></p>
 
 <br>
 
@@ -394,11 +394,11 @@ OLAP는 데이터에 대한 분석을 실행하기 때문에 읽기 집약적입
 
 - 1NF를 준수하려면 각 레코드가 고유해야하며, 각 셀은 하나의 값을 보유해야합니다.
 
- <p align="center"><img src="/img/post_img/design14.png"></p>
+ <p align="center"><img src="/img/post_img/design14.webp"></p>
 
  모든 행은 고유하지만, course_completed열에는 두 개의 레코드에 둘 이상의 코스가 있습니다. 이를 수정하기 위해서 테이블을 아래와 같이 분할 할 수 있습니다.
 
- <p align="center"><img src="/img/post_img/design15.png"></p>
+ <p align="center"><img src="/img/post_img/design15.webp"></p>
 
 위와 같이 설정하면, 모든 레코드가 고유하고 각 열에 하나의 값이 있습니다.
 
@@ -410,11 +410,11 @@ OLAP는 데이터에 대한 분석을 실행하기 때문에 읽기 집약적입
 - 그 외에도 기본 키가 하나의 열이면 테이블은 2NF입니다.
 - 테이블에 복합 키 ( 기본 키가 둘 이상의 열로 구성된 경우 ) 가 있는 경우 키가 아닌 각 열은 모든 키에 종속되어야합니다.
 
- <p align="center"><img src="/img/post_img/design16.png"></p>
+ <p align="center"><img src="/img/post_img/design16.webp"></p>
 
 위의 테이블은 합성 기본 키로 학생아이디와, 코스아이디가 있습니다. 이후 다른 열과 이 두 키에 대한 종속성을 검토합니다.
 
- <p align="center"><img src="/img/post_img/design17.png"></p>
+ <p align="center"><img src="/img/post_img/design17.webp"></p>
 
 이를 2NF로 변경하기 위해서는, 두개의 새 테이블로 분할합니다.
 
@@ -425,9 +425,9 @@ OLAP는 데이터에 대한 분석을 실행하기 때문에 읽기 집약적입
 - 3NF는 2NF를 충족해야 합니다.
 - 3NF는 종속성을 허용하지 않습니다. 즉, 기본 키가 아닌 열은 다른 기본 키가 아닌 열에 의존 할 수 없습니다.
 
- <p align="center"><img src="/img/post_img/design18.png"></p>
+ <p align="center"><img src="/img/post_img/design18.webp"></p>
 
- <p align="center"><img src="/img/post_img/design19.png"></p>
+ <p align="center"><img src="/img/post_img/design19.webp"></p>
 
 위의 테이블을 이용하면, 종속성이 없으며, 복합 기본 키가 없기 때문에 2NF를 충족합니다.
 
@@ -481,7 +481,7 @@ WHERE condition;
 
 #### Creating a View (example)
 
- <p align="center"><img src="/img/post_img/design20.png"></p>
+ <p align="center"><img src="/img/post_img/design20.webp"></p>
 
 회사의 분석가가 종종 공상과학 장르에 대한 분석을 실행한다고 가정
 
@@ -538,7 +538,7 @@ WHERE table_schema NOT IN ('pg_catalog', 'information_schema')
 
 뷰는 선택한 만큼 복잡하고 창의적일 수 있다는 점을 알아야합니다.
 
- <p align="center"><img src="/img/post_img/design21.png"></p>
+ <p align="center"><img src="/img/post_img/design21.webp"></p>
 
 물론 사용한 함수만큼, 뷰를 불러오는 시간이 길어진다는 것은 알아야합니다.
 
@@ -635,7 +635,7 @@ view_name이 존재하면 지정된 new_query로 대체됩니다.
 
 보조 속성을 변경 할 수 있습니다.
 
- <p align="center"><img src="/img/post_img/design22.png"></p>
+ <p align="center"><img src="/img/post_img/design22.webp"></p>
 
 <br>
 
@@ -689,7 +689,7 @@ SQL문에 MATERIALIZED를 지정하는 것을 제외하고는, 비 구체화 된
 
 비 구체화 된 뷰와 달리, 종속성이있을 때, 구체화 된 뷰를 새로 관리해야합니다.
 
-<p align="center"><img src="/img/post_img/design23.png"></p>
+<p align="center"><img src="/img/post_img/design23.webp"></p>
 
 Y는 쿼리에서 X를 사용합니다. 따라서, Y는 X에 따라 달라집니다.
 
@@ -767,7 +767,7 @@ REVOKE UPDATE ON ratings FROM data_analyst;
 
 역할은 다른 역할의 구성원 일 수 있으며 더 큰 역할을 그룹이라고 합니다.
 
- <p align="center"><img src="/img/post_img/design24.png"></p>
+ <p align="center"><img src="/img/post_img/design24.webp"></p>
 
 <br>
 
@@ -842,13 +842,13 @@ REVOKE data_analyst FROM alex;
 
 파티셔닝 유형은 두가지의 파티셔닝이있는데
 
-<p align="center"><img src="/img/post_img/design25.png"></p>
+<p align="center"><img src="/img/post_img/design25.webp"></p>
 
 위의 분할은 수직 분할입니다. 이전에 정규화로 분할된 상태에서 수직 분할은 한단계 더 나아가 테이블을 분할합니다.
 
 이미 완전히 정규화 된 경우에도 열에 의해 수직으로 분할됩니다.
 
-<p align="center"><img src="/img/post_img/design26.png"></p>
+<p align="center"><img src="/img/post_img/design26.webp"></p>
 
 분할 뒤, 공유 키를 통해 연결 할 수 있습니다. 긴텍스트를 포함한 열을 검색에 사용하지 않는다면, 더 적은 데이터를 스캔하므로 쿼리시간이 향상됩니다.
 
@@ -856,11 +856,11 @@ REVOKE data_analyst FROM alex;
 
 #### Horizontal partitioning
 
-<p align="center"><img src="/img/post_img/design27.png"></p>
+<p align="center"><img src="/img/post_img/design27.webp"></p>
 
 수평 분할은 다음과 같이 row를 기준으로 자릅니다.
 
-<p align="center"><img src="/img/post_img/design28.png"></p>
+<p align="center"><img src="/img/post_img/design28.webp"></p>
 
 <br>
 
@@ -881,7 +881,7 @@ REVOKE data_analyst FROM alex;
 
 파티셔닝을 한 단계 더 나아가 여러 머신에 분산 시킬 수 있습니다.
 
-<p align="center"><img src="/img/post_img/design29.png"></p>
+<p align="center"><img src="/img/post_img/design29.webp"></p>
 
 수평 분할을 적용하여 여러 컴퓨터에 테이블을 분산하는 것을 샤딩이라고하는데 이것을 이용하여 대규모 병렬 처리를 가능하게 합니다.
 
@@ -907,7 +907,7 @@ REVOKE data_analyst FROM alex;
 
 필요한 정보는 이러한 데이터 소스에 보관됩니다.
 
-<p align="center"><img src="/img/post_img/design30.png"></p>
+<p align="center"><img src="/img/post_img/design30.webp"></p>
 
 <br>
 
@@ -954,7 +954,7 @@ REVOKE data_analyst FROM alex;
   - Database engine
 - DBMS는 데이터베이스와 최종 사용자 또는 응용 프로그램 간의 인터페이스 역할을 합니다.
 
-<p align="center"><img src="/img/post_img/design31.png"></p>
+<p align="center"><img src="/img/post_img/design31.webp"></p>
 
 <br>
 
@@ -991,7 +991,7 @@ REVOKE data_analyst FROM alex;
 
 #### NoSQL - key-value store
 
-<p align="center"><img src="/img/post_img/design32.png"></p>
+<p align="center"><img src="/img/post_img/design32.webp"></p>
 
 - key-value 데이터베이스는 키와 밸류의 조합을 저장합니다.
 - 키는 관련 값을 검색하는 고유 식별자 역할을 하며, 밸류는 정수 또는 문자열과 같은 간단한 개체부터 JSON 구조와 같은 더 복잡한 개체까지 다양합니다.
@@ -1002,7 +1002,7 @@ REVOKE data_analyst FROM alex;
 
 #### NoSQL - document store
 
- <p align="center"><img src="/img/post_img/design33.png"></p>
+ <p align="center"><img src="/img/post_img/design33.webp"></p>
 
 - Document store는 각각 값에 해당하는 키로 구성된다는 점에서 키밸류와 유사
 - 차이점은, 저장된 값이 문서구조
@@ -1014,7 +1014,7 @@ REVOKE data_analyst FROM alex;
 
 #### NoSQL - columnar database
 
- <p align="center"><img src="/img/post_img/design34.png"></p>
+ <p align="center"><img src="/img/post_img/design34.webp"></p>
 
 - 열을 테이블로 그룹화하는 대신 데이터베이스는 각 열을 시스템 저장소의 별도 파일에 저장
 - 확장성과 규모가 더 빠른 데이터베이스가 가능
@@ -1025,7 +1025,7 @@ REVOKE data_analyst FROM alex;
 
 #### NoSQL - graph database
 
-<p align="center"><img src="/img/post_img/design35.png"></p>
+<p align="center"><img src="/img/post_img/design35.webp"></p>
 
 - 데이터는 서로 연결되어 있고 그래프로 표현됨 ( 다소 복잡 )
 - 대부분의 소셜 네트워크에서 사용되며, 행동에 따라 무엇이든 추천하는 웹사이트 많습니다.
