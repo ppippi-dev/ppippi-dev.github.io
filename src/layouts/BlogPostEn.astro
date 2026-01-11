@@ -348,10 +348,10 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			font-size: 0.85rem;
 			flex-shrink: 0;
 		}
-		.code-block-wrapper {
+		:global(.code-block-wrapper) {
 			position: relative;
 		}
-		.copy-button {
+		:global(.copy-button) {
 			position: absolute;
 			top: 8px;
 			right: 8px;
@@ -365,14 +365,14 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			opacity: 0;
 			transition: opacity 0.2s, background 0.2s;
 		}
-		.code-block-wrapper:hover .copy-button {
+		:global(.code-block-wrapper:hover .copy-button) {
 			opacity: 1;
 		}
-		.copy-button:hover {
+		:global(.copy-button:hover) {
 			background: rgba(255, 255, 255, 0.2);
 			color: #fff;
 		}
-		.copy-button.copied {
+		:global(.copy-button.copied) {
 			background: #35C5F0;
 			border-color: #35C5F0;
 			color: #fff;
@@ -607,6 +607,9 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			})();
 
 			// Add copy button to code blocks
+			const clipboardIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`;
+			const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+
 			document.querySelectorAll('.post-content pre').forEach(pre => {
 				// Wrap pre in a div for positioning
 				const wrapper = document.createElement('div');
@@ -617,23 +620,22 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				// Create copy button
 				const button = document.createElement('button');
 				button.className = 'copy-button';
-				button.textContent = 'Copy';
+				button.innerHTML = clipboardIcon;
 				button.setAttribute('aria-label', 'Copy code');
 
 				button.addEventListener('click', async () => {
 					const code = pre.querySelector('code')?.textContent || pre.textContent || '';
 					try {
 						await navigator.clipboard.writeText(code);
-						button.textContent = 'Copied!';
+						button.innerHTML = checkIcon;
 						button.classList.add('copied');
 						setTimeout(() => {
-							button.textContent = 'Copy';
+							button.innerHTML = clipboardIcon;
 							button.classList.remove('copied');
 						}, 2000);
 					} catch (err) {
-						button.textContent = 'Failed';
 						setTimeout(() => {
-							button.textContent = 'Copy';
+							button.innerHTML = clipboardIcon;
 						}, 2000);
 					}
 				});
