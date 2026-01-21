@@ -66,7 +66,7 @@ sed 's/1/2/gi' <파일> # 1을 2로 바꿔서 출력(대소문자 무시)
 - STDOUT (standard output) - A stream of data out of the program
 - STDERR (standard error) - Errors in your program
 
- ![image-20211014122706757](image-20211014122706757.png"></p>
+ ![image-20211014122706757](image-20211014122706757.webp"></p>
 
 <br>
 
@@ -91,7 +91,7 @@ echo "There are " $# "arguments"
 bash args.sh one two three four five
 ```
 
-![image-20211014123430624](image-20211014123430624.png"></p>
+![image-20211014123430624](image-20211014123430624.webp"></p>
 
 <br>
 
@@ -171,7 +171,7 @@ expr 1 + 4
 
 이럴땐 bc (basic calculator)를 사용하면 됨
 
-![image-20211014135348530](image-20211014135348530.png"></p>
+![image-20211014135348530](image-20211014135348530.webp"></p>
 
 bc를 따로 실행시키지 않고, 다음과 같이 이용 가능
 

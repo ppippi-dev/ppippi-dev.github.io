@@ -188,7 +188,7 @@ Inside the container shell, run the following commands to download an image and 
 
 ```shell
 # Download an image for testing (e.g., a new image)
-wget -O img1.jpg "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.jpg"
+wget -O img1.jpg "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.webp"
 
 # Run inference on the downloaded image
 /workspace/install/bin/image_client -m densenet_onnx -c 3 -s INCEPTION ./img1.jpg

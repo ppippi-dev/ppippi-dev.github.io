@@ -56,7 +56,7 @@ sed 's/1/2/gi' <file>  # replace 1 with 2, case-insensitive
 - STDOUT (standard output): data emitted by the program.
 - STDERR (standard error): error messages from the program.
 
-<p align="center"><img src="image-20211014122706757.png" alt="Standard streams diagram"></p>
+<p align="center"><img src="image-20211014122706757.webp" alt="Standard streams diagram"></p>
 
 <br>
 
@@ -77,7 +77,7 @@ echo "There are" $# "arguments"
 bash args.sh one two three four five
 ```
 
-<p align="center"><img src="image-20211014123430624.png" alt="ARGV example output"></p>
+<p align="center"><img src="image-20211014123430624.webp" alt="ARGV example output"></p>
 
 <br>
 
@@ -135,7 +135,7 @@ expr 1 + 4
 
 Integer math only. For floating-point calculations, use `bc` (basic calculator).
 
-<p align="center"><img src="image-20211014135348530.png" alt="bc example"></p>
+<p align="center"><img src="image-20211014135348530.webp" alt="bc example"></p>
 
 Use `bc` without launching it interactively by piping expressions:
 

@@ -188,7 +188,7 @@ docker run -it --rm --net=host nvcr.io/nvidia/tritonserver:25.02-py3-sdk /bin/sh
 
 ```shell
 # 테스트할 이미지 다운로드 (예: 새 이미지)
-wget -O img1.jpg "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.jpg"
+wget -O img1.jpg "https://www.hakaimagazine.com/wp-content/uploads/header-gulf-birds.webp"
 
 # 다운로드한 이미지로 추론 실행
 /workspace/install/bin/image_client -m densenet_onnx -c 3 -s INCEPTION ./img1.jpg
@@ -301,7 +301,7 @@ if __name__ == "__main__":
 **스크립트 실행 및 curl 요청**
 
 1. 위 Python 스크립트를 preprocess\_and\_create\_payload.py로 저장합니다.
-2. 테스트할 이미지를 준비합니다 (예: img1.jpg) - 이전 3.1 단계에서 다운로드한 이미지 사용
+2. 테스트할 이미지를 준비합니다 (예: img1.webp) - 이전 3.1 단계에서 다운로드한 이미지 사용
 3. Python 스크립트를 실행하여 payload.json 파일을 생성합니다.실행 결과 payload.json 파일이 생성되고, 입력 텐서 이름과 shape 정보가 출력됩니다.
     
     ```shell

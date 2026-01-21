@@ -202,9 +202,9 @@ Upload an image to S3:
 
 ```python
 s3.upload_file(
-    Filename="report.jpg",
+    Filename="report.webp",
     Bucket="datacamp-img",
-    Key="report.jpg",
+    Key="report.webp",
 )
 ```
 
@@ -219,7 +219,7 @@ rekog = boto3.client(
 )
 
 response = rekog.detect_labels(
-    Image={"S3Object": {"Bucket": "datacamp-img", "Name": "report.jpg"}},
+    Image={"S3Object": {"Bucket": "datacamp-img", "Name": "report.webp"}},
     MaxLabels=10,
     MinConfidence=95,
 )
@@ -228,7 +228,7 @@ response = rekog.detect_labels(
 Extract text:
 
 ```python
-rekog.detect_text(Image={"S3Object": {"Bucket": "datacamp-img", "Name": "report.jpg"}})
+rekog.detect_text(Image={"S3Object": {"Bucket": "datacamp-img", "Name": "report.webp"}})
 ```
 
 Translate, detect language, and analyze sentiment:

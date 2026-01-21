@@ -11,7 +11,7 @@ title: Unit Testing for Data Science in Python
 
 Interactive experiments in a REPL work, but they’re inefficient when you have to repeat them dozens or hundreds of times.
 
-<p align="center"><img src="/img/post_img/unitest1.PNG" alt="Manual testing loop"></p>
+<p align="center"><img src="/img/post_img/unitest1.webp" alt="Manual testing loop"></p>
 <p align="center" style="font-size:100%;">Source: DataCamp – Unit Testing for Data Science in Python</p>
 
 Imagine cleaning rows in a TSV dataset:
@@ -129,22 +129,22 @@ pytest test_row_to_list.py
 
 1. **General info**: OS, Python version, pytest version, working directory, plugins.
 
-   <p align="center"><img src="/img/post_img/unittest2.PNG" alt="Pytest environment info"></p>
+   <p align="center"><img src="/img/post_img/unittest2.webp" alt="Pytest environment info"></p>
 
 2. **Collected tests**: e.g. `collected 3 items` followed by `test_row_to_list.py`.
 
-   <p align="center"><img src="/img/post_img/unittest3.PNG" alt="Pytest collected tests"></p>
+   <p align="center"><img src="/img/post_img/unittest3.webp" alt="Pytest collected tests"></p>
 
    - `.` means the test passed.
    - `F` means the test failed (usually due to an exception).
 
 3. **Failure details**: pytest shows the failing line marked with `>`, followed by the exception (prefixed with `E`) and the evaluated values.
 
-   <p align="center"><img src="/img/post_img/unittest4.PNG" alt="Pytest failure details"></p>
+   <p align="center"><img src="/img/post_img/unittest4.webp" alt="Pytest failure details"></p>
 
 4. **Summary**: total fail / pass count.
 
-   <p align="center"><img src="/img/post_img/unittest5.PNG" alt="Pytest summary"></p>
+   <p align="center"><img src="/img/post_img/unittest5.webp" alt="Pytest summary"></p>
 
 <br>
 
@@ -185,7 +185,7 @@ def test_for_missing_area_with_message():
     assert actual is expected, message
 ```
 
-<p align="center"><img src="/img/post_img/unittest6.PNG" alt="Assertion with message"></p>
+<p align="center"><img src="/img/post_img/unittest6.webp" alt="Assertion with message"></p>
 
 Beware floating-point comparisons:
 
@@ -282,7 +282,7 @@ Feature work often comes first and testing gets postponed indefinitely. Flip the
 
 #### Organizing a Growing Test Suite
 
-<p align="center"><img src="/img/post_img/unittest7.PNG" alt="Test folder layout"></p>
+<p align="center"><img src="/img/post_img/unittest7.webp" alt="Test folder layout"></p>
 
 Split related tests into their own modules and group them by class.
 
@@ -319,7 +319,7 @@ Pytest recursively searches the working directory:
 - Classes starting with `Test` → test classes.
 - Functions starting with `test_` inside those classes → unit tests.
 
-<p align="center"><img src="/img/post_img/unittest8.PNG" alt="Pytest discovery"></p>
+<p align="center"><img src="/img/post_img/unittest8.webp" alt="Pytest discovery"></p>
 
 Other useful commands:
 

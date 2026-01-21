@@ -23,7 +23,7 @@ A workflow is the ordered set of steps that accomplish a data-engineering task, 
 
 Workflows can range from a few steps to hundreds—complexity depends entirely on requirements.
 
-<p align="center"><img src="/img/post_img/airflow1.PNG" alt="Workflow diagram"></p>
+<p align="center"><img src="/img/post_img/airflow1.webp" alt="Workflow diagram"></p>
 
 <br>
 
@@ -109,7 +109,7 @@ When to use each interface?
 
 The DAG list shows status, schedule (cron or datetime), owner, recent tasks, last run, and run history. Links provide quick access to graph, tree, code, Gantt charts, and more.
 
-<p align="center"><img src="/img/post_img/airflow2.PNG" alt="DAG list view"></p>
+<p align="center"><img src="/img/post_img/airflow2.webp" alt="DAG list view"></p>
 
 Click a DAG name to see detailed views:
 
@@ -118,9 +118,9 @@ Click a DAG name to see detailed views:
 - **Code view**: read-only DAG source.
 - Other tabs: task duration, tries, timing, Gantt, etc.
 
-<p align="center"><img src="/img/post_img/airflow3.PNG" alt="Tree view"></p>
-<p align="center"><img src="/img/post_img/airflow4.PNG" alt="Graph view"></p>
-<p align="center"><img src="/img/post_img/airflow5.PNG" alt="Code view"></p>
+<p align="center"><img src="/img/post_img/airflow3.webp" alt="Tree view"></p>
+<p align="center"><img src="/img/post_img/airflow4.webp" alt="Graph view"></p>
+<p align="center"><img src="/img/post_img/airflow5.webp" alt="Code view"></p>
 
 To troubleshoot or audit, browse → Logs shows recent activities (webserver start, DAG triggers, user actions, etc.).
 
@@ -192,8 +192,8 @@ task1 >> task2
 task3 >> task2
 ```
 
-<p align="center"><img src="/img/post_img/airflow7.PNG" alt="No dependencies"></p>
-<p align="center"><img src="/img/post_img/airflow8.PNG" alt="Dependencies set"></p>
+<p align="center"><img src="/img/post_img/airflow7.webp" alt="No dependencies"></p>
+<p align="center"><img src="/img/post_img/airflow8.webp" alt="Dependencies set"></p>
 
 <br>
 
@@ -257,7 +257,7 @@ A DAG run is one execution instance at a specific time (manual or scheduled). Ea
 
 Browse → DAG Runs shows all runs and details.
 
-<p align="center"><img src="/img/post_img/airflow10.PNG" alt="DAG runs"></p>
+<p align="center"><img src="/img/post_img/airflow10.webp" alt="DAG runs"></p>
 
 <br>
 
@@ -343,7 +343,7 @@ Check your executor in `airflow.cfg` (`executor=`) or via logs when running `air
 
 - **DAG not running on schedule**: Usually the scheduler isn’t running (`airflow scheduler`). Other causes: not enough time passed since `start_date`, or the executor has no free slots (switch to Local/Celery or adjust schedules).
 
-<p align="center"><img src="/img/post_img/airflow12.PNG" alt="Scheduler error"></p>
+<p align="center"><img src="/img/post_img/airflow12.webp" alt="Scheduler error"></p>
 
 - **DAG not loading**: The Python file isn’t in the configured DAG folder. Check `airflow.cfg` for `dags_folder` (must be an absolute path).
 - **Syntax errors**: Run `airflow list_dags` or `python3 <dagfile.py>` to surface errors.
@@ -356,7 +356,7 @@ Airflow treats Service Level Agreements as the expected runtime for a task or DA
 
 Browse → SLA Misses shows which tasks missed their SLAs.
 
-<p align="center"><img src="/img/post_img/airflow13.PNG" alt="SLA misses"></p>
+<p align="center"><img src="/img/post_img/airflow13.webp" alt="SLA misses"></p>
 
 Define SLAs either per task:
 

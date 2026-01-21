@@ -3,7 +3,6 @@ import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Giscus from '../components/Giscus.astro';
 import HeaderEn from '../components/HeaderEn.astro';
 import FallbackImage from '../assets/default_img.webp';
 
@@ -546,26 +545,32 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 						</ul>
 					</aside>
 				)}
-				<Giscus lang="en" />
 			</article>
 		</main>
 		<Footer />
 		<script>
-			// Reading progress bar
+			// Reading progress bar with throttling (requestAnimationFrame)
 			const progressBar = document.querySelector('.reading-progress-bar') as HTMLElement;
 			if (progressBar) {
+				let ticking = false;
 				window.addEventListener('scroll', () => {
-					const scrollTop = window.scrollY;
-					const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-					const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-					progressBar.style.width = `${Math.min(progress, 100)}%`;
+					if (!ticking) {
+						window.requestAnimationFrame(() => {
+							const scrollTop = window.scrollY;
+							const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+							const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+							progressBar.style.width = `${Math.min(progress, 100)}%`;
+							ticking = false;
+						});
+						ticking = true;
+					}
 				});
 			}
 
-			// Add lazy loading to all images in post content
+			// Native lazy loading for images
 			document.querySelectorAll('.post-content img').forEach(img => {
-				img.setAttribute('loading', 'lazy');
-				img.setAttribute('decoding', 'async');
+				if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+				if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
 			});
 
 			// Generate Table of Contents

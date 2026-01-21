@@ -28,7 +28,7 @@ title: AWS-SAA C02 후기
 
 
 
-<p align="center"><a href ="https://youtu.be/xNr0OGFWLEQ"><img src="http://img.youtube.com/vi/xNr0OGFWLEQ/0.jpg"></a></p>
+<p align="center"><a href ="https://youtu.be/xNr0OGFWLEQ"><img src="http://img.youtube.com/vi/xNr0OGFWLEQ/0.webp"></a></p>
 <p align="center" style="font-size:100%; ">[세계에서 제일 평균연봉 높은 IT자격증 알려드립니다(feat. 지금 바로 따야하는 이유)-AWS 강의실]</p>
 
 물론 처음부터 자격증을 목표로 공부한 것은 아닙니다.

@@ -33,7 +33,7 @@ workflow는 주어진 데이터 엔지니어링 작업을 수행하기 위한 �
 일부는 2~3 단계만 있을 수도 있고, 수백 개는 구성 될수도있습니다.
 
 워크 플로의 복잡성은 전적으로 사용자의 요구에 따라 달라집니다.
-<p align="center"><img src="/img/post_img/airflow1.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow1.webp"></p>
 
 <br>
 
@@ -186,7 +186,7 @@ Python:
 <br>
 
 #### DAGs view
-<p align="center"><img src="/img/post_img/airflow2.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow2.webp"></p>
 
 이 페이지는 대부분의 시간을 소비하게 될 페이지입니다.
 
@@ -205,7 +205,7 @@ DAG Runs 마지막 3개의 DAG실행
 Links는 오른쪽의 링크 영역을 통해 많은 DAG 특정보기에 빠르게 액세스
 
 
-<p align="center"><img src="/img/post_img/airflow3.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow3.webp"></p>
 
 DAG의 링크(이름)를 클릭하게 되면 상세 페이지로 접근
 
@@ -222,7 +222,7 @@ DAG를 시작하고, 뷰를 새로 고치고 원하는 경우 DAG를 삭제 가�
 특정 DAG의 경우 generate_random_number라는 작업이 하나 있습니다.
 
 
-<p align="center"><img src="/img/post_img/airflow4.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow4.webp"></p>
 
 DAG 그래프보기는 작업 및 종속성을 차트 형식 - DAG의 흐름에 대한 또 다른 보기를 제공합니다.
 
@@ -233,7 +233,7 @@ DAG 그래프보기는 작업 및 종속성을 차트 형식 - DAG의 흐름에 
 또한 이미지의 왼쪽 가운데에서 BashOperator 유형임을 알 수 있습니다.
 
 
-<p align="center"><img src="/img/post_img/airflow5.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow5.webp"></p>
 
  DAG 코드보기는, DAG를 구성하는 Python 코드의 복사본을 보여줍니다.
 
@@ -246,7 +246,7 @@ Airflow를 사용하면서, 가장 적합한 도구를 결정 할 수 있습니�
 모든 DAG 코드 변경은, 실제 DAG 스크립트를 통해 수행해야합니다.
 
 generate_random_number 태스크와 bash 명령 echo $ RANDOM을 실행합니다.
-<p align="center"><img src="/img/post_img/airflow6.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow6.webp"></p>
 
 Browse 메뉴 옵션 아래의 로그 페이지는 Airflow를 사용하는 동안 문제 해결 및 감사 가능을 제공합니다.
 
@@ -402,7 +402,7 @@ task1 >> task2 ## or task2 << task1
 task2보다 task1을 먼저 실행하고자 할 때, 가장 읽기 쉬운건 업스트림을 사용하는 방법입니다. (동일한 작업을 다운스트림을 이용해서 역으로 정의 할 수 도 있습니다.)
 
 
-<p align="center"><img src="/img/post_img/airflow7.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow7.webp"></p>
 
 작업 및 해당 종속성에 대해 Airflow UI에 표시되는 내용을 살펴보기 위해서는, Airflow 웹 인터페이스 내에서 그래프보기를 하면 됩니다.
 
@@ -411,7 +411,7 @@ task2보다 task1을 먼저 실행하고자 할 때, 가장 읽기 쉬운건 업
 이것은 bitshift 연산자를 사용하여 작업 종속성을 설정하기 전의 DAG입니다.
 
 
-<p align="center"><img src="/img/post_img/airflow8.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow8.webp"></p>
 
 bitshift 연산자를 통해 정의 된 순서로 뷰를 다시 살펴보면 다음과 같습니다. 이전과 달리, 표시되는 작업 순서를 볼 수 있습니다.
 
@@ -428,7 +428,7 @@ task1 >> task2 >> task3 >> task4 # 1
 ```python
 task1 >> task2 << task3 # 2
 ```
-<p align="center"><img src="/img/post_img/airflow9.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow9.webp"></p>
 
 즉, 더 명확한 형식으로 두 줄에 동일한 종속성 그래프를 정의 할 수 있습니다.
 
@@ -532,7 +532,7 @@ email_task = EmailOperator(
   - DAG는 실행 중, 실패 또는 성공 상태 일 수 있습니다.
 
 
-<p align="center"><img src="/img/post_img/airflow10.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow10.webp"></p>
 
 Airflow UI  Browse: DAG Runs 메뉴 옵션에서 모든 DAG 실행을 볼 수 있습니다.
 
@@ -563,7 +563,7 @@ DAG를 예약 할 때 예약 요구 사항에 따라 고려해야 할 많은 특
 <br>
 
 #### cron syntax
-<p align="center"><img src="/img/post_img/airflow11.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow11.webp"></p>
 
 - cron 구문은 Unix cron 도구를 사용하여 작업을 예약하는 형식과 동일
 
@@ -775,7 +775,7 @@ Airflow에는 다양한 유형의 센서를 사용할 수 있습니다.
 #### Dag won't run on schedule
 
 - DAG가 일정대로 실행되지 않는 가장 일반적인 이유는, 스케쥴러가 실행되고 있지 않기 때문
-<p align="center"><img src="/img/post_img/airflow12.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow12.webp"></p>
 
 스케쥴러 구성 요소가 실행되지 않을 경우, 웹 UI 내에서 오류가 표시
 
@@ -826,7 +826,7 @@ Airflow에는 다양한 유형의 센서를 사용할 수 있습니다.
 
 주어진 SLA 누락을 찾아보려면, Browse 에서 SLA 누락 링크를 통해 웹 UI에서 액세스 할 수 있습니다.
 
-<p align="center"><img src="/img/post_img/airflow13.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow13.webp"></p>
 
 SLA를 놓친 작업과 실패시기에 대한 일반적인 정보를 제공합니다. 또한 SLA가 실패했을 때 이메일이 전송되었는지 여부도 표시합니다.
 
@@ -1007,7 +1007,7 @@ branch_task >> odd_day_task >> odd_day_task2
 
 
 
-<p align="center"><img src="/img/post_img/airflow14.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow14.webp"></p>
 
 Airflow UI의 그래프보기를 통해 DAG를 살펴보면 다음과 같습니다.
 
@@ -1044,5 +1044,5 @@ Airflow UI의 그래프보기를 통해 DAG를 살펴보면 다음과 같습니�
 - 어떤 필드에서는 템플릿을 지원하지만, 지원하지 않는 것도 있습니다.
 - 라이브 파이썬 인터프리터를 통해 파이썬 내장 문서를 이용하면, 템플릿을 지원하는지 알 수 있습니다.
 
-<p align="center"><img src="/img/post_img/airflow15.PNG"></p>
+<p align="center"><img src="/img/post_img/airflow15.webp"></p>
 <br>

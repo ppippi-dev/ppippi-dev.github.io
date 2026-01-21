@@ -18,7 +18,7 @@ I finally achieved one of my goals for the year: passing the AWS Solutions Archi
 
 The more I studied data, the more convinced I became that cloud skills are essential. Most companies ingest and manage data in the cloud, so it felt worthwhile to dive in.
 
-<p align="center"><a href ="https://youtu.be/xNr0OGFWLEQ"><img src="http://img.youtube.com/vi/xNr0OGFWLEQ/0.jpg"></a></p>
+<p align="center"><a href ="https://youtu.be/xNr0OGFWLEQ"><img src="http://img.youtube.com/vi/xNr0OGFWLEQ/0.webp"></a></p>
 <p align="center" style="font-size:100%;">[세계에서 제일 평균연봉 높은 IT자격증 알려드립니다(feat. 지금 바로 따야하는 이유)-AWS 강의실]</p>
 
 I didn’t start my AWS journey with the certification in mind. While figuring out how to get started, I watched the video above. Key takeaways:

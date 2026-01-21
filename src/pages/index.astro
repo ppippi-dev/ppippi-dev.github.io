@@ -18,73 +18,155 @@ const posts = (await getCollection('blog'))
 		<style>
 			main {
 				width: 100%;
-				max-width: 800px;
+				max-width: 720px;
 				margin: 0 auto;
-				padding: 48px 40px 80px;
+				padding: 48px 24px 80px;
 			}
+
+			/* Hero Section - 타이포 강조 버전 */
+			.hero {
+				margin-bottom: 56px;
+			}
+
+			.hero-title {
+				font-size: 2.5rem;
+				font-weight: 800;
+				color: var(--text-primary);
+				margin: 0 0 12px 0;
+				letter-spacing: -0.04em;
+				line-height: 1.1;
+			}
+
+			.hero-description {
+				font-size: 1.0625rem;
+				color: var(--text-secondary);
+				margin: 0;
+				font-weight: 400;
+			}
+
+			/* Posts Section */
+			.section-header {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 16px;
+				padding-bottom: 16px;
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.section-title {
+				font-size: 0.8125rem;
+				font-weight: 500;
+				color: var(--text-muted);
+				margin: 0;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+
+			.posts-count {
+				font-size: 0.8125rem;
+				color: var(--text-muted);
+			}
+
+			/* Post List - 리스트형 */
 			.posts-list {
 				display: flex;
 				flex-direction: column;
 			}
+
 			.post-item {
-				padding: 24px 0;
+				display: block;
+				padding: 20px 0;
 				border-bottom: 1px solid var(--border-color);
+				text-decoration: none;
+				transition: background-color var(--transition-fast);
 			}
-			.post-item:first-child {
-				padding-top: 0;
+
+			.post-item:hover {
+				background-color: var(--bg-secondary);
+				margin: 0 -16px;
+				padding: 20px 16px;
 			}
+
 			.post-item:last-child {
 				border-bottom: none;
 			}
+
 			.post-meta {
-				font-size: 0.8rem;
-				color: var(--text-muted);
-				margin-bottom: 8px;
 				display: flex;
 				align-items: center;
-				gap: 12px;
+				gap: 8px;
+				margin-bottom: 6px;
 			}
+
+			.post-date {
+				font-size: 0.8125rem;
+				color: var(--text-muted);
+			}
+
 			.post-tag {
-				color: var(--text-secondary);
-				text-decoration: none;
-				font-weight: 500;
+				font-size: 0.75rem;
+				color: var(--text-muted);
 			}
-			.post-tag:hover {
-				color: var(--text-primary);
+
+			.post-tag::before {
+				content: '·';
+				margin-right: 8px;
 			}
+
 			.post-title {
-				margin: 0 0 6px 0;
-			}
-			.post-title a {
-				color: var(--text-primary);
-				font-size: 1.1rem;
+				font-size: 1.125rem;
 				font-weight: 600;
-				line-height: 1.4;
-				letter-spacing: -0.3px;
-				text-decoration: none;
-				transition: color 0.15s;
+				color: var(--text-primary);
+				margin: 0 0 4px 0;
+				line-height: 1.35;
+				letter-spacing: -0.02em;
+				transition: color var(--transition-fast);
 			}
-			.post-title a:hover {
-				color: var(--text-secondary);
+
+			.post-item:hover .post-title {
+				color: var(--accent-primary);
 			}
+
 			.post-description {
+				font-size: 0.875rem;
 				color: var(--text-secondary);
-				font-size: 0.9rem;
 				line-height: 1.5;
 				margin: 0;
+				display: -webkit-box;
+				-webkit-line-clamp: 1;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
 			}
+
 			@media (max-width: 768px) {
 				main {
 					padding: 32px 20px 60px;
 				}
-				.post-item {
-					padding: 20px 0;
+
+				.hero {
+					margin-bottom: 40px;
 				}
-				.post-title a {
+
+				.hero-title {
+					font-size: 1.875rem;
+				}
+
+				.hero-description {
 					font-size: 1rem;
 				}
-				.post-description {
-					font-size: 0.85rem;
+
+				.post-item {
+					padding: 16px 0;
+				}
+
+				.post-item:hover {
+					margin: 0 -12px;
+					padding: 16px 12px;
+				}
+
+				.post-title {
+					font-size: 1.0625rem;
 				}
 			}
 		</style>
@@ -92,23 +174,36 @@ const posts = (await getCollection('blog'))
 	<body>
 		<Header />
 		<main>
-			<section class="posts-list">
-				{posts.map((post) => (
-					<article class="post-item">
-						<div class="post-meta">
-							<FormattedDate date={post.data.pubDate} />
-							{post.data.tags && post.data.tags.length > 0 && (
-								<a href={`/tags/${post.data.tags[0]}/`} class="post-tag">{post.data.tags[0]}</a>
+			<!-- Hero Section - 미니멀 -->
+			<section class="hero">
+				<h1 class="hero-title">기술과 경험을 나누는 공간</h1>
+				<p class="hero-description">개발하며 배운 것들과 유용한 팁들을 기록합니다.</p>
+			</section>
+
+			<!-- Posts Section -->
+			<section>
+				<div class="section-header">
+					<h2 class="section-title">Posts</h2>
+					<span class="posts-count">{posts.length}</span>
+				</div>
+				<div class="posts-list">
+					{posts.map((post) => (
+						<a href={`/blog/${post.id}/`} class="post-item">
+							<div class="post-meta">
+								<span class="post-date">
+									<FormattedDate date={post.data.pubDate} />
+								</span>
+								{post.data.tags && post.data.tags.length > 0 && (
+									<span class="post-tag">{post.data.tags[0]}</span>
+								)}
+							</div>
+							<h3 class="post-title">{post.data.title}</h3>
+							{post.data.description && (
+								<p class="post-description">{post.data.description}</p>
 							)}
-						</div>
-						<h2 class="post-title">
-							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
-						</h2>
-						{post.data.description && (
-							<p class="post-description">{post.data.description}</p>
-						)}
-					</article>
-				))}
+						</a>
+					))}
+				</div>
 			</section>
 		</main>
 		<Footer />

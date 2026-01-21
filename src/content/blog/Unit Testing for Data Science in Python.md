@@ -11,7 +11,7 @@ title: Unit Testing for Data Science in Python
 
 테스트 하는 방법으로 먼저 인터프리터가 있지만, 이는 비효율적입니다.
 
-<p align="center"><img src="/img/post_img/unitest1.PNG"></p>
+<p align="center"><img src="/img/post_img/unitest1.webp"></p>
 <p align="center" style="font-size:100%; ">DataCamp-Unit Testing for Data Science in Python</p>
 
 
@@ -232,7 +232,7 @@ def test_for_missing_tab():
 
 #### Section 1: general information
 
-<p align="center"><img src="/img/post_img/unittest2.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest2.webp"></p>
 
 운영 체제, Python 버전, pytest패키지 버전, 작업 디렉토리 및 pytest 플로그인 정보가 출력
 
@@ -241,7 +241,7 @@ def test_for_missing_tab():
 
 #### Section 2: Test result
 
-<p align="center"><img src="/img/post_img/unittest3.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest3.webp"></p>
 
 
 
@@ -280,7 +280,7 @@ def test_for_missing_area():
 
 #### Section 3: Information on failed tests
 
-<p align="center"><img src="/img/post_img/unittest4.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest4.webp"></p>
 
 다음 섹션에서는 실패한 테스트에 대한 자세한 정보가 포함되어 있습니다.
 
@@ -297,7 +297,7 @@ def test_for_missing_area():
 
 #### Section 4 : Test result summary
 
-<p align="center"><img src="/img/post_img/unittest5.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest5.webp"></p>
 
 마지막 줄은, 결과를 요약하여 보여줍니다.
 
@@ -359,7 +359,7 @@ def test_for_missing_area_with_message():
 
 다음과 같이 코드를 사용하면 됩니다.
 
-<p align="center"><img src="/img/post_img/unittest6.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest6.webp"></p>
 
 이렇게 사용할 시, 하단에는 메시지와 함께 수정 된 것을 실행합니다.
 
@@ -555,7 +555,7 @@ Example: `np.array([845.0, 31036.0, 1291.0, 72205.0])`
 
 #### How to organize a growing set of tests?
 
-<p align="center"><img src="/img/post_img/unittest7.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest7.webp"></p>
 
 테스트 파일을 다음과 같이 구성해서 하는 것이 효율적
 
@@ -610,7 +610,7 @@ pytest
 - 테스트 모듈 내에서 이름이 "Test" 로 시작하는 클래스를 테스트 클래스로 식별합니다.
 - 각 테스트 클래스 내에서 "test_"로 시작하는 이름을 가진 모든 함수를 단위 테스트로 식별합니다.
 
-<p align="center"><img src="/img/post_img/unittest8.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest8.webp"></p>
 
 다음과 같이, 실행하면, 유닛테스트 실행결과가 출력됩니다.
 
@@ -676,7 +676,7 @@ class TestTrainModel(object):
 
 `pytest` 를 실행하면, 하나의 테스트가 xfailed임을 알 수 있습니다.
 
-<p align="center"><img src="/img/post_img/unittest9.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest9.webp"></p>
 
 이는 잘 파이썬 버전, 특정 플랫폼에 따라 잘 작동하지 않을수도 있습니다.
 
@@ -700,7 +700,7 @@ class TestConvertToInt(objcet):
 
 - skipif 데코레이터를 이용해서 파이썬 버전이 맞지않은 경우 패스
 
-<p align="center"><img src="/img/post_img/unittest10.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest10.webp"></p>
 
 
 
@@ -860,7 +860,7 @@ def test_something(my_fixture):
     ...
 ```
 
-<p align="center"><img src="/img/post_img/unittest11.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest11.webp"></p>
 
 Fixture과 test를 비교하면 다음과 같습니다.
 
@@ -938,7 +938,7 @@ def row_to_list_bug_free(row):
 
 #### Testing models
 
-<p align="center"><img src="/img/post_img/unittest12.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest12.webp"></p>
 
 다음과 같이 파일을 위치시킵니다.
 
@@ -1042,7 +1042,7 @@ def model_test(testing_set, slope, intercept):
 
 #### Plotting function
 
-<p align="center"><img src="/img/post_img/unittest13.PNG"></p>
+<p align="center"><img src="/img/post_img/unittest13.webp"></p>
 
 ```python
 def get_plot_for_best_fit_line(slope, intercept, x_array, y_array, title):
