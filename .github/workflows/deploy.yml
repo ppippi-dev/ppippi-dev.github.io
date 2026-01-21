@@ -1,8 +1,17 @@
 name: Deploy to GitHub Pages
 
 on:
+  # 번역 워크플로우 완료 후 배포 (블로그 포스트 변경 시)
+  workflow_run:
+    workflows: ["Translate new posts to English"]
+    types: [completed]
+    branches: [main]
+  # 블로그 외 파일 변경 시 즉시 배포
   push:
     branches: [main]
+    paths-ignore:
+      - 'src/content/blog/**/*.md'
+      - 'src/content/blog-en/**/*.md'
   workflow_dispatch:
 
 permissions:
@@ -17,6 +26,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # workflow_run 트리거 시 번역 워크플로우가 성공한 경우에만 실행
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
