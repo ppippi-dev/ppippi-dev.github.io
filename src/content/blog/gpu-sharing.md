@@ -1,5 +1,5 @@
 ---
-title: Kubernetes에서 GPU Sharing 정리: Time‑Slicing, MPS, MIG
+title: Kubernetes에서 GPU Sharing 정리 Time‑Slicing, MPS, MIG
 description: Kubernetes에서 NVIDIA GPU를 여러 워크로드가 함께 쓰게 만드는 방법(Time‑Slicing, CUDA MPS, MIG)과 각각의 격리/성능/운영 포인트를 정리한다.
 pubDate: '2026-01-06'
 tags:
@@ -51,7 +51,7 @@ NVIDIA의 CUDA MPS는 여러 프로세스가 동시에 GPU를 사용하도록 �
 
 ### MIG (Multi‑Instance GPU)
 
-GPU를 하드웨어 레벨에서 여러 개의 독립된 디바이스로 쪼개는 기능이다. 인스턴스별 전용 자원(SM, 메모리, L2 캐시)이 제공되며, 지원 GPU가 제한된다(A30, A100, A100X, A800, H100, H200, H800 등).
+GPU를 하드웨어 레벨에서 여러 개의 독립된 디바이스로 쪼개는 기능이다. 인스턴스별 전용 자원(SM, 메모리, L2 캐시)이 제공되며, 지원 GPU가 제한된다(A30, A100, H100, H200 등).
 
 ---
 
@@ -135,8 +135,8 @@ sharing:
 
 - Time‑Slicing과 MPS는 **동시에 켤 수 없다**.
 - NVIDIA device plugin 기준으로 MPS는 **실험적(experimental)** 로 취급되는 시기가 있었고, 버전에 따라 제약/동작이 달라질 수 있다.
-- (중요) **k8s‑device‑plugin 기준으로 MIG가 활성화된 디바이스에서는 MPS 공유가 지원되지 않는다.**
-- (중요) **MPS는 장애 격리(fault isolation)를 제공하지 않는다.** 한 클라이언트의 치명적 오류(fatal fault)가 동일 GPU를 공유하는 모든 클라이언트를 종료시킬 수 있다. 이 때문에 MPS는 원래 MPI 작업처럼 서로 신뢰하는 협력적 프로세스를 위해 설계되었으며, 멀티 테넌트 격리가 필요한 환경에서는 주의가 필요하다.
+- (중요) **k8s‑device‑plugin 기준으로 MIG가 활성화된 디바이스에서는 MPS 공유 모드가 지원되지 않는다.** (단, MPS 자체는 MIG 인스턴스 내에서 독립적으로 사용 가능하다.)
+- (중요) **MPS는 강한 장애 격리(fault isolation)를 제공하지 않는다.** Volta 이후 GPU에서는 클라이언트별로 격리된 GPU 주소 공간을 제공하지만, 한 클라이언트의 치명적 오류(fatal fault)는 여전히 동일 GPU를 공유하는 모든 클라이언트에 전파될 수 있다. 이 때문에 MPS는 원래 MPI 작업처럼 서로 신뢰하는 협력적 프로세스를 위해 설계되었으며, 멀티 테넌트 격리가 필요한 환경에서는 주의가 필요하다.
 - device plugin의 MPS 공유 모드에서는 멀티 GPU 요청이 제한된다. 예를 들어, `nvidia.com/gpu: 2`를 요청하면 아래와 같은 에러가 발생한다.
 
 ```text
@@ -222,7 +222,7 @@ GPU Sharing을 도입하면 "누가 얼마나 쓰고 있는지" 파악하기가 
 | 장애 격리 | ❌ | ❌ | ✅ |
 | 성능 예측 가능성 | 낮음 | 중간 | 높음 |
 | 설정 복잡도 | 낮음 | 중간 | 높음 |
-| 지원 GPU | 모든 NVIDIA GPU | 모든 NVIDIA GPU | A30, A100, H100 등 |
+| 지원 GPU | 모든 NVIDIA GPU | 모든 NVIDIA GPU | A30, A100, H100, H200 등 |
 | 리소스 제한 설정 | ❌ | `CUDA_MPS_ACTIVE_THREAD_PERCENTAGE` | 프로파일별 고정 |
 
 **요약하면:**
