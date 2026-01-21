@@ -22,31 +22,37 @@ jobs:
       - name: Get changed blog posts
         id: changes
         run: |
-          POSTS=$(git diff --name-only HEAD~1 HEAD -- 'src/content/blog/*.md' | tr '\n' ' ')
-          echo "posts=$POSTS" >> $GITHUB_OUTPUT
-          echo "Changed posts: $POSTS"
+          POSTS=$(git diff --name-only HEAD~1 HEAD -- 'src/content/blog/*.md')
+          if [ -n "$POSTS" ]; then
+            echo "has_posts=true" >> $GITHUB_OUTPUT
+            echo "Changed posts:"
+            echo "$POSTS"
+          else
+            echo "has_posts=false" >> $GITHUB_OUTPUT
+            echo "No changed posts"
+          fi
 
       - name: Set ONLY_FILES env
-        if: steps.changes.outputs.posts != ''
+        if: steps.changes.outputs.has_posts == 'true'
         run: |
           echo 'ONLY_FILES<<EOF' >> $GITHUB_ENV
-          echo '${{ steps.changes.outputs.posts }}' >> $GITHUB_ENV
+          git diff --name-only HEAD~1 HEAD -- 'src/content/blog/*.md' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Set up Python
-        if: steps.changes.outputs.posts != ''
+        if: steps.changes.outputs.has_posts == 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        if: steps.changes.outputs.posts != ''
+        if: steps.changes.outputs.has_posts == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install openai PyYAML python-frontmatter
 
       - name: Generate English translations
-        if: steps.changes.outputs.posts != ''
+        if: steps.changes.outputs.has_posts == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           TRANSLATION_MODEL: ${{ vars.TRANSLATION_MODEL }}
@@ -54,7 +60,7 @@ jobs:
           python scripts/translate_to_en.py
 
       - name: Commit and push translations
-        if: steps.changes.outputs.posts != ''
+        if: steps.changes.outputs.has_posts == 'true'
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: add English translations"
