@@ -18,10 +18,10 @@ const posts = (await getCollection('blog-en')).sort(
 		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 1200px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 60px 40px 0 40px;
+				width: 100%;
+				max-width: 720px;
+				margin: 0 auto;
+				padding: 48px 24px 80px;
 			}
 			.page-title {
 				font-size: 2rem;
@@ -108,7 +108,7 @@ const posts = (await getCollection('blog-en')).sort(
 			}
 			@media (max-width: 768px) {
 				main {
-					padding: 40px 20px 0 20px;
+					padding: 32px 20px 60px;
 				}
 				.page-title {
 					font-size: 1.5rem;
