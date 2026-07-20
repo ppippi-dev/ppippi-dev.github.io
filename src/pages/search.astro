@@ -8,51 +8,167 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="ko">
 	<head>
-		<BaseHead title={`Search | ${SITE_TITLE}`} description="블로그 포스트 검색" />
+		<BaseHead title={`검색 | ${SITE_TITLE}`} description="블로그 포스트 검색" />
 		<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 		<style>
 			main {
+				box-sizing: border-box;
 				width: 100%;
-				max-width: 720px;
+				max-width: 1120px;
+				min-height: 70vh;
 				margin: 0 auto;
-				padding: 48px 24px 80px;
+				padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(5rem, 10vw, 8rem);
 			}
+
+			.page-header {
+				display: grid;
+				grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+				gap: clamp(2rem, 6vw, 6rem);
+				align-items: end;
+				padding-bottom: clamp(2rem, 5vw, 3.5rem);
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.eyebrow,
+			.section-label {
+				font-family: 'SF Mono', Menlo, Consolas, monospace;
+				font-size: 0.75rem;
+				font-weight: 600;
+				line-height: 1.4;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.eyebrow {
+				margin: 0 0 1.25rem;
+				color: var(--accent-primary);
+			}
+
 			h1 {
-				margin-bottom: 1.5rem;
+				max-width: 9ch;
+				font-size: clamp(3rem, 8vw, 6.5rem);
+				font-weight: 800;
+				line-height: 0.92;
+				letter-spacing: -0.065em;
+				text-wrap: balance;
+			}
+
+			.lede {
+				max-width: 34rem;
+				margin: 0;
+				color: var(--text-secondary);
+				font-size: clamp(1rem, 2vw, 1.125rem);
+				line-height: 1.75;
+			}
+
+			.search-section {
+				padding-top: clamp(2rem, 6vw, 4rem);
+			}
+
+			.section-label {
+				margin: 0 0 1.5rem;
+				color: var(--text-secondary);
+			}
+
+			.search-panel {
+				box-sizing: border-box;
+				min-width: 0;
+				padding: clamp(1.25rem, 4vw, 2.5rem);
+				border: 1px solid var(--border-color);
+				background: var(--bg-primary);
+				--pagefind-ui-scale: 1;
+				--pagefind-ui-primary: var(--accent-primary);
+				--pagefind-ui-text: var(--text-primary);
+				--pagefind-ui-background: var(--bg-primary);
+				--pagefind-ui-border: var(--border-color);
+				--pagefind-ui-tag: var(--bg-secondary);
+				--pagefind-ui-border-width: 1px;
+				--pagefind-ui-border-radius: 0;
+				--pagefind-ui-font: inherit;
+			}
+
+			#search {
+				min-width: 0;
+			}
+
+			.state-panel {
+				margin: 0;
+				padding: 1rem 0;
+				color: var(--text-secondary);
+			}
+
+			:global(.pagefind-ui__search-input) {
+				box-sizing: border-box;
 				color: var(--text-primary);
 			}
-			@media (max-width: 768px) {
-				main {
-					padding: 32px 20px 60px;
-				}
+
+			:global(.pagefind-ui__result) {
+				border-color: var(--border-color);
 			}
-			:root {
-				--pagefind-ui-scale: 1;
-				--pagefind-ui-primary: rgb(var(--accent));
-				--pagefind-ui-text: rgb(var(--gray-dark));
-				--pagefind-ui-background: #fff;
-				--pagefind-ui-border: rgb(var(--gray-light));
-				--pagefind-ui-tag: rgb(var(--gray-light));
-				--pagefind-ui-border-width: 1px;
-				--pagefind-ui-border-radius: 8px;
-				--pagefind-ui-font: inherit;
+
+			:global(.pagefind-ui__result-link) {
+				color: var(--text-primary);
+				font-weight: 700;
+			}
+
+			@media (max-width: 720px) {
+				.page-header {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
+				}
+
+				h1 {
+					font-size: clamp(2.75rem, 16vw, 4.5rem);
+				}
+
+				.search-panel {
+					padding: 1rem;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>Search</h1>
-			<div id="search"></div>
+		<main id="main-content">
+			<header class="page-header">
+				<div>
+					<p class="eyebrow">Index / Search</p>
+					<h1>기록을 찾습니다.</h1>
+				</div>
+				<p class="lede">키워드로 기술 기록의 제목과 본문을 검색할 수 있습니다. 구체적인 제품명이나 오류 메시지를 입력해 보세요.</p>
+			</header>
+
+			<section class="search-section" aria-labelledby="search-label">
+				<h2 id="search-label" class="section-label">Search the archive</h2>
+				<div class="search-panel">
+					<div id="search" aria-label="블로그 검색">
+						<p id="search-status" class="state-panel" role="status">검색을 불러오는 중입니다.</p>
+					</div>
+					<noscript>
+						<p class="state-panel">검색을 사용하려면 JavaScript를 활성화해 주세요.</p>
+					</noscript>
+				</div>
+			</section>
 		</main>
 		<Footer />
 		<script>
 			import { PagefindUI } from '@pagefind/default-ui';
-			new PagefindUI({
-				element: '#search',
-				showSubResults: true,
-				showImages: false,
-			});
+
+			const status = document.querySelector('#search-status');
+
+			try {
+				new PagefindUI({
+					element: '#search',
+					showSubResults: true,
+					showImages: false,
+				});
+				status?.remove();
+			} catch (error) {
+				if (status) {
+					status.textContent = '검색을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.';
+				}
+				console.error('Pagefind initialization failed', error);
+			}
 		</script>
 	</body>
 </html>

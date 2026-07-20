@@ -1,6 +1,7 @@
 ---
 description: Agno Agent 프레임워크를 직접 사용해보며 느낀 장점과 구조 정리
 pubDate: '2026-01-01'
+heroImage: /img/agno/image-20260101180709381.webp
 tags:
 - Agno
 - LLMOps

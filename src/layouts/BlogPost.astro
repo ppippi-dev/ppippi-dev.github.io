@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import PostStyles from '../components/PostStyles.astro';
 import FallbackImage from '../assets/default_img.webp';
 
 type RelatedPost = { slug: string; title: string; pubDate: Date };
@@ -26,12 +27,22 @@ function calculateReadingTime(text: string): number {
 }
 
 const readingTime = calculateReadingTime(body || '');
-const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(FallbackImage.src, Astro.site).href;
+const imageUrl = heroImage
+	? new URL(heroImage, Astro.site ?? Astro.url).href
+	: new URL(FallbackImage.src, Astro.site ?? Astro.url).href;
 ---
 
+<!doctype html>
 <html lang="ko">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={heroImage}
+			type="article"
+			publishedTime={pubDate}
+			modifiedTime={updatedDate ?? pubDate}
+		/>
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "BlogPosting",
@@ -69,13 +80,8 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				{
 					"@type": "ListItem",
 					"position": 2,
-					"name": "블로그",
-					"item": "https://ppippi.dev/blog/"
-				},
-				{
-					"@type": "ListItem",
-					"position": 3,
-					"name": title
+					"name": title,
+					"item": Astro.url.href
 				}
 			]
 		})} />
@@ -490,31 +496,44 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 					opacity: 1;
 				}
 			}
-		</style>
-	</head>
+			</style>
+			<PostStyles />
+		</head>
 
-	<body>
-		<div class="reading-progress-bar"></div>
-		<Header slug={slug} />
-		<main>
-			<article>
-				<header class="post-header">
-					<div class="post-meta">
-						<FormattedDate date={pubDate} />
-						{updatedDate && (
-							<>
-								<span class="post-meta-divider">·</span>
-								<span>수정됨</span>
-							</>
+		<body>
+			<div class="reading-progress-bar" aria-hidden="true"></div>
+			<Header slug={slug} />
+			<main id="main-content" class="post-main">
+				<article class="post-article" data-pagefind-body>
+					<nav class="post-breadcrumb" aria-label="현재 위치">
+						<a href="/">Field notes</a>
+						<span aria-hidden="true">/</span>
+						<span aria-current="page" title={title}>{title}</span>
+					</nav>
+					<header class="post-header">
+						{tags && tags.length > 0 && (
+							<div class="post-tags" aria-label="태그">
+								{tags.map((tag: string) => (
+									<a href={`/tags/${tag}/`} class="post-tag">{tag}</a>
+								))}
+							</div>
 						)}
-						<span class="post-meta-divider">·</span>
-						<span>{readingTime}분</span>
-					</div>
-					<h1 class="post-title">{title}</h1>
-					{description && (
-						<p class="post-description">{description}</p>
-					)}
-				</header>
+						<h1 class="post-title">{title}</h1>
+						{description && (
+							<p class="post-description">{description}</p>
+						)}
+						<div class="post-meta">
+							<FormattedDate date={pubDate} />
+							{updatedDate && (
+								<>
+									<span class="post-meta-divider">·</span>
+									<span>수정 <FormattedDate date={updatedDate} /></span>
+								</>
+							)}
+							<span class="post-meta-divider">·</span>
+							<span>{readingTime}분</span>
+						</div>
+					</header>
 
 				<div class="post-content">
 					<nav class="toc" aria-label="목차"></nav>
@@ -533,7 +552,7 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				)}
 
 				{(prevPost || nextPost) && (
-					<nav class="post-navigation">
+						<nav class="post-navigation" aria-label="이전 및 다음 글">
 						{prevPost ? (
 							<a href={`/blog/${prevPost.slug}/`} class="nav-link prev">
 								<span class="nav-label">← 이전</span>
@@ -550,8 +569,8 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				)}
 
 				{relatedPosts && relatedPosts.length > 0 && (
-					<aside class="related-posts">
-						<h3 class="related-title">관련 글</h3>
+						<aside class="related-posts" aria-labelledby="related-posts-title">
+							<h3 id="related-posts-title" class="related-title">관련 글</h3>
 						<ul class="related-list">
 							{relatedPosts.map((post) => (
 								<li>
@@ -595,6 +614,16 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
 			});
 
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			document.querySelectorAll<HTMLVideoElement>('.post-content video').forEach(video => {
+				video.controls = true;
+				if (reduceMotion) {
+					video.pause();
+					video.removeAttribute('autoplay');
+					video.removeAttribute('loop');
+				}
+			});
+
 			(function() {
 				const content = document.querySelector('.post-content');
 				const toc = document.querySelector('.toc');
@@ -634,15 +663,18 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
 			document.querySelectorAll('.post-content pre').forEach(pre => {
+				if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
 				const wrapper = document.createElement('div');
 				wrapper.className = 'code-block-wrapper';
 				pre.parentNode?.insertBefore(wrapper, pre);
 				wrapper.appendChild(pre);
 
 				const button = document.createElement('button');
+				button.type = 'button';
 				button.className = 'copy-button';
 				button.innerHTML = clipboardIcon;
 				button.setAttribute('aria-label', '코드 복사');
+				button.setAttribute('aria-live', 'polite');
 
 				button.addEventListener('click', async () => {
 					const code = pre.querySelector('code')?.textContent || pre.textContent || '';
@@ -650,13 +682,18 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 						await navigator.clipboard.writeText(code);
 						button.innerHTML = checkIcon;
 						button.classList.add('copied');
+						button.setAttribute('aria-label', '코드 복사 완료');
 						setTimeout(() => {
 							button.innerHTML = clipboardIcon;
 							button.classList.remove('copied');
+							button.setAttribute('aria-label', '코드 복사');
 						}, 2000);
 					} catch (err) {
+						button.textContent = '!';
+						button.setAttribute('aria-label', '코드를 복사하지 못했습니다');
 						setTimeout(() => {
 							button.innerHTML = clipboardIcon;
+							button.setAttribute('aria-label', '코드 복사');
 						}, 2000);
 					}
 				});

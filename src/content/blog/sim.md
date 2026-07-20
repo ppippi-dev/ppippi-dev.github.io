@@ -2,6 +2,7 @@
 title: "sim: 자연어로 워크플로우를 생성하는 오픈소스 노코드 에이전트 툴"
 description: "sim은 자연어 입력만으로 LLM이 워크플로우를 생성하는 오픈소스 노코드 에이전트 툴이다. Self-hosted와 Managed를 모두 지원하지만 Copilot 의존 구조라는 한계도 존재한다."
 pubDate: "2026-01-03"
+heroImage: /img/sim/image-20260103225328920.webp
 tags:
   - LLM
   - Agent

@@ -1,6 +1,6 @@
 ---
 description: Implementing MCP
-heroImage: /img/2025-09-15-mcp-one-page/0.png
+heroImage: /img/2025-09-15-mcp-one-page/0.webp
 pubDate: '2025-09-15'
 tags:
 - LLMOps

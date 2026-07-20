@@ -4,6 +4,7 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import HeaderEn from '../components/HeaderEn.astro';
+import PostStyles from '../components/PostStyles.astro';
 import FallbackImage from '../assets/default_img.webp';
 
 type RelatedPost = { slug: string; title: string; pubDate: Date };
@@ -29,12 +30,22 @@ function calculateReadingTime(text: string): number {
 }
 
 const readingTime = calculateReadingTime(body || '');
-const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(FallbackImage.src, Astro.site).href;
+const imageUrl = heroImage
+	? new URL(heroImage, Astro.site ?? Astro.url).href
+	: new URL(FallbackImage.src, Astro.site ?? Astro.url).href;
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={heroImage}
+			type="article"
+			publishedTime={pubDate}
+			modifiedTime={updatedDate ?? pubDate}
+		/>
 		<!-- JSON-LD for BlogPosting -->
 		<script type="application/ld+json" set:html={JSON.stringify({
 			"@context": "https://schema.org",
@@ -74,13 +85,8 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				{
 					"@type": "ListItem",
 					"position": 2,
-					"name": "Blog",
-					"item": "https://ppippi.dev/en/blog/"
-				},
-				{
-					"@type": "ListItem",
-					"position": 3,
-					"name": title
+					"name": title,
+					"item": Astro.url.href
 				}
 			]
 		})} />
@@ -464,13 +470,19 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 				}
 			}
 		</style>
+		<PostStyles />
 	</head>
 
 	<body>
-		<div class="reading-progress-bar"></div>
+		<div class="reading-progress-bar" aria-hidden="true"></div>
 		<HeaderEn slug={slug} />
-		<main>
-			<article>
+		<main id="main-content" class="post-main">
+			<article class="post-article" data-pagefind-body>
+				<nav class="post-breadcrumb" aria-label="Breadcrumb">
+					<a href="/en/">Field notes</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page" title={title}>{title}</span>
+				</nav>
 				<header class="post-header">
 					<div class="post-header-top">
 						{tags && tags.length > 0 && (
@@ -513,7 +525,7 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 					</footer>
 				)}
 				{(prevPost || nextPost) && (
-					<nav class="post-navigation">
+					<nav class="post-navigation" aria-label="Previous and next articles">
 						{prevPost ? (
 							<a href={`/en/blog/${prevPost.slug}/`} class="nav-link prev">
 								<span class="nav-label">← Previous</span>
@@ -529,8 +541,8 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 					</nav>
 				)}
 				{relatedPosts && relatedPosts.length > 0 && (
-					<aside class="related-posts">
-						<h3 class="related-title">Related Posts</h3>
+					<aside class="related-posts" aria-labelledby="related-posts-title">
+						<h3 id="related-posts-title" class="related-title">Related Posts</h3>
 						<ul class="related-list">
 							{relatedPosts.map((post) => (
 								<li>
@@ -571,6 +583,16 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			document.querySelectorAll('.post-content img').forEach(img => {
 				if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
 				if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+			});
+
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			document.querySelectorAll<HTMLVideoElement>('.post-content video').forEach(video => {
+				video.controls = true;
+				if (reduceMotion) {
+					video.pause();
+					video.removeAttribute('autoplay');
+					video.removeAttribute('loop');
+				}
 			});
 
 			// Generate Table of Contents
@@ -616,6 +638,7 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 			const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
 
 			document.querySelectorAll('.post-content pre').forEach(pre => {
+				if (pre.parentElement?.classList.contains('code-block-wrapper')) return;
 				// Wrap pre in a div for positioning
 				const wrapper = document.createElement('div');
 				wrapper.className = 'code-block-wrapper';
@@ -624,9 +647,11 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 
 				// Create copy button
 				const button = document.createElement('button');
+				button.type = 'button';
 				button.className = 'copy-button';
 				button.innerHTML = clipboardIcon;
 				button.setAttribute('aria-label', 'Copy code');
+				button.setAttribute('aria-live', 'polite');
 
 				button.addEventListener('click', async () => {
 					const code = pre.querySelector('code')?.textContent || pre.textContent || '';
@@ -634,13 +659,18 @@ const imageUrl = heroImage ? new URL(heroImage, Astro.site).href : new URL(Fallb
 						await navigator.clipboard.writeText(code);
 						button.innerHTML = checkIcon;
 						button.classList.add('copied');
+						button.setAttribute('aria-label', 'Code copied');
 						setTimeout(() => {
 							button.innerHTML = clipboardIcon;
 							button.classList.remove('copied');
+							button.setAttribute('aria-label', 'Copy code');
 						}, 2000);
 					} catch (err) {
+						button.textContent = '!';
+						button.setAttribute('aria-label', 'Could not copy code');
 						setTimeout(() => {
 							button.innerHTML = clipboardIcon;
+							button.setAttribute('aria-label', 'Copy code');
 						}, 2000);
 					}
 				});

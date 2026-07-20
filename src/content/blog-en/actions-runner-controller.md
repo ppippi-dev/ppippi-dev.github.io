@@ -1,6 +1,6 @@
 ---
 description: Building an MLOps CI environment
-heroImage: /img/2025-07-03/0.png
+heroImage: /img/2025-07-03/0.webp
 pubDate: '2025-07-03'
 tags:
 - MLOps

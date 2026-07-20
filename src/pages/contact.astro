@@ -8,84 +8,250 @@ import { SITE_TITLE } from '../consts';
 <!doctype html>
 <html lang="ko">
 	<head>
-		<BaseHead title={`Contact | ${SITE_TITLE}`} description="연락처 정보" />
+		<BaseHead title={`연락하기 | ${SITE_TITLE}`} description="기술 질문, 피드백, 협업 제안을 위한 연락처" />
 		<style>
 			main {
+				box-sizing: border-box;
 				width: 100%;
-				max-width: 720px;
+				max-width: 1120px;
 				margin: 0 auto;
-				padding: 48px 24px 80px;
+				padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(5rem, 10vw, 8rem);
 			}
-			h1, h2, h3 {
-				line-height: 1.2;
-				color: var(--text-primary);
+
+			.page-header {
+				display: grid;
+				grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+				gap: clamp(2rem, 6vw, 6rem);
+				align-items: end;
+				padding-bottom: clamp(2rem, 5vw, 3.5rem);
+				border-bottom: 1px solid var(--border-color);
 			}
-			h3 {
-				margin-top: 1.5rem;
+
+			.eyebrow,
+			.section-label,
+			.contact-index,
+			.contact-action {
+				font-family: 'SF Mono', Menlo, Consolas, monospace;
 			}
-			p, ul {
-				line-height: 1.6;
-				color: var(--text-secondary);
+
+			.eyebrow,
+			.section-label {
+				font-size: 0.75rem;
+				font-weight: 600;
+				line-height: 1.4;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
 			}
-			ul {
-				padding-left: 1.5rem;
-			}
-			li {
-				margin-bottom: 0.5rem;
-			}
-			a {
+
+			.eyebrow {
+				margin: 0 0 1.25rem;
 				color: var(--accent-primary);
 			}
-			hr {
-				margin: 2rem 0;
-				border: none;
+
+			h1 {
+				max-width: 8ch;
+				font-size: clamp(3rem, 8vw, 6.5rem);
+				font-weight: 800;
+				line-height: 0.92;
+				letter-spacing: -0.065em;
+				text-wrap: balance;
+			}
+
+			.lede {
+				max-width: 34rem;
+				margin: 0;
+				color: var(--text-secondary);
+				font-size: clamp(1rem, 2vw, 1.125rem);
+				line-height: 1.75;
+			}
+
+			.contact-section,
+			.details-section {
+				padding-top: clamp(2.5rem, 7vw, 5rem);
+			}
+
+			.section-label {
+				margin: 0 0 1.25rem;
+				color: var(--text-secondary);
+			}
+
+			.contact-list {
+				margin: 0;
 				border-top: 1px solid var(--border-color);
 			}
-			@media (max-width: 768px) {
-				main {
-					padding: 32px 20px 60px;
+
+			.contact-row {
+				display: grid;
+				grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+				gap: clamp(1rem, 3vw, 2rem);
+				align-items: center;
+				padding: clamp(1.5rem, 4vw, 2.5rem) 0;
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.contact-index {
+				align-self: start;
+				padding-top: 0.25rem;
+				color: var(--accent-primary);
+				font-size: 0.75rem;
+			}
+
+			.contact-copy {
+				min-width: 0;
+			}
+
+			.contact-copy h2 {
+				margin: 0 0 0.5rem;
+				font-size: clamp(1.35rem, 3vw, 2rem);
+				line-height: 1.15;
+			}
+
+			.contact-copy p {
+				max-width: 42rem;
+				margin: 0;
+				color: var(--text-secondary);
+			}
+
+			.contact-action {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.6rem;
+				min-height: 44px;
+				color: var(--accent-primary);
+				font-size: 0.8rem;
+				font-weight: 600;
+				text-decoration: none;
+			}
+
+			.contact-action:hover {
+				color: var(--accent-hover);
+				text-decoration: underline;
+				text-underline-offset: 0.35rem;
+			}
+
+			.details-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				border: 1px solid var(--border-color);
+			}
+
+			.detail-block {
+				box-sizing: border-box;
+				min-width: 0;
+				padding: clamp(1.5rem, 4vw, 2.5rem);
+			}
+
+			.detail-block + .detail-block {
+				border-left: 1px solid var(--border-color);
+			}
+
+			.detail-block h2 {
+				margin: 0 0 1rem;
+				font-size: 1.25rem;
+			}
+
+			.detail-block p,
+			.detail-block ul {
+				margin: 0;
+				color: var(--text-secondary);
+			}
+
+			.detail-block ul {
+				padding-left: 1.25rem;
+			}
+
+			.detail-block li + li {
+				margin-top: 0.55rem;
+			}
+
+			address {
+				font-style: normal;
+			}
+
+			@media (max-width: 720px) {
+				.page-header,
+				.details-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.page-header {
+					gap: 1.5rem;
+				}
+
+				h1 {
+					font-size: clamp(2.75rem, 16vw, 4.5rem);
+				}
+
+				.contact-row {
+					grid-template-columns: 2rem minmax(0, 1fr);
+				}
+
+				.contact-action {
+					grid-column: 2;
+					justify-self: start;
+				}
+
+				.detail-block + .detail-block {
+					border-top: 1px solid var(--border-color);
+					border-left: 0;
 				}
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>연락하기</h1>
+		<main id="main-content">
+			<header class="page-header">
+				<div>
+					<p class="eyebrow">Contact / Seoul</p>
+					<h1>좋은 대화를 기다립니다.</h1>
+				</div>
+				<p class="lede">기술 관련 질문과 글에 대한 피드백, 협업 제안을 환영합니다. 목적에 맞는 채널로 편하게 연락해 주세요.</p>
+			</header>
 
-			<p>기술 관련 질문, 피드백, 협업 제안 등이 있으시면 언제든 연락 주세요.</p>
+			<section class="contact-section" aria-labelledby="contact-channels">
+				<h2 id="contact-channels" class="section-label">Contact channels</h2>
+				<address class="contact-list">
+					<div class="contact-row">
+						<span class="contact-index" aria-hidden="true">01</span>
+						<div class="contact-copy">
+							<h2>LinkedIn</h2>
+							<p>기술 토론, 협업, 컨설팅, 강연 제안에 가장 빠르게 답변합니다.</p>
+						</div>
+						<a class="contact-action" href="https://www.linkedin.com/in/parkjeongbin/" target="_blank" rel="noopener noreferrer">
+							프로필 보기 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭에서 열림)</span>
+						</a>
+					</div>
+					<div class="contact-row">
+						<span class="contact-index" aria-hidden="true">02</span>
+						<div class="contact-copy">
+							<h2>GitHub</h2>
+							<p>코드와 오픈소스 프로젝트에 관한 내용은 GitHub에서 확인할 수 있습니다.</p>
+						</div>
+						<a class="contact-action" href="https://github.com/ppippi-dev" target="_blank" rel="noopener noreferrer">
+							프로필 보기 <span aria-hidden="true">↗</span><span class="sr-only">(새 탭에서 열림)</span>
+						</a>
+					</div>
+				</address>
+			</section>
 
-			<h3>LinkedIn으로 연락하기</h3>
-			<p>가장 빠르고 확실한 연락 방법은 LinkedIn 메시지입니다:</p>
-			<p><strong><a href="https://www.linkedin.com/in/parkjeongbin/" target="_blank">LinkedIn 프로필 보기</a></strong></p>
-
-			<p>LinkedIn을 통해 다음과 같은 내용을 문의하실 수 있습니다:</p>
-			<ul>
-				<li>기술 관련 질문 및 토론</li>
-				<li>블로그 포스트에 대한 피드백</li>
-				<li>협업 및 프로젝트 제안</li>
-				<li>기술 컨설팅 문의</li>
-				<li>강연 및 발표 요청</li>
-			</ul>
-
-			<h3>GitHub</h3>
-			<p>코드 관련 문의나 오픈소스 프로젝트에 관심이 있으시다면:</p>
-			<p><strong><a href="https://github.com/ppippi-dev" target="_blank">GitHub 프로필 보기</a></strong></p>
-
-			<h3>응답 시간</h3>
-			<p>일반적으로 2-3일 이내에 응답드리고 있습니다. 업무 상황에 따라 조금 더 시간이 걸릴 수 있는 점 양해 부탁드립니다.</p>
-
-			<h3>문의 시 도움이 되는 정보</h3>
-			<p>효과적인 커뮤니케이션을 위해 다음 정보를 포함해 주시면 감사하겠습니다:</p>
-			<ul>
-				<li><strong>기술 질문</strong>: 사용 중인 환경, 발생한 에러 메시지, 시도해본 해결 방법</li>
-				<li><strong>협업 제안</strong>: 프로젝트 개요, 기대하는 역할, 예상 일정</li>
-				<li><strong>피드백</strong>: 구체적인 포스트 제목이나 링크</li>
-			</ul>
-
-			<hr />
-
-			<p>연락 주셔서 감사합니다. 좋은 대화를 나눌 수 있기를 기대합니다!</p>
+			<section class="details-section" aria-labelledby="contact-notes">
+				<h2 id="contact-notes" class="section-label">Before you write</h2>
+				<div class="details-grid">
+					<div class="detail-block">
+						<h2>응답 시간</h2>
+						<p>일반적으로 2–3일 이내에 답변합니다. 업무 상황에 따라 조금 더 걸릴 수 있습니다.</p>
+					</div>
+					<div class="detail-block">
+						<h2>함께 알려주세요</h2>
+						<ul>
+							<li>기술 질문: 환경, 오류 메시지, 시도한 방법</li>
+							<li>협업 제안: 프로젝트 개요, 역할, 예상 일정</li>
+							<li>글 피드백: 포스트 제목 또는 링크</li>
+						</ul>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>

@@ -2,6 +2,7 @@
 description: sim is an open-source no-code agent tool that uses natural language to
   generate LLM workflows. Supports self-hosted and managed, but relies on Copilot.
 pubDate: '2026-01-03'
+heroImage: /img/sim/image-20260103225328920.webp
 tags:
 - LLM
 - Agent

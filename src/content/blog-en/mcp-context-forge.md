@@ -3,6 +3,7 @@ description: Hands-on experience running IBM’s open-source MCP Gateway, mcp-co
   in production. Learn Virtual Server-based tool authorization, the MCP Catalog, metrics,
   and more.
 pubDate: '2025-12-19'
+heroImage: /img/mcp-context-forge/image-20251219001059140.webp
 tags:
 - LLMOps
 - MCP

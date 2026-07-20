@@ -1,62 +1,187 @@
 ---
 const today = new Date();
+const isEnglish = Astro.url.pathname === '/en' || Astro.url.pathname.startsWith('/en/');
+const rssLink = isEnglish ? '/en/rss.xml' : '/rss.xml';
 ---
 
-<footer>
+<footer class="site-footer">
 	<div class="footer-content">
-		<span class="copyright">&copy; {today.getFullYear()} ppippi-dev</span>
-		<div class="footer-links">
-			<a href="https://github.com/ppippi-dev" target="_blank" rel="noopener noreferrer">GitHub</a>
-			<a href="https://www.linkedin.com/in/parkjeongbin/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+		<div class="footer-brand">
+			<a href={isEnglish ? '/en/' : '/'} class="brand-link">
+				<span class="brand-mark" aria-hidden="true"></span>
+				<span>ppippi.dev</span>
+			</a>
+			<p>{isEnglish ? 'Notes from building and operating software.' : '운영하며 얻은 답을 기록합니다.'}</p>
+		</div>
+
+		<nav class="footer-links" aria-label={isEnglish ? 'Footer navigation' : '하단 탐색'}>
+			<a href={rssLink}>RSS</a>
+			<a href="/contact/" hreflang={isEnglish ? 'ko' : undefined}>{isEnglish ? 'Contact · KO' : '연락하기'}</a>
+			<a href="https://github.com/ppippi-dev" target="_blank" rel="noopener noreferrer">
+				GitHub <span aria-hidden="true">↗</span>
+				<span class="sr-only">{isEnglish ? '(opens in a new tab)' : '(새 탭에서 열림)'}</span>
+			</a>
+			<a href="https://www.linkedin.com/in/parkjeongbin/" target="_blank" rel="noopener noreferrer">
+				LinkedIn <span aria-hidden="true">↗</span>
+				<span class="sr-only">{isEnglish ? '(opens in a new tab)' : '(새 탭에서 열림)'}</span>
+			</a>
+		</nav>
+
+		<div class="footer-meta">
+			<span>&copy; {today.getFullYear()} ppippi.dev</span>
+			<span>SEOUL · KR</span>
 		</div>
 	</div>
 </footer>
 
 <style>
-	footer {
-		padding: 32px 24px;
-		border-top: 1px solid var(--border-color);
+	.site-footer {
+		margin-top: clamp(4rem, 10vw, 8rem);
+		border-top: 1px solid var(--border-strong);
+		background: var(--bg-primary);
+		background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
 	}
 
 	.footer-content {
-		max-width: 720px;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 2.5rem clamp(2rem, 7vw, 7rem);
+		width: 100%;
+		max-width: var(--site-max-width);
 		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
+		padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 4vw, 3.5rem) 1.5rem;
+	}
+
+	.footer-brand {
+		max-width: 30rem;
+	}
+
+	.brand-link {
+		display: inline-flex;
 		align-items: center;
-	}
-
-	.copyright {
-		font-size: 0.8125rem;
-		color: var(--text-muted);
-	}
-
-	.footer-links {
-		display: flex;
-		gap: 16px;
-	}
-
-	.footer-links a {
-		font-size: 0.8125rem;
-		color: var(--text-muted);
+		gap: 0.75rem;
+		color: var(--text-primary);
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		font-weight: 650;
+		letter-spacing: 0.05em;
 		text-decoration: none;
-		transition: color var(--transition-fast);
 	}
 
-	.footer-links a:hover {
+	.brand-link:hover {
 		color: var(--text-primary);
 		text-decoration: none;
 	}
 
-	@media (max-width: 768px) {
-		footer {
-			padding: 24px 20px;
+	.brand-mark {
+		width: 0.62rem;
+		height: 0.62rem;
+		border-radius: 50%;
+		background: var(--accent-primary);
+		box-shadow: inset 0.15rem 0.1rem 0 rgba(255, 255, 255, 0.28);
+	}
+
+	.footer-brand p {
+		max-width: 34ch;
+		margin: 1rem 0 0;
+		color: var(--text-secondary);
+		font-size: 0.9rem;
+		line-height: 1.65;
+	}
+
+	.footer-links {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(7rem, 1fr));
+		align-self: start;
+		min-width: min(100%, 20rem);
+		border-top: 1px solid var(--border-color);
+	}
+
+	.footer-links a {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		min-height: 2.75rem;
+		padding: 0.65rem 0.75rem;
+		border-bottom: 1px solid var(--border-color);
+		color: var(--text-primary);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.035em;
+		text-decoration: none;
+		transition: background-color var(--transition-fast), color var(--transition-fast);
+	}
+
+	.footer-links a:nth-child(odd) {
+		border-right: 1px solid var(--border-color);
+	}
+
+	.footer-links a:hover {
+		background: var(--bg-secondary);
+		color: var(--text-primary);
+		text-decoration: underline;
+		text-decoration-color: var(--accent-primary);
+		text-underline-offset: 0.3em;
+	}
+
+	.footer-links span {
+		color: var(--accent-primary);
+		font-size: 0.9rem;
+	}
+
+	.footer-meta {
+		grid-column: 1 / -1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-top: 1.25rem;
+		border-top: 1px solid var(--border-color);
+		color: var(--text-muted);
+		font-family: var(--font-mono);
+		font-size: 0.66rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 680px) {
+		.site-footer {
+			margin-top: 4rem;
 		}
 
 		.footer-content {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 2rem;
+			padding: 2rem 1.25rem 1.25rem;
+		}
+
+		.footer-links {
+			width: 100%;
+			min-width: 0;
+		}
+
+		.footer-meta {
+			grid-column: 1;
+			gap: 1rem;
+		}
+	}
+
+	@media (max-width: 390px) {
+		.footer-content {
+			padding-inline: 0.9rem;
+		}
+
+		.footer-links {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.footer-links a:nth-child(odd) {
+			border-right: 0;
+		}
+
+		.footer-meta {
+			align-items: flex-start;
 			flex-direction: column;
-			gap: 12px;
-			text-align: center;
 		}
 	}
 </style>

@@ -3,6 +3,7 @@ description: 'A hands-on review of Dify, an open-source no-code LLM platform: st
   and limits for building RAG pipelines, agent workflows, self-hosted deployments,
   and how it compares to n8n/Make.'
 pubDate: '2026-01-09'
+heroImage: /img/dify/image-20260109230639695.webp
 tags:
 - dify
 - llm

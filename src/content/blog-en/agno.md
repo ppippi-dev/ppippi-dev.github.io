@@ -3,6 +3,7 @@ description: 'Hands-on review of the Agno Agent Framework: performance, architec
   and a minimal API for building AI agents with Memory, Knowledge (RAG), MCP, Teams,
   and AgentOS.'
 pubDate: '2026-01-01'
+heroImage: /img/agno/image-20260101180709381.webp
 tags:
 - Agno
 - LLMOps

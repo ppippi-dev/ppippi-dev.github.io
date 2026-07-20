@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
@@ -15,153 +14,263 @@ const posts = (await getCollection('blog-en')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead title={`All posts | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
+				box-sizing: border-box;
 				width: 100%;
-				max-width: 720px;
+				max-width: 1120px;
+				min-height: 70vh;
 				margin: 0 auto;
-				padding: 48px 24px 80px;
+				padding: clamp(3.5rem, 8vw, 7rem) clamp(1.25rem, 5vw, 3rem) clamp(5rem, 10vw, 8rem);
 			}
-			.page-title {
-				font-size: 2rem;
-				font-weight: 700;
-				margin-bottom: 40px;
-				color: #000;
+
+			.page-header {
+				display: grid;
+				grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+				gap: clamp(2rem, 6vw, 6rem);
+				align-items: end;
+				padding-bottom: clamp(2rem, 5vw, 3.5rem);
+				border-bottom: 1px solid var(--border-color);
 			}
-			.posts-grid {
-				display: flex;
-				flex-direction: column;
-				gap: 0;
+
+			.eyebrow,
+			.section-label,
+			.post-index,
+			.post-meta,
+			.post-tag {
+				font-family: 'SF Mono', Menlo, Consolas, monospace;
 			}
-			.post-card {
+
+			.eyebrow,
+			.section-label {
+				font-size: 0.75rem;
+				font-weight: 600;
+				line-height: 1.4;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.eyebrow {
+				margin: 0 0 1.25rem;
+				color: var(--accent-primary);
+			}
+
+			h1 {
+				max-width: 9ch;
+				font-size: clamp(3rem, 8vw, 6.5rem);
+				font-weight: 800;
+				line-height: 0.92;
+				letter-spacing: -0.065em;
+				text-wrap: balance;
+			}
+
+			.lede {
+				max-width: 34rem;
+				margin: 0;
+				color: var(--text-secondary);
+				font-size: clamp(1rem, 2vw, 1.125rem);
+				line-height: 1.75;
+			}
+
+			.posts-section {
+				padding-top: clamp(2.5rem, 7vw, 5rem);
+			}
+
+			.section-heading {
 				display: flex;
 				justify-content: space-between;
-				align-items: flex-start;
-				gap: 40px;
-				padding: 40px 0;
-				border-bottom: 1px solid #eee;
+				gap: 1rem;
+				align-items: baseline;
+				margin-bottom: 1.25rem;
 			}
-			.post-card:first-child {
-				padding-top: 0;
+
+			.section-label {
+				margin: 0;
+				color: var(--text-secondary);
 			}
-			.post-card:last-child {
-				border-bottom: none;
+
+			.total-count {
+				color: var(--text-secondary);
+				font-family: 'SF Mono', Menlo, Consolas, monospace;
+				font-size: 0.75rem;
 			}
-			.post-content {
-				flex: 1;
+
+			.post-list {
+				margin: 0;
+				padding: 0;
+				border-top: 1px solid var(--border-color);
+				list-style: none;
+			}
+
+			.post-item {
+				display: grid;
+				grid-template-columns: 3.5rem minmax(0, 1fr) minmax(9rem, auto);
+				gap: clamp(1rem, 4vw, 3rem);
+				align-items: start;
+				padding: clamp(1.5rem, 4vw, 2.75rem) 0;
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.post-index {
+				padding-top: 0.25rem;
+				color: var(--accent-primary);
+				font-size: 0.75rem;
+			}
+
+			.post-copy {
+				min-width: 0;
+			}
+
+			.post-tags {
 				display: flex;
-				flex-direction: column;
-				gap: 12px;
+				flex-wrap: wrap;
+				gap: 0.4rem 0.8rem;
+				margin-bottom: 0.8rem;
 			}
-			.category-badge {
-				color: #35C5F0;
-				font-size: 0.9rem;
+
+			.post-tag {
+				color: var(--accent-primary);
+				font-size: 0.7rem;
 				font-weight: 600;
-				text-decoration: none;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
 			}
-			.category-badge:hover {
-				color: #0099CC;
+
+			.post-tag:hover {
+				color: var(--accent-hover);
+				text-decoration: underline;
+				text-underline-offset: 0.25rem;
 			}
-			.post-info h2 {
-				color: #000;
-				font-size: 1.5rem;
+
+			.post-title {
+				margin: 0;
+				font-size: clamp(1.35rem, 3vw, 2rem);
 				font-weight: 700;
-				line-height: 1.3;
-				letter-spacing: -0.5px;
-				margin: 0 0 8px 0;
+				line-height: 1.2;
+				letter-spacing: -0.035em;
 			}
-			.post-info h2 a {
-				color: inherit;
+
+			.post-title a {
+				color: var(--text-primary);
 				text-decoration: none;
-				transition: color 0.2s;
+				overflow-wrap: anywhere;
 			}
-			.post-info h2 a:hover {
-				color: #35C5F0;
+
+			.post-title a:hover {
+				color: var(--accent-primary);
+				text-decoration: underline;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.35rem;
 			}
+
 			.post-description {
-				color: #666;
-				font-size: 1rem;
-				line-height: 1.5;
-				margin: 0 0 8px 0;
-				font-weight: 400;
+				max-width: 50rem;
+				margin: 0.75rem 0 0;
+				color: var(--text-secondary);
+				line-height: 1.65;
+				text-wrap: pretty;
 			}
+
 			.post-meta {
-				font-size: 0.875rem;
-				color: #999;
+				justify-self: end;
+				padding-top: 0.35rem;
+				color: var(--text-secondary);
+				font-size: 0.75rem;
+				font-variant-numeric: tabular-nums;
+				white-space: nowrap;
 			}
-			.post-image {
-				flex-shrink: 0;
-				width: 200px;
-				height: 140px;
-				overflow: hidden;
-				border-radius: 8px;
+
+			.empty-state {
+				padding: clamp(2rem, 6vw, 4rem);
+				border: 1px solid var(--border-color);
+				text-align: center;
 			}
-			.post-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-				transition: transform 0.3s ease;
+
+			.empty-state h2 {
+				margin: 0 0 0.75rem;
+				font-size: 1.5rem;
 			}
-			.post-image:hover img {
-				transform: scale(1.05);
+
+			.empty-state p {
+				margin: 0;
+				color: var(--text-secondary);
 			}
-			@media (max-width: 768px) {
-				main {
-					padding: 32px 20px 60px;
+
+			@media (max-width: 720px) {
+				.page-header {
+					grid-template-columns: 1fr;
+					gap: 1.5rem;
 				}
-				.page-title {
-					font-size: 1.5rem;
-					margin-bottom: 30px;
+
+				h1 {
+					font-size: clamp(2.75rem, 16vw, 4.5rem);
 				}
-				.post-card {
-					flex-direction: column;
-					gap: 20px;
-					padding: 32px 0;
+
+				.post-item {
+					grid-template-columns: 2rem minmax(0, 1fr);
+					gap: 0.75rem;
 				}
-				.post-image {
-					width: 100%;
-					height: 180px;
-					order: -1;
+
+				.post-meta {
+					grid-column: 2;
+					grid-row: 1;
+					justify-self: start;
+					padding-top: 0;
 				}
-				.post-info h2 {
-					font-size: 1.25rem;
-				}
-				.post-description {
-					font-size: 0.9rem;
+
+				.post-copy {
+					grid-column: 2;
 				}
 			}
 		</style>
 	</head>
 	<body>
 		<HeaderEn />
-		<main>
-			<h1 class="page-title">All Posts</h1>
-			<div class="posts-grid">
-				{posts.map((post) => (
-					<article class="post-card">
-						<div class="post-content">
-							{post.data.tags && post.data.tags.length > 0 && (
-								<a href={`/en/tags/${post.data.tags[0]}/`} class="category-badge">{post.data.tags[0]}</a>
-							)}
-							<div class="post-info">
-								<h2><a href={`/en/blog/${post.id}/`}>{post.data.title}</a></h2>
-								{post.data.description && (
-									<p class="post-description">{post.data.description}</p>
-								)}
-								<div class="post-meta">
-									<FormattedDate date={post.data.pubDate} />
-								</div>
-							</div>
-						</div>
-						{post.data.heroImage && (
-							<a href={`/en/blog/${post.id}/`} class="post-image">
-								<img src={post.data.heroImage} alt={post.data.title} width="200" height="140" loading="lazy" />
-							</a>
-						)}
-					</article>
-				))}
-			</div>
+		<main id="main-content">
+			<header class="page-header">
+				<div>
+					<p class="eyebrow">Archive / All notes</p>
+					<h1>Every note, in one place.</h1>
+				</div>
+				<p class="lede">A chronological record of the problems, experiments, and solutions encountered while building and operating systems.</p>
+			</header>
+
+			<section class="posts-section" aria-labelledby="all-posts">
+				<div class="section-heading">
+					<h2 id="all-posts" class="section-label">Complete archive</h2>
+					<span class="total-count">{posts.length} POSTS</span>
+				</div>
+
+				{posts.length > 0 ? (
+					<ol class="post-list">
+						{posts.map((post, index) => (
+							<li>
+								<article class="post-item">
+									<span class="post-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+									<div class="post-copy">
+										{post.data.tags && post.data.tags.length > 0 && (
+											<div class="post-tags">
+												{post.data.tags.slice(0, 3).map((tag) => (
+													<a class="post-tag" href={`/en/tags/${encodeURIComponent(tag)}/`}>{tag}</a>
+												))}
+											</div>
+										)}
+										<h2 class="post-title"><a href={`/en/blog/${post.id}/`}>{post.data.title}</a></h2>
+										{post.data.description && <p class="post-description">{post.data.description}</p>}
+									</div>
+									<div class="post-meta"><FormattedDate date={post.data.pubDate} /></div>
+								</article>
+							</li>
+						))}
+					</ol>
+				) : (
+					<div class="empty-state" role="status">
+						<h2>No published notes yet.</h2>
+						<p>New field notes are in progress. Check back soon.</p>
+					</div>
+				)}
+			</section>
 		</main>
 		<Footer />
 	</body>

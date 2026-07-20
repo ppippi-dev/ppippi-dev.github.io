@@ -1,6 +1,6 @@
 ---
 description: MCP 구현해보기
-heroImage: /img/2025-09-15-mcp-one-page/0.png
+heroImage: /img/2025-09-15-mcp-one-page/0.webp
 pubDate: '2025-09-15'
 tags:
 - LLMOps
@@ -458,4 +458,3 @@ async def main():
 
 
 여담이지만, MCP관련된 보안이슈들이 여전히 많이 남아있다. 이 부분을 고려하여 특히 원격 MCP 서버와 연결하는 경우, 항상 조심하기를 바란다.
-

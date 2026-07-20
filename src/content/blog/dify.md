@@ -1,6 +1,7 @@
 ---
 description: 'Dify를 실제로 사용해본 경험을 바탕으로 오픈소스 노코드 LLM 플랫폼의 강점과 한계를 분석한다. RAG 파이프라인 구축, Agent 워크플로우, Self-hosted 배포의 장점과 n8n·Make 대비 차별점, 엔터프라이즈 운영 시 고려 사항을 정리했다.'
 pubDate: '2026-01-09'
+heroImage: /img/dify/image-20260109230639695.webp
 tags:
   - dify
   - llm
